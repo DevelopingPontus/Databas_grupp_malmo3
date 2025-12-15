@@ -4,29 +4,88 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca0eb6a0-46eb-48cd-b8c1-1fea9ddc021a" name="Changes" comment="sql initialization" />
+    <list default="true" id="82047938-8798-4954-8357-50ca6af530de" name="Changes" comment="pon" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="pontus" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubPullRequestsUISettings">{
   }
 }</component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
     "git-widget-placeholder": "main"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Main" />
+      <module name="bookingapp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="Workspace.xml var ändrad på något sätt. Kolla den om det strular">
+      <option name="closed" value="true" />
+      <created>1765788998120</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765788998120</updated>
+    </task>
+    <task id="LOCAL-00002" summary="workspace.xml">
+      <option name="closed" value="true" />
+      <created>1765789143736</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765789143736</updated>
+    </task>
+    <task id="LOCAL-00003" summary="sql schema">
+      <option name="closed" value="true" />
+      <created>1765789204408</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1765789204408</updated>
+    </task>
+    <task id="LOCAL-00004" summary="sql initialization">
+      <option name="closed" value="true" />
+      <created>1765789908774</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765789908774</updated>
+    </task>
+    <task id="LOCAL-00005" summary="sql initialization">
+      <option name="closed" value="true" />
+      <created>1765789997231</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765789997231</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Trying to connect to DB" />
+    <MESSAGE value="workspace.xml" />
+    <MESSAGE value="sql schema" />
+    <MESSAGE value="sql initialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="sql initialization" />
   </component>
 </project>
