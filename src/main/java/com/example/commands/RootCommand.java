@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
 @Component
-@Command(name = "", helpCommand = true, subcommands = {
+@Command(name = "", mixinStandardHelpOptions = true, subcommands = {
         ExitCommand.class
 })
 public class RootCommand implements Runnable {
