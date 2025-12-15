@@ -24,4 +24,24 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+    public Product() {
+    }
+
+    public Product(String name, String description, double price, boolean active, Timestamp createdAt) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.active = active;
+        this.createdAt = createdAt;
+    }
+
+    public Product(long id, String name, String description, double price, boolean active, Timestamp createdAt) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.active = active;
+        this.createdAt = createdAt;
+    }
 }
