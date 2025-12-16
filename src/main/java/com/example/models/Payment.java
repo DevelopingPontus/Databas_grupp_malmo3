@@ -2,7 +2,7 @@ package com.example.models;
 
 import jakarta.persistence.*;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "payment")
@@ -20,14 +20,20 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "PAYMENT_ID")
+    private Integer id;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "PAYMENT_METHOD")
     private PaymentMethod method;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "PAYMENT_STATUS")
     private PaymentStatus status;
+    @Column
     private Timestamp timestamp;
 
     //Relations
-    @OneToOne
-    private Order order;
+    @OneToOne(mappedBy = "payment")
+    private Orders orders;
 
     //Constructor
     public Payment() {
@@ -40,11 +46,11 @@ public class Payment {
     }
 
     //Getters and setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -72,11 +78,11 @@ public class Payment {
         this.timestamp = timestamp;
     }
 
-    public Order getOrder() {
-        return order;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 }

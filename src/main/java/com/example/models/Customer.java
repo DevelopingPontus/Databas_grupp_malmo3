@@ -1,9 +1,8 @@
 package com.example.models;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,14 +12,18 @@ public class Customer {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "CUSTOMER_ID")
+    private Integer id;
+    @Column
     private String email;
+    @Column
     private String name;
+    @Column
     private Timestamp createdAt;
 
     //Relation
     @OneToMany(mappedBy = "customer")
-    private Set<Order> orders = new HashSet<>();
+    private Set<Orders> orders = new HashSet<>();
 
     //Constructor
     public Customer() {
@@ -33,11 +36,11 @@ public class Customer {
     }
 
     //Getters and Setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,11 +68,11 @@ public class Customer {
         this.createdAt = createdAt;
     }
 
-    public Set<Order> getOrders() {
+    public Set<Orders> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<Orders> orders) {
         this.orders = orders;
     }
 }

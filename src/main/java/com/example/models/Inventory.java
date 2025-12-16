@@ -8,30 +8,41 @@ public class Inventory {
     //Attributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "INVENTORY_ID")
+    private Integer id;
+    @Column(insertable = false, updatable = false)
+    private Integer product_Id;
+    @Column
     private int quantity; //KRAV(MVP) säger att vi ska ha endast inStock dock vår sql schema har quantity men inte inStock .
-    private boolean inStock;
 
     //Relations
     @OneToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
     //Constructor
     public Inventory() {
     }
 
-    public Inventory(int quantity, boolean inStock) {
+    public Inventory(int quantity) {
         this.quantity = quantity;
-        this.inStock = inStock;
     }
 
     //Getters and Setter
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getProduct_Id() {
+        return product_Id;
+    }
+
+    public void setProduct_Id(Integer product_Id) {
+        this.product_Id = product_Id;
     }
 
     public int getQuantity() {
@@ -40,14 +51,6 @@ public class Inventory {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public boolean isInStock() {
-        return inStock;
-    }
-
-    public void setInStock(boolean inStock) {
-        this.inStock = inStock;
     }
 
     public Product getProduct() {

@@ -11,7 +11,9 @@ public class Category {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "CATEGORY_ID")
+    private Integer id;
+    @Column
     private String name;
 
     //Relations
@@ -27,11 +29,11 @@ public class Category {
     }
 
     //Getters and Setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

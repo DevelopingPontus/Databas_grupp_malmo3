@@ -2,7 +2,7 @@ package com.example.models;
 
 import jakarta.persistence.*;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,12 +13,19 @@ public class Product {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "PRODUCT_ID")
+    private Integer id;
+    @Column
     private String sku;
+    @Column
     private String name;
+    @Column
     private String description;
+    @Column(columnDefinition = "numeric(10,2) default 0.0")
     private double price;
+    @Column
     private boolean active;
+    @Column
     private Timestamp createdAt;
 
     //Relations
@@ -28,10 +35,10 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<OrderItem> orderItems = new HashSet<>();
+//    @OneToMany(mappedBy = "product")
+//    private Set<OrderItem> orderItems = new HashSet<>();
 
-    @OneToOne
+    @OneToOne(mappedBy = "product")
     private Inventory inventory;
 
     //Constructor
@@ -47,11 +54,11 @@ public class Product {
     }
 
     //Getters and Setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -111,13 +118,13 @@ public class Product {
         this.categories = categories;
     }
 
-    public Set<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(Set<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
+//    public Set<OrderItem> getOrderItems() {
+//        return orderItems;
+//    }
+//
+//    public void setOrderItems(Set<OrderItem> orderItems) {
+//        this.orderItems = orderItems;
+//    }
 
     public Inventory getInventory() {
         return inventory;
