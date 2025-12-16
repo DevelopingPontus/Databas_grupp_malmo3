@@ -5,8 +5,15 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "order_item")
 public class OrderItem {
-    @EmbeddedId
-    private OrderItemId id = new OrderItemId();
+    //Attributes
+    //Denna tabell har egen id i KRAV (MVP) och i sql schema. Men vet ej om det är rätt för att OrderItems är typ
+    //junktion table ska vi därför använda @Embeddable?
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int quantity;
+    private double unitPrice;
+    private double lineTotal;
 
     // Relations
     @ManyToOne
@@ -19,24 +26,11 @@ public class OrderItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private int quantity;
-    private double unitPrice;
-    private double lineTotal;
-
+    //Constructor
     public OrderItem() {
     }
 
-    public OrderItem(Order order, Product product, int quantity, double unitPrice, double lineTotal) {
-        this.order = order;
-        this.product = product;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-        this.lineTotal = lineTotal;
-    }
-
-    public OrderItem(OrderItemId OrderItemId, Order order, Product product, int quantity, double unitPrice,
-            double lineTotal) {
-        this.id = OrderItemId;
+    public OrderItem(int quantity, double unitPrice, double lineTotal) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
