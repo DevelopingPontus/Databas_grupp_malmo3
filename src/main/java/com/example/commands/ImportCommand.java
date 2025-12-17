@@ -1,6 +1,5 @@
 package com.example.commands;
 
-import java.lang.classfile.ClassFile.Option;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,6 +18,13 @@ import com.example.models.OrderItem;
 import com.example.models.Orders;
 import com.example.models.Payment;
 import com.example.models.Product;
+import com.example.respoitories.CategoryRepository;
+import com.example.respoitories.CustomerRepository;
+import com.example.respoitories.InventoryRepository;
+import com.example.respoitories.OrderItemRepository;
+import com.example.respoitories.OrdersRepository;
+import com.example.respoitories.PaymentRepository;
+import com.example.respoitories.ProductRepository;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
@@ -31,6 +37,27 @@ import org.json.JSONObject;
 public class ImportCommand implements Runnable {
     @Parameters(index = "0", description = "Path to the JSON file to import")
     private String filePath;
+
+    private final CategoryRepository categoryRepository;
+    private final CustomerRepository customerRepository;
+    private final InventoryRepository inventoryRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final OrdersRepository ordersRepository;
+    private final PaymentRepository paymentRepository;
+    private final ProductRepository productRepository;
+
+    public ImportCommand(CategoryRepository categoryRepository, CustomerRepository customerRepository,
+            InventoryRepository inventoryRepository, OrderItemRepository orderItemRepository,
+            OrdersRepository ordersRepository, PaymentRepository paymentRepository,
+            ProductRepository productRepository) {
+        this.categoryRepository = categoryRepository;
+        this.customerRepository = customerRepository;
+        this.inventoryRepository = inventoryRepository;
+        this.orderItemRepository = orderItemRepository;
+        this.ordersRepository = ordersRepository;
+        this.paymentRepository = paymentRepository;
+        this.productRepository = productRepository;
+    }
 
     private boolean validatePath(String path) {
         if (filePath == null || filePath.isEmpty()) {
@@ -190,9 +217,27 @@ public class ImportCommand implements Runnable {
         JSONArray orders = jsonData.getJSONArray("orders");
 
         var importedCategories = parseCategories(categories);
+        categoryRepository.saveAll(importedCategories);
         var importedProducts = parseProducts(products, importedCategories);
+        productRepository.saveAll(importedProducts.values());
         var importedCustomers = parseCustomers(customers);
+        customerRepository.saveAll(importedCustomers);
         var importedInventory = parseInventory(inventory, importedProducts);
+        inventoryRepository.saveAll(importedInventory);
         var importedOrders = parseOrders(orders, importedCustomers, importedProducts);
+        for (Orders order : importedOrders) {
+            var payment = order.getPayment();
+            order.setPayment(null);
+            ordersRepository.save(order);
+            if (payment != null) {
+                paymentRepository.save(payment);
+                order.setPayment(payment);
+            }
+            for (OrderItem item : order.getOrderItems()) {
+                // Initialize the composite key before saving
+                item.setId(new OrderItem.OrderItemId());
+                orderItemRepository.save(item);
+            }
+        }
     }
 }

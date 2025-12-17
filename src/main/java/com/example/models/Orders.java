@@ -6,6 +6,9 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 @Entity
 @Table(name = "orders")
 public class Orders {
@@ -19,6 +22,8 @@ public class Orders {
     @Column(name = "ORDER_ID")
     private Integer id;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private OrderStatus status;
     @Column(columnDefinition = "numeric(10,2) default 0.0")
     private double total;
@@ -79,9 +84,9 @@ public class Orders {
         this.createdAt = createdAt;
     }
 
-    // public Set<OrderItem> getOrderItems() {
-    // return orderItems;
-    // }
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
     //
     // public void setOrderItems(Set<OrderItem> orderItems) {
     // this.orderItems = orderItems;

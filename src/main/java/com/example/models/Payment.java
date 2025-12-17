@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 @Entity
 @Table(name = "payment")
 public class Payment {
@@ -25,9 +29,11 @@ public class Payment {
     private Integer id;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "PAYMENT_METHOD")
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private PaymentMethod method;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "PAYMENT_STATUS")
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private PaymentStatus status;
     @Column
     private Timestamp timestamp;
