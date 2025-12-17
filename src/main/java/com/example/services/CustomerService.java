@@ -37,4 +37,12 @@ public class CustomerService {
         }
         return false;
     }
+
+    public List<Customer> getCustomersByName(String name) {
+        return customerRepository.findByName(name);
+    }
+
+    public Optional<Customer> getCustomerById(Integer id) {
+        return customerRepository.findById(id);
+    }
 }
