@@ -1,6 +1,7 @@
 package com.example.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -15,17 +16,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
     private Integer id;
-    @Column
+    @Column(nullable = false, unique = true)
     private String sku;
-    @Column
+    @Column(nullable = false)
     private String name;
-    @Column
-    private String description;
-    @Column(columnDefinition = "numeric(10,2) default 0.0")
+    @Column(nullable = true)
+    private String description = "Description missing";
+    @Column(columnDefinition = "numeric(10,2) default 0.0", nullable = false)
     private double price;
-    @Column
+    @Column(nullable = false)
     private boolean active;
-    @Column
+    @Column(nullable = false)
+    @CreationTimestamp
     private Timestamp createdAt;
 
     //Relations
@@ -45,21 +47,18 @@ public class Product {
     public Product() {
     }
 
-    public Product(String sku, String name, String description, double price, boolean active, Timestamp createdAt) {
+    public Product(String sku, String name, String description, double price) {
+        this.sku = sku;
         this.name = name;
-        this.description = description;
+        if (description != null)
+            this.description = description;
         this.price = price;
-        this.active = active;
-        this.createdAt = createdAt;
+        this.active = true;
     }
 
     //Getters and Setters
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getSku() {
@@ -104,10 +103,6 @@ public class Product {
 
     public Timestamp getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Set<Category> getCategories() {

@@ -13,9 +13,9 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>bookingapp</artifactId>
+    <artifactId>storeapp</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>bookingapp</name>
+    <name>storeapp</name>
 
     <properties>
         <java.version>24</java.version>
@@ -50,7 +50,7 @@
             <artifactId>picocli-spring-boot-starter</artifactId>
             <version>4.7.7</version>
         </dependency>
-        
+
         <!-- Terminal for auto completion -->
         <dependency>
             <groupId>org.jline</groupId>
@@ -64,10 +64,10 @@
             <artifactId>picocli-shell-jline3</artifactId>
             <version>4.7.7</version>
         </dependency>
-        
-        
+
+
         <!-- Test Dependencies -->
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
