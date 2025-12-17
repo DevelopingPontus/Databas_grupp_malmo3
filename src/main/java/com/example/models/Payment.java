@@ -8,12 +8,12 @@ import java.sql.Timestamp;
 @Table(name = "payment")
 public class Payment {
     // Attribut
-    enum PaymentMethod {
+    public enum PaymentMethod {
         CARD,
         INVOICE
     }
 
-    enum PaymentStatus {
+    public enum PaymentStatus {
         PENDING,
         APPROVED,
         DECLINED

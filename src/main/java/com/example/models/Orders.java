@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Table(name = "orders")
 public class Orders {
     // Attribut
-    enum OrderStatus {
+    public enum OrderStatus {
         NEW, PAID, CANCELLED
     }
 
