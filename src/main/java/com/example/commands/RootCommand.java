@@ -1,13 +1,13 @@
 package com.example.commands;
 
-import org.springframework.stereotype.Component;
-
+import com.example.commands.Category.CategoryCommand;
 import com.example.commands.Customer.CustomerCommand;
-
+import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
 @Component
 @Command(name = "", mixinStandardHelpOptions = true, subcommands = {
+        CategoryCommand.class,
         CustomerCommand.class,
         ExitCommand.class
 })

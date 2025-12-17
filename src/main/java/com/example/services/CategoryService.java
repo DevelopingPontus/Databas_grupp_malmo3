@@ -20,7 +20,7 @@ public class CategoryService {
     }
 
     public Category addCategory(@NotNull String name) {
-        if (categoryRepository.exists(name)) {
+        if (categoryRepository.findByNameIgnoreCase(name) != null) {
             throw new IllegalArgumentException("Category already exists");
         }
         return categoryRepository.save(new Category(name));
