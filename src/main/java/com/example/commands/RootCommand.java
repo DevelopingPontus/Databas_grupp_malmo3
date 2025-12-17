@@ -2,10 +2,13 @@ package com.example.commands;
 
 import org.springframework.stereotype.Component;
 
+import com.example.commands.Customer.CustomerCommand;
+
 import picocli.CommandLine.Command;
 
 @Component
 @Command(name = "", mixinStandardHelpOptions = true, subcommands = {
+        CustomerCommand.class,
         ExitCommand.class
 })
 public class RootCommand implements Runnable {
