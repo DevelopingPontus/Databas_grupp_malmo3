@@ -1,9 +1,9 @@
 package com.example.commands;
 
 import com.example.commands.product.ProductCommand;
-import org.springframework.stereotype.Component;
+import com.example.commands.Category.CategoryCommand;
+import com.example.commands.customer.CustomerCommand;
 
-import com.example.commands.Customer.CustomerCommand;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
