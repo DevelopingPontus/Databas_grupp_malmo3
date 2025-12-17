@@ -42,7 +42,7 @@ public class ProductListCommand implements Runnable {
 
         System.out.println("Listing all products... ");
         productService.getAllProducts()
-                .forEach((p) -> System.out.printf("- %s (SKU: %s, Price: %.2f)%n", p.getName(), p.getSku(), p.getPrice()));
+                .forEach((p) -> System.out.printf("- %s (SKU: %s, Price: %.2f, Description: %s, Active: %b)%n", p.getName(), p.getSku(), p.getPrice(), p.getDescription(), p.isActive()));
 
     }
 }

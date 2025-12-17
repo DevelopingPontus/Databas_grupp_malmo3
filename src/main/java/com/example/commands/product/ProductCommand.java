@@ -7,7 +7,8 @@ import picocli.CommandLine.Command;
 @Command(name = "product", description = "Product commands", subcommands = {
         ProductAddCommand.class,
         ProductListCommand.class,
-        ProductRemoveCommand.class
+        ProductRemoveCommand.class,
+        ProductUpdatedCommand.class
 })
 public class ProductCommand {
 }
