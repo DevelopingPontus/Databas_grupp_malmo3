@@ -20,9 +20,18 @@ public class CategoryService {
     }
 
     public Category addCategory(@NotNull String name) {
-        categoryRepository.findByNameIgnoreCase(name).(c -> { throw new IllegalArgumentException("Category already exists"); });
+        if (categoryRepository.exists(name)) {
+            throw new IllegalArgumentException("Category already exists");
+        }
         return categoryRepository.save(new Category(name));
     }
 
+    public boolean removeCategoryById(int categoryId) {
+        if (categoryRepository.existsById(categoryId)) {
+            categoryRepository.deleteById((categoryId));
+            return true;
+        }
+        return false;
+    }
 
 }
