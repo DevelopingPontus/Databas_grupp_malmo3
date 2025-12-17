@@ -1,4 +1,4 @@
-package com.example.commands.Customer;
+package com.example.commands.customer;
 
 import org.springframework.stereotype.Component;
 
@@ -7,7 +7,6 @@ import com.example.services.CustomerService;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
 @Component
 @Command(name = "find", description = "Find a customer by email")
