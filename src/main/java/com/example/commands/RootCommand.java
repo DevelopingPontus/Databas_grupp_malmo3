@@ -11,6 +11,7 @@ import picocli.CommandLine.Command;
 @Command(name = "", mixinStandardHelpOptions = true, subcommands = {
         CategoryCommand.class,
         CustomerCommand.class,
+        ImportCommand.class,
         ProductCommand.class,
         ExitCommand.class
 })

@@ -3,6 +3,8 @@ package com.example.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -24,8 +26,8 @@ public class Orders {
     private Timestamp createdAt;
 
     // Relations
-    // @OneToMany(mappedBy = "order")
-    // private Set<OrderItem> orderItems = new HashSet<>();
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "orders")
     private Payment payment;
@@ -84,6 +86,10 @@ public class Orders {
     // public void setOrderItems(Set<OrderItem> orderItems) {
     // this.orderItems = orderItems;
     // }
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+    }
 
     public Payment getPayment() {
         return payment;

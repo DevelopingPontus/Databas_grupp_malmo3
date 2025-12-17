@@ -36,6 +36,13 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
+    public OrderItem(int quantity, BigDecimal unitPrice, Product product, Orders order) {
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.product = product;
+        this.order = order;
+    }
+
     @Embeddable
     class OrderItemId implements java.io.Serializable {
         @Column(name = "order_id")
