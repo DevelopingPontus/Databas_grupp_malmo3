@@ -7,11 +7,12 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "payment")
 public class Payment {
-    //Attribut
+    // Attribut
     enum PaymentMethod {
         CARD,
         INVOICE
     }
+
     enum PaymentStatus {
         PENDING,
         APPROVED,
@@ -31,11 +32,12 @@ public class Payment {
     @Column
     private Timestamp timestamp;
 
-    //Relations
-    @OneToOne(mappedBy = "payment")
+    // Relations
+    @OneToOne
+    @JoinColumn(name = "order_id")
     private Orders orders;
 
-    //Constructor
+    // Constructor
     public Payment() {
     }
 
@@ -45,7 +47,7 @@ public class Payment {
         this.timestamp = timestamp;
     }
 
-    //Getters and setters
+    // Getters and setters
     public Integer getId() {
         return id;
     }

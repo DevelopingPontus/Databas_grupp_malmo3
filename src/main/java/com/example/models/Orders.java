@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "orders")
 public class Orders {
-    //Attribut
+    // Attribut
     enum OrderStatus {
         NEW, PAID, CANCELLED
     }
@@ -23,19 +23,18 @@ public class Orders {
     @Column()
     private Timestamp createdAt;
 
-    //Relations
-//    @OneToMany(mappedBy = "order")
-//    private Set<OrderItem> orderItems = new HashSet<>();
+    // Relations
+    // @OneToMany(mappedBy = "order")
+    // private Set<OrderItem> orderItems = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "payment_id")
+    @OneToOne(mappedBy = "orders")
     private Payment payment;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    //Constructor
+    // Constructor
     public Orders() {
     }
 
@@ -45,7 +44,7 @@ public class Orders {
         this.createdAt = createdAt;
     }
 
-    //Getters and setters
+    // Getters and setters
     public Integer getId() {
         return id;
     }
@@ -78,13 +77,13 @@ public class Orders {
         this.createdAt = createdAt;
     }
 
-//    public Set<OrderItem> getOrderItems() {
-//        return orderItems;
-//    }
-//
-//    public void setOrderItems(Set<OrderItem> orderItems) {
-//        this.orderItems = orderItems;
-//    }
+    // public Set<OrderItem> getOrderItems() {
+    // return orderItems;
+    // }
+    //
+    // public void setOrderItems(Set<OrderItem> orderItems) {
+    // this.orderItems = orderItems;
+    // }
 
     public Payment getPayment() {
         return payment;
