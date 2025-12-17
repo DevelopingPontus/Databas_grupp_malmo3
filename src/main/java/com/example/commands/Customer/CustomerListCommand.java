@@ -2,23 +2,24 @@ package com.example.commands.Customer;
 
 import org.springframework.stereotype.Component;
 
-import com.example.respoitories.CustomerRepository;
+import com.example.services.CustomerService;
 
 import picocli.CommandLine.Command;
 
 @Component
 @Command(name = "list", description = "List all customers")
 public class CustomerListCommand implements Runnable {
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
-    public CustomerListCommand(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerListCommand(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @Override
     public void run() {
         System.out.println("Listing all customers...");
-        customerRepository.findAll().forEach((c) -> System.out.println(c.getName()));
+        customerService.getAllCustomers()
+                .forEach((c) -> System.out.printf("%s, %s, %s\n", c.getName(), c.getEmail(), c.getCreatedAt()));
     }
 
 }
