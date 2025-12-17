@@ -17,27 +17,77 @@ public class CartService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final PaymentRepository paymentRepository;
-    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
     private final ProductRepository productRepository;
-
-    // In-memory cart storage (or you could use Redis/Session if needed)
-    private final Map<Integer, Map<Integer, Integer>> userCarts = new HashMap<>();
 
     public CartService(OrderRepository orderRepository,
                        OrderItemRepository orderItemRepository,
                        PaymentRepository paymentRepository,
-                       CustomerRepository customerRepository,
+                       CustomerService customerService,
                        ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.paymentRepository = paymentRepository;
-        this.customerRepository = customerRepository;
+        this.customerService = customerService;
         this.productRepository = productRepository;
     }
 
+    @Transactional
     public void addToCart(int customerId, int productId, int quantity) {
-        userCarts.computeIfAbsent(customerId, k -> new HashMap<>())
-                .merge(productId, quantity, Integer::sum);
+        // TODO(vera) hämta carten. (alltså order med status new) senaste ordern
+        // om carten inte finns, skapa en ny
+        // addera produkten till carten
+        // uppdatera totalen
+        // spara carten
+
+        Customer customer = customerService.getCustomerById(customerId);
+        Product product = productRepository.findById(productId);
+        Order order = getCurrentOrder(customer);
+        OrderItem orderItem = createOrUpdateOrderItem(order, product, quantity);
+
+        updateOrderTotal(order);
+        saveOrder(order);
+
+    }
+    // --- Hjälpmetoder till addToCart
+    public Orders getCurrentOrder(Customer customer){
+        return orderService.getCurrentOrder(customer)
+                .orElseGet(() -> {
+            Orders order = new Orders(customer);
+            order.setCreatedNow();
+            return orderService.save(order);
+        });
+    }
+
+    public OrderItem createOrUpdateOrderItem(Order order, Product product, int quantity) {
+        OrderItem item = orderItemService.findByOrderAndProduct(order, product)
+                .orElseGet(() -> {
+                    OrderItem oi = new OrderItem();
+                    oi.setOrder(order);
+                    oi.setProduct(product);
+                    oi.setQuantity(0);
+                    oi.setUnitPrice(product.getPrice());
+                    return oi;
+                });
+
+        item.setQuantity(item.getQuantity() + quantity);
+        item.setLineTotal(
+                item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()))
+        );
+
+        return orderItemRepository.save(item);
+    }
+
+    private void updateOrderTotal(Orders order){
+        BigDecimal total = order.getOrderItems().stream()
+                .map(OrderItem::getLineTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        order.setTotal(total.doubleValue());
+    }
+
+    private void saveOrder(Orders order) {
+        orderService.save(order);
     }
 
     public void removeFromCart(int customerId, int productId, int quantity) {
@@ -82,15 +132,16 @@ public class CartService {
             throw new IllegalStateException("Cart is empty");
         }
 
-        Customer customer = customerRepository.findById(customerId)
+        Customer customer = customerService.getCustomerById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
+
+        //TODO: använd orderservicen istället
         // Create order
-        Orders order = new Orders();
-        order.setCustomer(customer);
-        order.setOrderDate(LocalDateTime.now());
-        order.setStatus(Orders.OrderStatus.NEW);
+        Orders order = new Orders(customer);
         orderRepository.save(order);
+
+
 
         // Add order items and calculate total
         BigDecimal total = BigDecimal.ZERO;

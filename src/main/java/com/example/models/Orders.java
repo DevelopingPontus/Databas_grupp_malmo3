@@ -27,7 +27,8 @@ public class Orders {
     private OrderStatus status;
     @Column(columnDefinition = "numeric(10,2) default 0.0")
     private double total;
-    @Column()
+    @Column(nullable = false)
+    @CreationTimestamp
     private Timestamp createdAt;
 
     // Relations
@@ -45,10 +46,24 @@ public class Orders {
     public Orders() {
     }
 
+    public Orders(Customer customer) {
+        this.customer = customer;
+        this.total = 0;
+        this.status = OrderStatus.NEW;
+        customer.addOrder(this);
+    }
+
     public Orders(OrderStatus status, double total, Timestamp createdAt) {
         this.status = status;
         this.total = total;
         this.createdAt = createdAt;
+    }
+
+    public void setOrderDate(LocalDateTime now) {
+    }
+
+    public void setCreatedNow() {
+        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
     // Getters and setters
@@ -87,10 +102,6 @@ public class Orders {
     public Set<OrderItem> getOrderItems() {
         return orderItems;
     }
-    //
-    // public void setOrderItems(Set<OrderItem> orderItems) {
-    // this.orderItems = orderItems;
-    // }
 
     public void addOrderItem(OrderItem orderItem) {
         this.orderItems.add(orderItem);
