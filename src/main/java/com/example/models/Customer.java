@@ -16,11 +16,11 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID")
     private Integer id;
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
-    @Column
+    @Column(nullable = false)
     private String name;
-    @Column
+    @Column(nullable = false)
     @CreationTimestamp
     private Timestamp createdAt;
 

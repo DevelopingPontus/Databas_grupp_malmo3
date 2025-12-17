@@ -1,4 +1,4 @@
-package com.example.commands.Customer;
+package com.example.commands.customer;
 
 import org.springframework.stereotype.Component;
 
