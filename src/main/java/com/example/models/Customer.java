@@ -6,10 +6,12 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
-    //Attributes
+    // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID")
@@ -19,13 +21,14 @@ public class Customer {
     @Column
     private String name;
     @Column
+    @CreationTimestamp
     private Timestamp createdAt;
 
-    //Relation
+    // Relation
     @OneToMany(mappedBy = "customer")
     private Set<Orders> orders = new HashSet<>();
 
-    //Constructor
+    // Constructor
     public Customer() {
     }
 
@@ -35,7 +38,12 @@ public class Customer {
         this.createdAt = createdAt;
     }
 
-    //Getters and Setters
+    public Customer(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
