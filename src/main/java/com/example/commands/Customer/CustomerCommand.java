@@ -8,7 +8,7 @@ import picocli.CommandLine.Command;
 @Command(name = "customer", description = "Commands related to customer operations", subcommands = {
                 CustomerListCommand.class,
                 CustomerAddCommand.class,
-                CustomerFindByEmailCommand.class,
+                CustomerFindCommand.class,
                 CustomerRemoveCommand.class
 })
 public class CustomerCommand {
