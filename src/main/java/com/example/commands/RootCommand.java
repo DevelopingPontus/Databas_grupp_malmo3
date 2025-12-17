@@ -2,7 +2,7 @@ package com.example.commands;
 
 import org.springframework.stereotype.Component;
 
-import com.example.commands.Customer.CustomerCommand;
+import com.example.commands.customer.CustomerCommand;
 
 import picocli.CommandLine.Command;
 
