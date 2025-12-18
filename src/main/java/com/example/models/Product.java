@@ -35,8 +35,8 @@ public class Product {
     @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    @OneToOne(mappedBy = "product")
-    private OrderItem orderItem;
+    @OneToMany(mappedBy = "product")
+    private Set<OrderItem> orderItem;
 
     @OneToOne(mappedBy = "product")
     private Inventory inventory;
