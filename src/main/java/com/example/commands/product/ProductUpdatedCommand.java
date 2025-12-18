@@ -12,7 +12,7 @@ import picocli.CommandLine.Command;
 import java.util.Optional;
 
 @Component
-@Command(name = "updated", description = "Update a product")
+@Command(name = "update", description = "Update a product")
 public class ProductUpdatedCommand implements Runnable {
     private final ProductService productService;
 
