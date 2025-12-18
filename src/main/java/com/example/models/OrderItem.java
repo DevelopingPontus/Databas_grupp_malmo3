@@ -14,8 +14,10 @@ import java.math.BigDecimal;
 public class OrderItem {
     @EmbeddedId
     private OrderItemId id;
+
     @Column(name = "quantity", nullable = false)
     private int quantity;
+
     @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
 
@@ -49,6 +51,13 @@ public class OrderItem {
         this.unitPrice = unitPrice;
         this.product = product;
         this.order = order;
+    }
+
+    // Vera testar setter
+    public void setOrderAndProduct(Orders order, Product product) {
+        this.order = order;
+        this.product = product;
+        this.id = new OrderItemId(order.getId(), product.getId());
     }
 
     public OrderItemId getId() {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, OrderItem.OrderItemId> {
     Optional<OrderItem> findByOrderAndProduct(Orders order, Product product);
 }
 

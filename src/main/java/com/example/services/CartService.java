@@ -55,21 +55,16 @@ public class CartService {
 
     // --- Hjälpmetoder till addToCart
     public OrderItem createOrUpdateOrderItem(Orders order, Product product, int quantity) {
-        OrderItem item = orderService.findByOrderAndProduct(order, product)
-                .orElseGet(() -> {
-                    OrderItem oi = new OrderItem();
-                    oi.setOrder(order);
-                    oi.setProduct(product);
-                    oi.setQuantity(0);
-                    oi.setUnitPrice(product.getPrice());
-                    oi.setLineTotal(BigDecimal.ZERO);
-                    return oi;
-                });
+        // Creating OrderItem id manually
+        // because OrderItem has a composite primary key
+        OrderItem.OrderItemId id = new OrderItem.OrderItemId(order.getId(), product.getId());
 
+        OrderItem item = orderItemRepository.findById(id).orElseGet(OrderItem::new);
+
+        item.setOrderAndProduct(order, product);
         item.setQuantity(item.getQuantity() + quantity);
-        item.setLineTotal(
-                item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()))
-        );
+        item.setUnitPrice(product.getPrice());
+        item.setLineTotal(item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
 
         return orderItemRepository.save(item);
     }
@@ -87,25 +82,28 @@ public class CartService {
     }
 
     @Transactional
-    public void removeFromCart(int customerId, int productId, int quantity){
-        if (quantity<=0){
-            throw new IllegalArgumentException("Quantity most be greater than zero");
-        }
-        Customer customer = customerService.getCustomerById(customerId).orElseThrow(()->new IllegalArgumentException("Customer not found"));
-        Orders order =  orderService.getOrCreateCart(customer);
-        OrderItem item = order.getOrderItems().stream()
-                .filter(i -> i.getProduct().getId().equals(productId))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(" Product not in cart! "));
+    public void removeFromCart(int customerId, int productId, int quantity) {
 
-        int newQty = item.getQuantity() - quantity;
-        if (newQty <= 0){
-            order.getOrderItems().remove(item);
-            orderService.deleteOrderItem(item);
-        } else {
-            item.setQuantity(newQty);
-        }
+        Customer customer = customerService.getCustomerById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
+        Orders order = orderService.getOrCreateCart(customer);
+
+        OrderItem.OrderItemId id = new OrderItem.OrderItemId(customerId, productId);
+
+        orderItemRepository.findById(id).ifPresent(item -> {
+            int newQty = item.getQuantity() - quantity;
+
+            if (newQty <= 0) {
+                order.getOrderItems().remove(item);
+                orderItemRepository.delete(item);
+            } else {
+                item.setQuantity(newQty);
+                item.setLineTotal(
+                        item.getUnitPrice().multiply(BigDecimal.valueOf(newQty))
+                );
+            }
+        });
         orderService.updateTotal(order);
         orderService.save(order);
     }
@@ -117,12 +115,12 @@ public class CartService {
         Customer customer = customerService.getCustomerById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         Orders order = orderService.getOrCreateCart(customer);
+
+        order.getOrderItems().size();
         return order;
     }
 
-    // clearCart(customerId)
-
-
+    // TODO:clearCart(customerId)
 
     // checkout(customerId, PaymentMethod method)
     //    Checkout =
@@ -164,7 +162,6 @@ public class CartService {
         }
 
         orderService.save(order);
-
     }
 
 
