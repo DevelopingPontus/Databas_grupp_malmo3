@@ -38,8 +38,8 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    @OneToOne(mappedBy = "product")
-    private OrderItem orderItem;
+    @OneToMany(mappedBy = "product")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "product")
     private Inventory inventory;
@@ -52,7 +52,15 @@ public class Product {
         this(sku, name, description, price, true);
     }
 
+    public Product(String sku, String name, String description, BigDecimal price) {
+        this(sku, name, description, price, true);
+    }
+
     public Product(String sku, String name, String description, double price, boolean active) {
+        this(sku, name, description, new BigDecimal(price), active);
+    }
+
+    public Product(String sku, String name, String description, BigDecimal price, boolean active) {
         this.sku = sku;
         this.name = name;
         if (description != null)
