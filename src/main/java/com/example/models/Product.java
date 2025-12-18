@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "product")
 public class Product {
-    //Attributes
+    // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
@@ -30,11 +30,9 @@ public class Product {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    //Relations
+    // Relations
     @ManyToMany
-    @JoinTable(name = "product_category",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     @OneToOne(mappedBy = "product")
@@ -43,20 +41,24 @@ public class Product {
     @OneToOne(mappedBy = "product")
     private Inventory inventory;
 
-    //Constructor
+    // Constructor
     public Product() {
     }
 
     public Product(String sku, String name, String description, double price) {
+        this(sku, name, description, price, true);
+    }
+
+    public Product(String sku, String name, String description, double price, boolean active) {
         this.sku = sku;
         this.name = name;
         if (description != null)
             this.description = description;
         this.price = price;
-        this.active = true;
+        this.active = active;
     }
 
-    //Getters and Setters
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -113,13 +115,18 @@ public class Product {
         this.categories = categories;
     }
 
-//    public Set<OrderItem> getOrderItems() {
-//        return orderItems;
-//    }
-//
-//    public void setOrderItems(Set<OrderItem> orderItems) {
-//        this.orderItems = orderItems;
-//    }
+    public void addCategory(Category category) {
+        this.categories.add(category);
+        category.getProducts().add(this);
+    }
+
+    // public Set<OrderItem> getOrderItems() {
+    // return orderItems;
+    // }
+    //
+    // public void setOrderItems(Set<OrderItem> orderItems) {
+    // this.orderItems = orderItems;
+    // }
 
     public Inventory getInventory() {
         return inventory;

@@ -83,4 +83,9 @@ public class Customer {
     public void setOrders(Set<Orders> orders) {
         this.orders = orders;
     }
+
+    public void addOrder(Orders order) {
+        orders.add(order);
+        order.setCustomer(this);
+    }
 }

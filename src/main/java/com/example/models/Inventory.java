@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "inventory")
 public class Inventory {
-    //Attributs
+    // Attributs
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "INVENTORY_ID")
@@ -13,14 +13,15 @@ public class Inventory {
     @Column(insertable = false, updatable = false)
     private Integer product_Id;
     @Column
-    private int quantity; //KRAV(MVP) säger att vi ska ha endast inStock dock vår sql schema har quantity men inte inStock .
+    private int quantity; // KRAV(MVP) säger att vi ska ha endast inStock dock vår sql schema har quantity
+                          // men inte inStock .
 
-    //Relations
+    // Relations
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    //Constructor
+    // Constructor
     public Inventory() {
     }
 
@@ -28,7 +29,12 @@ public class Inventory {
         this.quantity = quantity;
     }
 
-    //Getters and Setter
+    public Inventory(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    // Getters and Setter
     public Integer getId() {
         return id;
     }
