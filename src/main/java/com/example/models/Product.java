@@ -24,7 +24,7 @@ public class Product {
     @Column(nullable = true)
     private String description = "Description missing";
     @Column(columnDefinition = "numeric(10,2) default 0.0", nullable = false)
-    private double price;
+    private BigDecimal price;
     @Column(nullable = false)
     private boolean active;
     @Column(nullable = false)
@@ -33,7 +33,9 @@ public class Product {
 
     // Relations
     @ManyToMany
-    @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     @OneToOne(mappedBy = "product")
@@ -92,7 +94,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
