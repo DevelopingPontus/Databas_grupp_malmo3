@@ -70,11 +70,6 @@ public class JsonService {
         for (Orders order : importedOrders) {
             orderIndex++;
 
-            // Initialize composite keys for order items BEFORE saving order
-            for (OrderItem item : order.getOrderItems()) {
-                item.setId(new OrderItem.OrderItemId());
-            }
-
             var payment = order.getPayment();
             order.setPayment(null);
 
@@ -174,15 +169,33 @@ public class JsonService {
             order.setCustomer(customer);
             var itemsArray = orderJson.getJSONArray("items");
             double total = 0.0;
+
+            // Use HashMap to merge duplicate products in same order
+            HashMap<String, OrderItem> itemsBySku = new HashMap<>();
+
             for (int j = 0; j < itemsArray.length(); j++) {
                 JSONObject itemJson = itemsArray.getJSONObject(j);
-                Product product = products.get(itemJson.getString("productSku"));
+                String productSku = itemJson.getString("productSku");
+                Product product = products.get(productSku);
                 int quantity = itemJson.getInt("quantity");
                 double price = itemJson.getDouble("unitPrice");
-                total += price * quantity;
-                OrderItem orderItem = new OrderItem(quantity, BigDecimal.valueOf(price), product, order);
-                order.addOrderItem(orderItem);
+
+                // If product already in order, merge quantities
+                if (itemsBySku.containsKey(productSku)) {
+                    OrderItem existing = itemsBySku.get(productSku);
+                    existing.setQuantity(existing.getQuantity() + quantity);
+                } else {
+                    OrderItem orderItem = new OrderItem(quantity, BigDecimal.valueOf(price), product, order);
+                    itemsBySku.put(productSku, orderItem);
+                }
             }
+
+            // Add all merged items to order and calculate total
+            for (OrderItem item : itemsBySku.values()) {
+                total += item.getUnitPrice().doubleValue() * item.getQuantity();
+                order.addOrderItem(item);
+            }
+
             if (status == Orders.OrderStatus.PAID) {
                 JSONObject paymentJson = orderJson.getJSONObject("payment");
                 Payment.PaymentMethod method = Payment.PaymentMethod
