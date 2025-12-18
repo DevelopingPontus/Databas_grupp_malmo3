@@ -53,6 +53,16 @@ public class OrderService {
         return orderItemRepository.findByOrderAndProduct(order, product);
     }
 
+    public void deleteOrderItem(OrderItem item) {
+        Orders order = item.getOrder();
+
+        if (order != null) {
+            order.getOrderItems().remove(item);
+        }
+        orderItemRepository.delete(item);
+
+    }
+
 
 
 

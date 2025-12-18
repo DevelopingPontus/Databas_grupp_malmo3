@@ -5,7 +5,10 @@ import picocli.CommandLine.Command;
 
 @Component
 @Command(name = "cart", description = "Commands related to cart operations", subcommands = {
-        CartAddCommand.class
+        CartAddCommand.class,
+        CartRemoveItemCommand.class,
+        CartListCommand.class,
+        CartCheckoutCommand.class
 })
 public class CartCommand {
 

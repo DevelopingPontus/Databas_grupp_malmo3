@@ -20,19 +20,25 @@ public class CartService {
     private final CustomerService customerService;
     private final ProductRepository productRepository;
     private final OrderService orderService;
+    private final InventoryService inventoryService;
+    private final PaymentService paymentService;
 
     public CartService(OrderRepository orderRepository,
                        OrderItemRepository orderItemRepository,
                        PaymentRepository paymentRepository,
                        CustomerService customerService,
                        ProductRepository productRepository,
-                       OrderService orderService) {
+                       OrderService orderService,
+                       InventoryService inventoryService,
+                       PaymentService paymentService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.paymentRepository = paymentRepository;
         this.customerService = customerService;
         this.productRepository = productRepository;
         this.orderService = orderService;
+        this.inventoryService = inventoryService;
+        this.paymentService = paymentService;
     }
 
     @Transactional
@@ -85,25 +91,89 @@ public class CartService {
         if (quantity<=0){
             throw new IllegalArgumentException("Quantity most be greater than zero");
         }
-        Customer customer = customerService.getCustomerById(customerId).orElseThrow(()->new IllegalArgumentException("Customer not found"))
+        Customer customer = customerService.getCustomerById(customerId).orElseThrow(()->new IllegalArgumentException("Customer not found"));
         Orders order =  orderService.getOrCreateCart(customer);
         OrderItem item = order.getOrderItems().stream()
-                .filter(item -> item.getProduct().getId().equals(productId))
+                .filter(i -> i.getProduct().getId().equals(productId))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(" Product not in cart! "));
 
         int newQty = item.getQuantity() - quantity;
         if (newQty <= 0){
             order.getOrderItems().remove(item);
-            orderService.delete(item);
+            orderService.deleteOrderItem(item);
+        } else {
+            item.setQuantity(newQty);
+        }
+
+        orderService.updateTotal(order);
+        orderService.save(order);
+    }
+
+    // get cart here, is looped and printed in list command!
+    @Transactional(readOnly = true)
+    public Orders getCartItems(int customerId){
+
+        Customer customer = customerService.getCustomerById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        Orders order = orderService.getOrCreateCart(customer);
+        return order;
+    }
+
+    // clearCart(customerId)
+
+
+
+    // checkout(customerId, PaymentMethod method)
+    //    Checkout =
+//    ta kundens cart (Order NEW) →
+//    reservera lager →
+//    beräkna total →
+//    simulera betalning →
+//    uppdatera orderstatus →
+//    spara →
+//    töm cart
+    @Transactional
+    public void checkout(int customerId, Payment.PaymentMethod paymentMethod){
+
+        Customer customer = customerService.getCustomerById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+
+        Orders order = orderService.getOrCreateCart(customer);
+
+        if (order.getOrderItems().isEmpty()) {
+            throw new IllegalArgumentException("Cart is empty");
+        }
+
+        // reserve in inventory
+        inventoryService.reserve(order);
+
+        // update total
+        orderService.updateTotal(order);
+
+        // create and process payment
+        Payment payment = paymentService.process(order, paymentMethod);
+
+        if (payment.getStatus() == Payment.PaymentStatus.APPROVED) {
+            order.setStatus(Orders.OrderStatus.PAID);
+        } else {
+            order.setStatus(Orders.OrderStatus.CANCELLED);
+            inventoryService.release(order);
+            throw new IllegalArgumentException("Payment failed");
 
         }
 
+        orderService.save(order);
 
-        // minska Quantity eller ta bort den
-        //uppdatera orderTotal
-        // spara
     }
+
+
+
+
+
+
+
+
     //public void removeFromCart(int customerId, int productId, int quantity) {
       //Map<Integer, Integer> cart = userCarts.get(customerId);
     //    if (cart != null) {
@@ -117,7 +187,7 @@ public class CartService {
 //
 //    @Transactional
 //    public void checkoutTest() {
-//        var order = createOrder();
+//        var order = createOrder(); (orderService)
 //
 //        try {
 //            reserveInventory(order);
