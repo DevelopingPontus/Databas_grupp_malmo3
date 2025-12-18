@@ -4,6 +4,7 @@ import com.example.models.Customer;
 import com.example.models.OrderItem;
 import com.example.models.Orders;
 import com.example.models.Product;
+import com.example.respoitories.OrderItemRepository;
 import com.example.respoitories.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,11 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
         this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Transactional
@@ -45,8 +48,9 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public OrderItem findByOrderAndProduct(Orders order, Product product) {
-        //hello
+
+    public Optional<OrderItem> findByOrderAndProduct(Orders order, Product product) {
+        return orderItemRepository.findByOrderAndProduct(order, product);
     }
 
 

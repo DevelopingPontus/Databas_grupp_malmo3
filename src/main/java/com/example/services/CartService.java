@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ public class CartService {
                     oi.setProduct(product);
                     oi.setQuantity(0);
                     oi.setUnitPrice(product.getPrice());
+                    oi.setLineTotal(BigDecimal.ZERO);
                     return oi;
                 });
 

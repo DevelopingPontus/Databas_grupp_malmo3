@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
     Optional<OrderItem> findByOrderAndProduct(Orders order, Product product);
-
 }
+
+
