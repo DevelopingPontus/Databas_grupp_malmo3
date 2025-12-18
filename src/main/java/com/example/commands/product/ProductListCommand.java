@@ -1,5 +1,6 @@
 package com.example.commands.product;
 
+import com.example.models.Category;
 import com.example.models.Product;
 import com.example.services.ProductService;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,9 @@ public class ProductListCommand implements Runnable {
     @Option(names = "--name", description = "List products by name")
     private String name;
 
+    @Option(names = "--category", description = "List products by category")
+    private Category categories;
+
     @Override
     public void run() {
         List<Product> products;
@@ -30,6 +34,8 @@ public class ProductListCommand implements Runnable {
             products = productService.searchProductBySku(sku);
         } else if (name != null) {
             products = productService.searchProductByName(name);
+        } else if (categories != null) {
+            products = productService.searchProductByCategory(categories);
         } else {
             products = productService.getAllProducts();
         }
@@ -41,8 +47,16 @@ public class ProductListCommand implements Runnable {
         }
 
         System.out.println("Listing all products... ");
-        productService.getAllProducts()
-                .forEach((p) -> System.out.printf("- %s (SKU: %s, Price: %.2f, Description: %s, Active: %b)%n", p.getName(), p.getSku(), p.getPrice(), p.getDescription(), p.isActive()));
+        products.forEach((p) -> {
+            String categories = p.getCategories().isEmpty() ? "No categories" : 
+                    p.getCategories().stream()
+                            .map(category -> category.getName())
+                            .reduce((a, b) -> a + ", " + b)
+                            .orElse("");
+            
+            System.out.printf("- %s (SKU: %s, Price: %.2f, Description: %s, Active: %b, Categories: %s)%n",
+                    p.getName(), p.getSku(), p.getPrice(), p.getDescription(), p.isActive(), categories);
+        });
 
     }
 }

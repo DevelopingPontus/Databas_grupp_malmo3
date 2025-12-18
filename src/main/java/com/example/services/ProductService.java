@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.models.Category;
 import com.example.models.Product;
 import com.example.respoitories.ProductRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,9 +34,6 @@ public class ProductService {
         return false;
     }
 
-    //För att kunna ta bort en produkt med en SKU behövs @Transactional
-    //The Transactional annotation ensures that the database operations are performed within a transaction.
-    //This is required for any operation that modifies data in the database (like delete, update, etc.) when using JPA/Hibernate
     @Transactional
     public boolean removeProductBySku(String sku) {
         if (productRepository.existsBySku(sku)) {
@@ -53,6 +51,11 @@ public class ProductService {
     @Transactional(readOnly = true)
     public List<Product> searchProductByName(String name) {
         return productRepository.findProductByName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Product> searchProductByCategory(Category categories) {
+        return productRepository.findProductByCategory(categories.getId());
     }
 
     @Transactional(readOnly = true)

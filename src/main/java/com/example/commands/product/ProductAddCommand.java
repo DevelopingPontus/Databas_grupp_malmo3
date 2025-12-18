@@ -5,13 +5,11 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
-
 @Component
 @Command(name = "add", description = "Add a new product")
 public class ProductAddCommand implements Runnable {
     private final ProductService productService;
 
-    //String sku, String name, String description, double price
     @Parameters(index = "0", description = "Product SKU")
     private String sku;
 
