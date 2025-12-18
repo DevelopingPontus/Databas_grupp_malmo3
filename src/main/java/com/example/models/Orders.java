@@ -31,7 +31,7 @@ public class Orders {
     private Timestamp createdAt;
 
     // Relations
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "orders")

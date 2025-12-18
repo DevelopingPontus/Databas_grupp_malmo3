@@ -48,8 +48,8 @@ public class JsonService {
         this.productRepository = productRepository;
     }
 
-    public void importData(String jsonData) {
-        JSONObject jsonObject = new JSONObject(jsonData);
+    public void importData(String json) {
+        JSONObject jsonObject = new JSONObject(json);
 
         JSONArray categories = jsonObject.getJSONArray("categories");
         JSONArray products = jsonObject.getJSONArray("products");
@@ -66,18 +66,26 @@ public class JsonService {
         var importedInventory = parseInventory(inventory, importedProducts);
         inventoryRepository.saveAll(importedInventory);
         var importedOrders = parseOrders(orders, importedCustomers, importedProducts);
+        int orderIndex = 0;
         for (Orders order : importedOrders) {
+            orderIndex++;
+
+            // Initialize composite keys for order items BEFORE saving order
+            for (OrderItem item : order.getOrderItems()) {
+                item.setId(new OrderItem.OrderItemId());
+            }
+
             var payment = order.getPayment();
             order.setPayment(null);
+
+            // This will cascade save to OrderItems automatically
             ordersRepository.save(order);
+            System.out.println("Saved order " + orderIndex + " with ID: " + order.getId() +
+                    " and " + order.getOrderItems().size() + " items");
+
             if (payment != null) {
                 paymentRepository.save(payment);
                 order.setPayment(payment);
-            }
-            for (OrderItem item : order.getOrderItems()) {
-                // Initialize the composite key before saving
-                item.setId(new OrderItem.OrderItemId());
-                orderItemRepository.save(item);
             }
         }
     }

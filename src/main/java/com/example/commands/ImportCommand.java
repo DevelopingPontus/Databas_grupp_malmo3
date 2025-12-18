@@ -62,6 +62,7 @@ public class ImportCommand implements Runnable {
                 System.out.println("Data import completed successfully.");
             } catch (Exception e) {
                 System.out.println("Error importing data: " + e.getMessage());
+                System.out.println("Cause: " + e.getCause());
                 return;
             }
         }, () -> {
