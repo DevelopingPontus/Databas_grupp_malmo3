@@ -5,7 +5,6 @@ import com.example.respoitories.*;
 import jakarta.persistence.criteria.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -81,11 +80,35 @@ public class CartService {
         orderService.save(order);
     }
 
-//    public void removeFromCart(int customerId, int productId, int quantity) {
-//        Map<Integer, Integer> cart = userCarts.get(customerId);
-//        if (cart != null) {
-//            cart.computeIfPresent(productId, (k, v) -> v > quantity ? v - quantity : null);
-//        }
+    @Transactional
+    public void removeFromCart(int customerId, int productId, int quantity){
+        if (quantity<=0){
+            throw new IllegalArgumentException("Quantity most be greater than zero");
+        }
+        Customer customer = customerService.getCustomerById(customerId).orElseThrow(()->new IllegalArgumentException("Customer not found"))
+        Orders order =  orderService.getOrCreateCart(customer);
+        OrderItem item = order.getOrderItems().stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(" Product not in cart! "));
+
+        int newQty = item.getQuantity() - quantity;
+        if (newQty <= 0){
+            order.getOrderItems().remove(item);
+            orderService.delete(item);
+
+        }
+
+
+        // minska Quantity eller ta bort den
+        //uppdatera orderTotal
+        // spara
+    }
+    //public void removeFromCart(int customerId, int productId, int quantity) {
+      //Map<Integer, Integer> cart = userCarts.get(customerId);
+    //    if (cart != null) {
+  //          cart.computeIfPresent(productId, (k, v) -> v > quantity ? v - quantity : null);
+//       }
 //    }
 //
 //    public Map<Integer, Integer> viewCart(int customerId) {
