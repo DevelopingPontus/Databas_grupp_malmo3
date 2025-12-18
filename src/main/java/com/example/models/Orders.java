@@ -3,12 +3,17 @@ package com.example.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "orders")
 public class Orders {
     // Attribut
-    enum OrderStatus {
+    public enum OrderStatus {
         NEW, PAID, CANCELLED
     }
 
@@ -17,6 +22,8 @@ public class Orders {
     @Column(name = "ORDER_ID")
     private Integer id;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private OrderStatus status;
     @Column(columnDefinition = "numeric(10,2) default 0.0")
     private double total;
@@ -24,8 +31,8 @@ public class Orders {
     private Timestamp createdAt;
 
     // Relations
-    // @OneToMany(mappedBy = "order")
-    // private Set<OrderItem> orderItems = new HashSet<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "orders")
     private Payment payment;
@@ -77,13 +84,17 @@ public class Orders {
         this.createdAt = createdAt;
     }
 
-    // public Set<OrderItem> getOrderItems() {
-    // return orderItems;
-    // }
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
     //
     // public void setOrderItems(Set<OrderItem> orderItems) {
     // this.orderItems = orderItems;
     // }
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+    }
 
     public Payment getPayment() {
         return payment;

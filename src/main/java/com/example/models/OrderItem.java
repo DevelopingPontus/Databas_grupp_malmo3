@@ -1,6 +1,9 @@
 package com.example.models;
 
 import java.math.BigDecimal;
+import java.util.Objects;
+
+import org.hibernate.annotations.Generated;
 
 import jakarta.persistence.*;
 
@@ -13,7 +16,9 @@ public class OrderItem {
     private int quantity;
     @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
-    @Column(name = "line_total", nullable = false)
+
+    @Column(name = "line_total", insertable = false, updatable = false)
+    @Generated
     private BigDecimal lineTotal;
 
     // Relations
@@ -36,19 +41,101 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
+    public OrderItem(int quantity, BigDecimal unitPrice, Product product, Orders order) {
+        this.id = new OrderItemId();
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.product = product;
+        this.order = order;
+    }
+
     @Embeddable
-    class OrderItemId implements java.io.Serializable {
+    public static class OrderItemId implements java.io.Serializable {
         @Column(name = "order_id")
-        private int order_id;
+        private Integer order_id;
+
         @Column(name = "product_id")
-        private int product_id;
+        private Integer product_id;
 
         public OrderItemId() {
         }
 
-        public OrderItemId(int order_id, int product_id) {
+        public OrderItemId(Integer order_id, Integer product_id) {
             this.order_id = order_id;
             this.product_id = product_id;
         }
+
+        public Integer getOrder_id() {
+            return order_id;
+        }
+
+        public void setOrder_id(Integer order_id) {
+            this.order_id = order_id;
+        }
+
+        public Integer getProduct_id() {
+            return product_id;
+        }
+
+        public void setProduct_id(Integer product_id) {
+            this.product_id = product_id;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+            if (!(o instanceof OrderItemId))
+                return false;
+            OrderItemId that = (OrderItemId) o;
+            return Objects.equals(order_id, that.order_id) &&
+                    Objects.equals(product_id, that.product_id);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(order_id, product_id);
+        }
+    }
+
+    // Getters and setters
+    public OrderItemId getId() {
+        return id;
+    }
+
+    public void setId(OrderItemId id) {
+        this.id = id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

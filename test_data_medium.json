@@ -1,0 +1,2728 @@
+{
+    "categories": [
+        {
+            "name": "Electronics"
+        },
+        {
+            "name": "Clothing"
+        },
+        {
+            "name": "Books"
+        },
+        {
+            "name": "Sports"
+        },
+        {
+            "name": "Home & Garden"
+        },
+        {
+            "name": "Toys & Games"
+        },
+        {
+            "name": "Beauty & Health"
+        },
+        {
+            "name": "Automotive"
+        },
+        {
+            "name": "Office Supplies"
+        },
+        {
+            "name": "Pet Supplies"
+        }
+    ],
+    "products": [
+        {
+            "sku": "ELEC001",
+            "name": "Wireless Mouse",
+            "description": "Ergonomic wireless mouse",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC002",
+            "name": "Mechanical Keyboard",
+            "description": "RGB gaming keyboard",
+            "price": 89.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC003",
+            "name": "USB-C Hub",
+            "description": "7-port USB-C adapter",
+            "price": 45.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC004",
+            "name": "Webcam HD",
+            "description": "1080p webcam with microphone",
+            "price": 69.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC005",
+            "name": "Bluetooth Earbuds",
+            "description": "Wireless earbuds with case",
+            "price": 79.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC006",
+            "name": "Phone Stand",
+            "description": "Adjustable phone holder",
+            "price": 15.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics",
+                "Office Supplies"
+            ]
+        },
+        {
+            "sku": "ELEC007",
+            "name": "Power Bank",
+            "description": "20000mAh portable charger",
+            "price": 39.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC008",
+            "name": "HDMI Cable",
+            "description": "6ft 4K HDMI cable",
+            "price": 12.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC009",
+            "name": "External SSD",
+            "description": "1TB portable SSD",
+            "price": 129.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC010",
+            "name": "Smart Watch",
+            "description": "Fitness tracker smartwatch",
+            "price": 199.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "CLOTH001",
+            "name": "Cotton T-Shirt",
+            "description": "100% cotton tee",
+            "price": 19.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH002",
+            "name": "Denim Jeans",
+            "description": "Classic fit jeans",
+            "price": 49.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH003",
+            "name": "Hoodie",
+            "description": "Comfortable pullover hoodie",
+            "price": 39.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH004",
+            "name": "Running Shorts",
+            "description": "Athletic shorts",
+            "price": 24.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing",
+                "Sports"
+            ]
+        },
+        {
+            "sku": "CLOTH005",
+            "name": "Winter Jacket",
+            "description": "Insulated winter coat",
+            "price": 89.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH006",
+            "name": "Baseball Cap",
+            "description": "Adjustable sports cap",
+            "price": 14.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing",
+                "Sports"
+            ]
+        },
+        {
+            "sku": "CLOTH007",
+            "name": "Socks 6-Pack",
+            "description": "Athletic socks",
+            "price": 16.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH008",
+            "name": "Dress Shirt",
+            "description": "Formal button-up shirt",
+            "price": 34.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH009",
+            "name": "Yoga Pants",
+            "description": "Stretchy workout pants",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing",
+                "Sports"
+            ]
+        },
+        {
+            "sku": "CLOTH010",
+            "name": "Leather Belt",
+            "description": "Genuine leather belt",
+            "price": 27.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "BOOK001",
+            "name": "Java Programming",
+            "description": "Java development guide",
+            "price": 39.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK002",
+            "name": "Database Design",
+            "description": "SQL and database principles",
+            "price": 44.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK003",
+            "name": "Web Development",
+            "description": "HTML, CSS, JavaScript guide",
+            "price": 42.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK004",
+            "name": "Python Basics",
+            "description": "Learn Python programming",
+            "price": 36.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK005",
+            "name": "Cloud Computing",
+            "description": "AWS and Azure guide",
+            "price": 49.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK006",
+            "name": "Mystery Novel",
+            "description": "Bestselling thriller",
+            "price": 14.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK007",
+            "name": "Sci-Fi Adventure",
+            "description": "Space exploration saga",
+            "price": 16.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK008",
+            "name": "Cookbook",
+            "description": "Healthy recipes",
+            "price": 24.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK009",
+            "name": "History of Rome",
+            "description": "Ancient history book",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK010",
+            "name": "Self-Help Guide",
+            "description": "Personal development",
+            "price": 19.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "SPORT001",
+            "name": "Running Shoes",
+            "description": "Cushioned running shoes",
+            "price": 79.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT002",
+            "name": "Yoga Mat",
+            "description": "Non-slip yoga mat",
+            "price": 24.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT003",
+            "name": "Dumbbells Set",
+            "description": "Adjustable weight set",
+            "price": 119.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT004",
+            "name": "Resistance Bands",
+            "description": "Exercise band set",
+            "price": 19.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT005",
+            "name": "Jump Rope",
+            "description": "Speed jump rope",
+            "price": 12.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT006",
+            "name": "Tennis Racket",
+            "description": "Professional tennis racket",
+            "price": 89.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT007",
+            "name": "Basketball",
+            "description": "Official size basketball",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT008",
+            "name": "Water Bottle",
+            "description": "Insulated water bottle",
+            "price": 22.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT009",
+            "name": "Foam Roller",
+            "description": "Muscle recovery roller",
+            "price": 34.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT010",
+            "name": "Gym Bag",
+            "description": "Durable sports bag",
+            "price": 39.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "HOME001",
+            "name": "LED Desk Lamp",
+            "description": "Adjustable desk lamp",
+            "price": 34.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden"
+            ]
+        },
+        {
+            "sku": "HOME002",
+            "name": "Plant Pot Set",
+            "description": "Ceramic pot set of 3",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden"
+            ]
+        },
+        {
+            "sku": "HOME003",
+            "name": "Throw Pillow",
+            "description": "Decorative cushion",
+            "price": 18.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden"
+            ]
+        },
+        {
+            "sku": "HOME004",
+            "name": "Wall Clock",
+            "description": "Modern wall clock",
+            "price": 24.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden"
+            ]
+        },
+        {
+            "sku": "HOME005",
+            "name": "Candle Set",
+            "description": "Scented candles 3-pack",
+            "price": 26.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden"
+            ]
+        },
+        {
+            "sku": "TOY001",
+            "name": "Board Game",
+            "description": "Family strategy game",
+            "price": 34.99,
+            "active": true,
+            "categoryNames": [
+                "Toys & Games"
+            ]
+        },
+        {
+            "sku": "TOY002",
+            "name": "Puzzle 1000pc",
+            "description": "Jigsaw puzzle",
+            "price": 19.99,
+            "active": true,
+            "categoryNames": [
+                "Toys & Games"
+            ]
+        },
+        {
+            "sku": "BEAUTY001",
+            "name": "Skincare Set",
+            "description": "Daily skincare routine",
+            "price": 49.99,
+            "active": true,
+            "categoryNames": [
+                "Beauty & Health"
+            ]
+        },
+        {
+            "sku": "AUTO001",
+            "name": "Car Phone Mount",
+            "description": "Dashboard phone holder",
+            "price": 16.99,
+            "active": true,
+            "categoryNames": [
+                "Automotive"
+            ]
+        },
+        {
+            "sku": "OFFICE001",
+            "name": "Notebook Pack",
+            "description": "Ruled notebooks 5-pack",
+            "price": 14.99,
+            "active": true,
+            "categoryNames": [
+                "Office Supplies"
+            ]
+        }
+    ],
+    "customers": [
+        {
+            "email": "john.doe@example.com",
+            "name": "John Doe"
+        },
+        {
+            "email": "jane.smith@example.com",
+            "name": "Jane Smith"
+        },
+        {
+            "email": "bob.wilson@example.com",
+            "name": "Bob Wilson"
+        },
+        {
+            "email": "alice.johnson@example.com",
+            "name": "Alice Johnson"
+        },
+        {
+            "email": "charlie.brown@example.com",
+            "name": "Charlie Brown"
+        },
+        {
+            "email": "david.clark@example.com",
+            "name": "David Clark"
+        },
+        {
+            "email": "emma.davis@example.com",
+            "name": "Emma Davis"
+        },
+        {
+            "email": "frank.miller@example.com",
+            "name": "Frank Miller"
+        },
+        {
+            "email": "grace.moore@example.com",
+            "name": "Grace Moore"
+        },
+        {
+            "email": "henry.taylor@example.com",
+            "name": "Henry Taylor"
+        },
+        {
+            "email": "ivy.anderson@example.com",
+            "name": "Ivy Anderson"
+        },
+        {
+            "email": "jack.thomas@example.com",
+            "name": "Jack Thomas"
+        },
+        {
+            "email": "kate.jackson@example.com",
+            "name": "Kate Jackson"
+        },
+        {
+            "email": "liam.white@example.com",
+            "name": "Liam White"
+        },
+        {
+            "email": "mia.harris@example.com",
+            "name": "Mia Harris"
+        },
+        {
+            "email": "noah.martin@example.com",
+            "name": "Noah Martin"
+        },
+        {
+            "email": "olivia.garcia@example.com",
+            "name": "Olivia Garcia"
+        },
+        {
+            "email": "peter.martinez@example.com",
+            "name": "Peter Martinez"
+        },
+        {
+            "email": "quinn.robinson@example.com",
+            "name": "Quinn Robinson"
+        },
+        {
+            "email": "ryan.clark@example.com",
+            "name": "Ryan Clark"
+        },
+        {
+            "email": "sophia.rodriguez@example.com",
+            "name": "Sophia Rodriguez"
+        },
+        {
+            "email": "tyler.lewis@example.com",
+            "name": "Tyler Lewis"
+        },
+        {
+            "email": "uma.lee@example.com",
+            "name": "Uma Lee"
+        },
+        {
+            "email": "victor.walker@example.com",
+            "name": "Victor Walker"
+        },
+        {
+            "email": "wendy.hall@example.com",
+            "name": "Wendy Hall"
+        },
+        {
+            "email": "xavier.allen@example.com",
+            "name": "Xavier Allen"
+        },
+        {
+            "email": "yara.young@example.com",
+            "name": "Yara Young"
+        },
+        {
+            "email": "zack.king@example.com",
+            "name": "Zack King"
+        },
+        {
+            "email": "amy.wright@example.com",
+            "name": "Amy Wright"
+        },
+        {
+            "email": "brian.lopez@example.com",
+            "name": "Brian Lopez"
+        },
+        {
+            "email": "chloe.hill@example.com",
+            "name": "Chloe Hill"
+        },
+        {
+            "email": "daniel.scott@example.com",
+            "name": "Daniel Scott"
+        },
+        {
+            "email": "emily.green@example.com",
+            "name": "Emily Green"
+        },
+        {
+            "email": "finn.adams@example.com",
+            "name": "Finn Adams"
+        },
+        {
+            "email": "gina.baker@example.com",
+            "name": "Gina Baker"
+        },
+        {
+            "email": "harry.gonzalez@example.com",
+            "name": "Harry Gonzalez"
+        },
+        {
+            "email": "isla.nelson@example.com",
+            "name": "Isla Nelson"
+        },
+        {
+            "email": "james.carter@example.com",
+            "name": "James Carter"
+        },
+        {
+            "email": "kelly.mitchell@example.com",
+            "name": "Kelly Mitchell"
+        },
+        {
+            "email": "lucas.perez@example.com",
+            "name": "Lucas Perez"
+        },
+        {
+            "email": "maya.roberts@example.com",
+            "name": "Maya Roberts"
+        },
+        {
+            "email": "nathan.turner@example.com",
+            "name": "Nathan Turner"
+        },
+        {
+            "email": "oscar.phillips@example.com",
+            "name": "Oscar Phillips"
+        },
+        {
+            "email": "paula.campbell@example.com",
+            "name": "Paula Campbell"
+        },
+        {
+            "email": "quentin.parker@example.com",
+            "name": "Quentin Parker"
+        },
+        {
+            "email": "rachel.evans@example.com",
+            "name": "Rachel Evans"
+        },
+        {
+            "email": "steve.edwards@example.com",
+            "name": "Steve Edwards"
+        },
+        {
+            "email": "tina.collins@example.com",
+            "name": "Tina Collins"
+        },
+        {
+            "email": "ursula.stewart@example.com",
+            "name": "Ursula Stewart"
+        },
+        {
+            "email": "vince.sanchez@example.com",
+            "name": "Vince Sanchez"
+        },
+        {
+            "email": "wanda.morris@example.com",
+            "name": "Wanda Morris"
+        },
+        {
+            "email": "xander.rogers@example.com",
+            "name": "Xander Rogers"
+        },
+        {
+            "email": "yvonne.reed@example.com",
+            "name": "Yvonne Reed"
+        },
+        {
+            "email": "zeus.cook@example.com",
+            "name": "Zeus Cook"
+        },
+        {
+            "email": "anna.morgan@example.com",
+            "name": "Anna Morgan"
+        },
+        {
+            "email": "ben.bell@example.com",
+            "name": "Ben Bell"
+        },
+        {
+            "email": "cara.murphy@example.com",
+            "name": "Cara Murphy"
+        },
+        {
+            "email": "derek.bailey@example.com",
+            "name": "Derek Bailey"
+        },
+        {
+            "email": "ella.rivera@example.com",
+            "name": "Ella Rivera"
+        },
+        {
+            "email": "fred.cooper@example.com",
+            "name": "Fred Cooper"
+        },
+        {
+            "email": "greta.richardson@example.com",
+            "name": "Greta Richardson"
+        },
+        {
+            "email": "hank.cox@example.com",
+            "name": "Hank Cox"
+        },
+        {
+            "email": "iris.howard@example.com",
+            "name": "Iris Howard"
+        },
+        {
+            "email": "joe.ward@example.com",
+            "name": "Joe Ward"
+        },
+        {
+            "email": "kim.torres@example.com",
+            "name": "Kim Torres"
+        },
+        {
+            "email": "leo.peterson@example.com",
+            "name": "Leo Peterson"
+        },
+        {
+            "email": "maria.gray@example.com",
+            "name": "Maria Gray"
+        },
+        {
+            "email": "nick.ramirez@example.com",
+            "name": "Nick Ramirez"
+        },
+        {
+            "email": "olive.james@example.com",
+            "name": "Olive James"
+        },
+        {
+            "email": "paul.watson@example.com",
+            "name": "Paul Watson"
+        },
+        {
+            "email": "queenie.brooks@example.com",
+            "name": "Queenie Brooks"
+        },
+        {
+            "email": "rob.kelly@example.com",
+            "name": "Rob Kelly"
+        },
+        {
+            "email": "sara.sanders@example.com",
+            "name": "Sara Sanders"
+        },
+        {
+            "email": "tom.price@example.com",
+            "name": "Tom Price"
+        },
+        {
+            "email": "una.bennett@example.com",
+            "name": "Una Bennett"
+        },
+        {
+            "email": "val.wood@example.com",
+            "name": "Val Wood"
+        },
+        {
+            "email": "walt.barnes@example.com",
+            "name": "Walt Barnes"
+        },
+        {
+            "email": "xena.ross@example.com",
+            "name": "Xena Ross"
+        },
+        {
+            "email": "yale.henderson@example.com",
+            "name": "Yale Henderson"
+        },
+        {
+            "email": "zara.coleman@example.com",
+            "name": "Zara Coleman"
+        },
+        {
+            "email": "adam.jenkins@example.com",
+            "name": "Adam Jenkins"
+        },
+        {
+            "email": "beth.perry@example.com",
+            "name": "Beth Perry"
+        },
+        {
+            "email": "carl.powell@example.com",
+            "name": "Carl Powell"
+        },
+        {
+            "email": "dana.long@example.com",
+            "name": "Dana Long"
+        },
+        {
+            "email": "evan.patterson@example.com",
+            "name": "Evan Patterson"
+        },
+        {
+            "email": "faye.hughes@example.com",
+            "name": "Faye Hughes"
+        },
+        {
+            "email": "greg.flores@example.com",
+            "name": "Greg Flores"
+        },
+        {
+            "email": "hope.washington@example.com",
+            "name": "Hope Washington"
+        },
+        {
+            "email": "ian.butler@example.com",
+            "name": "Ian Butler"
+        },
+        {
+            "email": "jill.simmons@example.com",
+            "name": "Jill Simmons"
+        },
+        {
+            "email": "kyle.foster@example.com",
+            "name": "Kyle Foster"
+        },
+        {
+            "email": "lisa.gonzales@example.com",
+            "name": "Lisa Gonzales"
+        },
+        {
+            "email": "mark.bryant@example.com",
+            "name": "Mark Bryant"
+        },
+        {
+            "email": "nina.alexander@example.com",
+            "name": "Nina Alexander"
+        },
+        {
+            "email": "owen.russell@example.com",
+            "name": "Owen Russell"
+        },
+        {
+            "email": "pam.griffin@example.com",
+            "name": "Pam Griffin"
+        },
+        {
+            "email": "quincy.diaz@example.com",
+            "name": "Quincy Diaz"
+        },
+        {
+            "email": "rose.hayes@example.com",
+            "name": "Rose Hayes"
+        },
+        {
+            "email": "sam.myers@example.com",
+            "name": "Sam Myers"
+        },
+        {
+            "email": "tara.ford@example.com",
+            "name": "Tara Ford"
+        }
+    ],
+    "inventory": [
+        {
+            "productSku": "ELEC001",
+            "quantity": 150
+        },
+        {
+            "productSku": "ELEC002",
+            "quantity": 75
+        },
+        {
+            "productSku": "ELEC003",
+            "quantity": 100
+        },
+        {
+            "productSku": "ELEC004",
+            "quantity": 60
+        },
+        {
+            "productSku": "ELEC005",
+            "quantity": 120
+        },
+        {
+            "productSku": "ELEC006",
+            "quantity": 200
+        },
+        {
+            "productSku": "ELEC007",
+            "quantity": 90
+        },
+        {
+            "productSku": "ELEC008",
+            "quantity": 250
+        },
+        {
+            "productSku": "ELEC009",
+            "quantity": 45
+        },
+        {
+            "productSku": "ELEC010",
+            "quantity": 30
+        },
+        {
+            "productSku": "CLOTH001",
+            "quantity": 300
+        },
+        {
+            "productSku": "CLOTH002",
+            "quantity": 180
+        },
+        {
+            "productSku": "CLOTH003",
+            "quantity": 150
+        },
+        {
+            "productSku": "CLOTH004",
+            "quantity": 200
+        },
+        {
+            "productSku": "CLOTH005",
+            "quantity": 80
+        },
+        {
+            "productSku": "CLOTH006",
+            "quantity": 220
+        },
+        {
+            "productSku": "CLOTH007",
+            "quantity": 160
+        },
+        {
+            "productSku": "CLOTH008",
+            "quantity": 100
+        },
+        {
+            "productSku": "CLOTH009",
+            "quantity": 140
+        },
+        {
+            "productSku": "CLOTH010",
+            "quantity": 110
+        },
+        {
+            "productSku": "BOOK001",
+            "quantity": 50
+        },
+        {
+            "productSku": "BOOK002",
+            "quantity": 45
+        },
+        {
+            "productSku": "BOOK003",
+            "quantity": 55
+        },
+        {
+            "productSku": "BOOK004",
+            "quantity": 60
+        },
+        {
+            "productSku": "BOOK005",
+            "quantity": 40
+        },
+        {
+            "productSku": "BOOK006",
+            "quantity": 120
+        },
+        {
+            "productSku": "BOOK007",
+            "quantity": 100
+        },
+        {
+            "productSku": "BOOK008",
+            "quantity": 70
+        },
+        {
+            "productSku": "BOOK009",
+            "quantity": 35
+        },
+        {
+            "productSku": "BOOK010",
+            "quantity": 90
+        },
+        {
+            "productSku": "SPORT001",
+            "quantity": 80
+        },
+        {
+            "productSku": "SPORT002",
+            "quantity": 150
+        },
+        {
+            "productSku": "SPORT003",
+            "quantity": 40
+        },
+        {
+            "productSku": "SPORT004",
+            "quantity": 180
+        },
+        {
+            "productSku": "SPORT005",
+            "quantity": 200
+        },
+        {
+            "productSku": "SPORT006",
+            "quantity": 50
+        },
+        {
+            "productSku": "SPORT007",
+            "quantity": 70
+        },
+        {
+            "productSku": "SPORT008",
+            "quantity": 130
+        },
+        {
+            "productSku": "SPORT009",
+            "quantity": 60
+        },
+        {
+            "productSku": "SPORT010",
+            "quantity": 55
+        },
+        {
+            "productSku": "HOME001",
+            "quantity": 75
+        },
+        {
+            "productSku": "HOME002",
+            "quantity": 100
+        },
+        {
+            "productSku": "HOME003",
+            "quantity": 200
+        },
+        {
+            "productSku": "HOME004",
+            "quantity": 85
+        },
+        {
+            "productSku": "HOME005",
+            "quantity": 120
+        },
+        {
+            "productSku": "TOY001",
+            "quantity": 90
+        },
+        {
+            "productSku": "TOY002",
+            "quantity": 110
+        },
+        {
+            "productSku": "BEAUTY001",
+            "quantity": 65
+        },
+        {
+            "productSku": "AUTO001",
+            "quantity": 140
+        },
+        {
+            "productSku": "OFFICE001",
+            "quantity": 180
+        }
+    ],
+    "orders": [
+        {
+            "customerEmail": "john.doe@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC001",
+                    "quantity": 2,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "ELEC007",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "jane.smith@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH001",
+                    "quantity": 3,
+                    "unitPrice": 19.99
+                },
+                {
+                    "productSku": "CLOTH002",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "bob.wilson@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "BOOK001",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                },
+                {
+                    "productSku": "BOOK002",
+                    "quantity": 1,
+                    "unitPrice": 44.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "alice.johnson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT001",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "charlie.brown@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "HOME001",
+                    "quantity": 2,
+                    "unitPrice": 34.99
+                },
+                {
+                    "productSku": "HOME002",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "david.clark@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC002",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                },
+                {
+                    "productSku": "ELEC006",
+                    "quantity": 2,
+                    "unitPrice": 15.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "emma.davis@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH003",
+                    "quantity": 2,
+                    "unitPrice": 39.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "frank.miller@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "BOOK003",
+                    "quantity": 1,
+                    "unitPrice": 42.99
+                },
+                {
+                    "productSku": "BOOK004",
+                    "quantity": 2,
+                    "unitPrice": 36.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "grace.moore@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT002",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                },
+                {
+                    "productSku": "SPORT004",
+                    "quantity": 1,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "henry.taylor@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "ELEC003",
+                    "quantity": 1,
+                    "unitPrice": 45.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "ivy.anderson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BEAUTY001",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                },
+                {
+                    "productSku": "HOME003",
+                    "quantity": 2,
+                    "unitPrice": 18.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "jack.thomas@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "TOY001",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "kate.jackson@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "CLOTH004",
+                    "quantity": 3,
+                    "unitPrice": 24.99
+                },
+                {
+                    "productSku": "SPORT008",
+                    "quantity": 1,
+                    "unitPrice": 22.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "liam.white@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC010",
+                    "quantity": 1,
+                    "unitPrice": 199.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "mia.harris@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK005",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                },
+                {
+                    "productSku": "OFFICE001",
+                    "quantity": 2,
+                    "unitPrice": 14.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "noah.martin@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "AUTO001",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                },
+                {
+                    "productSku": "ELEC008",
+                    "quantity": 2,
+                    "unitPrice": 12.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "olivia.garcia@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH005",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "peter.martinez@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT003",
+                    "quantity": 1,
+                    "unitPrice": 119.99
+                },
+                {
+                    "productSku": "SPORT009",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "quinn.robinson@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "ELEC004",
+                    "quantity": 1,
+                    "unitPrice": 69.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "ryan.clark@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK006",
+                    "quantity": 2,
+                    "unitPrice": 14.99
+                },
+                {
+                    "productSku": "BOOK007",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "sophia.rodriguez@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "HOME004",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                },
+                {
+                    "productSku": "HOME005",
+                    "quantity": 2,
+                    "unitPrice": 26.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "tyler.lewis@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH006",
+                    "quantity": 2,
+                    "unitPrice": 14.99
+                },
+                {
+                    "productSku": "CLOTH007",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "uma.lee@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC005",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "victor.walker@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "SPORT006",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                },
+                {
+                    "productSku": "SPORT007",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "wendy.hall@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK008",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "xavier.allen@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "TOY002",
+                    "quantity": 2,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "yara.young@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "ELEC009",
+                    "quantity": 1,
+                    "unitPrice": 129.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "zack.king@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH008",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                },
+                {
+                    "productSku": "CLOTH010",
+                    "quantity": 1,
+                    "unitPrice": 27.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "amy.wright@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "SPORT010",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "brian.lopez@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK009",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "BOOK010",
+                    "quantity": 1,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "chloe.hill@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH009",
+                    "quantity": 2,
+                    "unitPrice": 29.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "daniel.scott@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "ELEC001",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "ELEC002",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                },
+                {
+                    "productSku": "ELEC003",
+                    "quantity": 1,
+                    "unitPrice": 45.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "emily.green@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "HOME001",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "finn.adams@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT005",
+                    "quantity": 2,
+                    "unitPrice": 12.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "gina.baker@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "BEAUTY001",
+                    "quantity": 2,
+                    "unitPrice": 49.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "harry.gonzalez@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "AUTO001",
+                    "quantity": 2,
+                    "unitPrice": 16.99
+                },
+                {
+                    "productSku": "ELEC007",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "isla.nelson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH001",
+                    "quantity": 4,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "james.carter@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "ELEC010",
+                    "quantity": 1,
+                    "unitPrice": 199.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "kelly.mitchell@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK001",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                },
+                {
+                    "productSku": "BOOK002",
+                    "quantity": 1,
+                    "unitPrice": 44.99
+                },
+                {
+                    "productSku": "BOOK003",
+                    "quantity": 1,
+                    "unitPrice": 42.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "lucas.perez@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "SPORT001",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "maya.roberts@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "HOME002",
+                    "quantity": 2,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "HOME003",
+                    "quantity": 3,
+                    "unitPrice": 18.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "nathan.turner@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "TOY001",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                },
+                {
+                    "productSku": "TOY002",
+                    "quantity": 1,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "oscar.phillips@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "ELEC004",
+                    "quantity": 1,
+                    "unitPrice": 69.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "paula.campbell@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH002",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "quentin.parker@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT002",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                },
+                {
+                    "productSku": "SPORT008",
+                    "quantity": 1,
+                    "unitPrice": 22.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "rachel.evans@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "BOOK005",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "steve.edwards@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC006",
+                    "quantity": 3,
+                    "unitPrice": 15.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "tina.collins@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "HOME004",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                },
+                {
+                    "productSku": "HOME005",
+                    "quantity": 1,
+                    "unitPrice": 26.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "ursula.stewart@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH003",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                },
+                {
+                    "productSku": "CLOTH004",
+                    "quantity": 2,
+                    "unitPrice": 24.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "vince.sanchez@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT003",
+                    "quantity": 1,
+                    "unitPrice": 119.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "wanda.morris@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "BOOK006",
+                    "quantity": 3,
+                    "unitPrice": 14.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "xander.rogers@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC005",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                },
+                {
+                    "productSku": "ELEC008",
+                    "quantity": 1,
+                    "unitPrice": 12.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "yvonne.reed@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "OFFICE001",
+                    "quantity": 3,
+                    "unitPrice": 14.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "zeus.cook@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "SPORT006",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "anna.morgan@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BEAUTY001",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "ben.bell@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "AUTO001",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "cara.murphy@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH005",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                },
+                {
+                    "productSku": "CLOTH006",
+                    "quantity": 1,
+                    "unitPrice": 14.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "derek.bailey@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK007",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                },
+                {
+                    "productSku": "BOOK008",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "ella.rivera@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "HOME001",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                },
+                {
+                    "productSku": "HOME002",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "fred.cooper@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT007",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "greta.richardson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC009",
+                    "quantity": 1,
+                    "unitPrice": 129.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "hank.cox@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "TOY001",
+                    "quantity": 2,
+                    "unitPrice": 34.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "iris.howard@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH007",
+                    "quantity": 2,
+                    "unitPrice": 16.99
+                },
+                {
+                    "productSku": "CLOTH008",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "joe.ward@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "ELEC002",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "kim.torres@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT009",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                },
+                {
+                    "productSku": "SPORT010",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "leo.peterson@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "BOOK009",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "maria.gray@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "HOME003",
+                    "quantity": 4,
+                    "unitPrice": 18.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "nick.ramirez@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC001",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "ELEC006",
+                    "quantity": 1,
+                    "unitPrice": 15.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "olive.james@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "CLOTH009",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "paul.watson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT004",
+                    "quantity": 2,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "queenie.brooks@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BEAUTY001",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                },
+                {
+                    "productSku": "HOME005",
+                    "quantity": 1,
+                    "unitPrice": 26.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "rob.kelly@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "ELEC010",
+                    "quantity": 1,
+                    "unitPrice": 199.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "sara.sanders@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK010",
+                    "quantity": 2,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "tom.price@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "AUTO001",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                },
+                {
+                    "productSku": "OFFICE001",
+                    "quantity": 1,
+                    "unitPrice": 14.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "una.bennett@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH010",
+                    "quantity": 1,
+                    "unitPrice": 27.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "val.wood@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT001",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                },
+                {
+                    "productSku": "SPORT002",
+                    "quantity": 1,
+                    "unitPrice": 24.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "walt.barnes@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "ELEC003",
+                    "quantity": 1,
+                    "unitPrice": 45.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "xena.ross@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "TOY002",
+                    "quantity": 1,
+                    "unitPrice": 19.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "yale.henderson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK001",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "zara.coleman@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "HOME004",
+                    "quantity": 2,
+                    "unitPrice": 24.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "adam.jenkins@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC007",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                },
+                {
+                    "productSku": "ELEC008",
+                    "quantity": 2,
+                    "unitPrice": 12.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "beth.perry@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH001",
+                    "quantity": 2,
+                    "unitPrice": 19.99
+                },
+                {
+                    "productSku": "CLOTH002",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "carl.powell@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "SPORT003",
+                    "quantity": 1,
+                    "unitPrice": 119.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "dana.long@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK002",
+                    "quantity": 1,
+                    "unitPrice": 44.99
+                },
+                {
+                    "productSku": "BOOK004",
+                    "quantity": 1,
+                    "unitPrice": 36.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "evan.patterson@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "SPORT005",
+                    "quantity": 1,
+                    "unitPrice": 12.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "faye.hughes@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "HOME001",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                },
+                {
+                    "productSku": "HOME003",
+                    "quantity": 2,
+                    "unitPrice": 18.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "greg.flores@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC004",
+                    "quantity": 1,
+                    "unitPrice": 69.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "hope.washington@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "CLOTH003",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "ian.butler@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT006",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                },
+                {
+                    "productSku": "SPORT008",
+                    "quantity": 1,
+                    "unitPrice": 22.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "jill.simmons@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "OFFICE001",
+                    "quantity": 2,
+                    "unitPrice": 14.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "kyle.foster@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "ELEC005",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "lisa.gonzales@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BEAUTY001",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ],
+            "payment": {
+                "method": "INVOICE",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "mark.bryant@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "TOY001",
+                    "quantity": 1,
+                    "unitPrice": 34.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "nina.alexander@example.com",
+            "status": "CANCELLED",
+            "items": [
+                {
+                    "productSku": "ELEC009",
+                    "quantity": 1,
+                    "unitPrice": 129.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "owen.russell@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "BOOK006",
+                    "quantity": 1,
+                    "unitPrice": 14.99
+                },
+                {
+                    "productSku": "BOOK007",
+                    "quantity": 1,
+                    "unitPrice": 16.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "pam.griffin@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "SPORT007",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "quincy.diaz@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH004",
+                    "quantity": 2,
+                    "unitPrice": 24.99
+                },
+                {
+                    "productSku": "CLOTH006",
+                    "quantity": 1,
+                    "unitPrice": 14.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "rose.hayes@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "HOME002",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "sam.myers@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "AUTO001",
+                    "quantity": 2,
+                    "unitPrice": 16.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "tara.ford@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC001",
+                    "quantity": 1,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "ELEC002",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        }
+    ]
+}
