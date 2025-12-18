@@ -123,7 +123,7 @@ public class CartService {
     // TODO:clearCart(customerId)
 
     // checkout(customerId, PaymentMethod method)
-    //    Checkout =
+    // Checkout =
 //    ta kundens cart (Order NEW) →
 //    reservera lager →
 //    beräkna total →

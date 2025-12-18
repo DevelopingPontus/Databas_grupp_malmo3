@@ -17,11 +17,7 @@ public class CartCheckoutCommand implements Runnable {
     @Parameters(index = "0", description = "Customer id")
     private int customerId;
 
-    @Option(
-            names = "--method",
-            required = true,
-            description = "Payment method: CARD or INVOICE"
-    )
+    @Parameters(index = "1", description = "Payment method (CARD|INVOICE)")
     private Payment.PaymentMethod method;
 
     public CartCheckoutCommand(CartService cartService) {
