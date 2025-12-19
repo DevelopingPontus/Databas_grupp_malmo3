@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class InventoryService {
     private final InventoryRepository inventoryRepository;
 
-    public InventoryService(InventoryRepository inventoryRepository){
+    public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
 
@@ -20,8 +20,7 @@ public class InventoryService {
             int inStock = getStock(item.getProduct().getId());
             if (inStock < item.getQuantity()) {
                 throw new OutOfStockException(
-                        item.getProduct().getName() + " only has " + inStock + " left"
-                );
+                        item.getProduct().getName() + " only has " + inStock + " left");
 
             }
 
@@ -35,26 +34,23 @@ public class InventoryService {
         }
     }
 
-    //--helper methods
-    private int getStock(int productId) {
+    public int getStock(int productId) {
         return inventoryRepository.findByProductId(productId)
-                .orElseThrow(() ->
-                        new IllegalStateException("No inventory found for product " + productId))
+                .orElseThrow(() -> new IllegalStateException("No inventory found for product " + productId))
                 .getQuantity();
     }
 
+    // --helper methods
     private void decreaseStock(int productId, int quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
-                .orElseThrow(() ->
-                        new IllegalStateException("No inventory found for product " + productId));
+                .orElseThrow(() -> new IllegalStateException("No inventory found for product " + productId));
         inventory.setQuantity(inventory.getQuantity() - quantity);
         inventoryRepository.save(inventory);
     }
 
     private void increaseStock(int productId, int quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
-                .orElseThrow(() ->
-                        new IllegalStateException("No inventory found for product " + productId));
+                .orElseThrow(() -> new IllegalStateException("No inventory found for product " + productId));
         inventory.setQuantity(inventory.getQuantity() + quantity);
         inventoryRepository.save(inventory);
     }

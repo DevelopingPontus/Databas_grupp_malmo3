@@ -48,7 +48,10 @@ public class CartService {
         Customer customer = customerService.getCustomerByEmail(customerEmail).orElseThrow();
         Product product = productService.searchProductBySku(productSku).getFirst();
         Orders order = orderService.getOrCreateCart(customer);
-        // TODO: check stock in inventory service
+
+        if (inventoryService.getStock(product.getId()) < quantity) {
+            throw new IllegalArgumentException("Not enough stock for product " + productSku);
+        }
         OrderItem orderItem = createOrUpdateOrderItem(order, product, quantity);
 
         saveOrder(order);
@@ -56,7 +59,7 @@ public class CartService {
     }
 
     // --- Hjälpmetoder till addToCart
-    public OrderItem createOrUpdateOrderItem(Orders order, Product product, int quantity) {
+    private OrderItem createOrUpdateOrderItem(Orders order, Product product, int quantity) {
         var orderItem = order.getOrderItems().stream().filter((oi) -> oi.getProduct().getId().equals(product.getId()))
                 .findFirst();
         if (orderItem.isPresent()) {
@@ -106,6 +109,11 @@ public class CartService {
         Customer customer = customerService.getCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         var order = orderService.getCart(customer);
+        // Force loading of order items
+        if (order.isPresent()) {
+            var cart = order.get();
+            cart.getOrderItems().size();
+        }
 
         return order;
     }
