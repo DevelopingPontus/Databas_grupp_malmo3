@@ -1,13 +1,12 @@
 package com.example.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.example.models.Customer;
+import com.example.respoitories.CustomerRepository;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
-import com.example.models.Customer;
-import com.example.respoitories.CustomerRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
