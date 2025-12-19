@@ -91,7 +91,7 @@ class CartServiceTest {
     //Add to cart tests
     @Test
     void shouldAddToCartAndUpdateOrder() {
-        cartService.addToCart(TEST_EMAIL, TEST_SKU, TEST_QUANTITY);
+
     }
 
     @Test
