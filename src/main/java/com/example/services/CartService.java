@@ -1,16 +1,13 @@
 package com.example.services;
 
 import com.example.models.*;
-import com.example.respoitories.*;
-import jakarta.persistence.criteria.Order;
+import com.example.respoitories.OrderItemRepository;
+import com.example.respoitories.OrderRepository;
+import com.example.respoitories.PaymentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -25,13 +22,13 @@ public class CartService {
     private final PaymentService paymentService;
 
     public CartService(OrderRepository orderRepository,
-            OrderItemRepository orderItemRepository,
-            PaymentRepository paymentRepository,
-            CustomerService customerService,
-            ProductService productService,
-            OrderService orderService,
-            InventoryService inventoryService,
-            PaymentService paymentService) {
+                       OrderItemRepository orderItemRepository,
+                       PaymentRepository paymentRepository,
+                       CustomerService customerService,
+                       ProductService productService,
+                       OrderService orderService,
+                       InventoryService inventoryService,
+                       PaymentService paymentService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.paymentRepository = paymentRepository;
@@ -80,7 +77,7 @@ public class CartService {
                 .map(OrderItem::getLineTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        order.setTotal(total.doubleValue());
+        order.setTotal(total);
     }
 
     private void saveOrder(Orders order) {

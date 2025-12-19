@@ -50,7 +50,7 @@ public class CartServiceTest {
         product = new Product("ThisSKU", "Billys Pizza", "Mumma!", BigDecimal.valueOf(15), true);
         orderEmpty = new Orders(customer);
         orderWithItem = new Orders(customer);
-        orderWithItem.setTotal();
+        orderWithItem.setTotal(BigDecimal.valueOf(30));
     }
 
     //Add to cart tests
