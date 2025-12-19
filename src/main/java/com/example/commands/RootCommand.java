@@ -1,6 +1,8 @@
 package com.example.commands;
 
 import com.example.commands.cart.CartCommand;
+import com.example.commands.inventory.InventoryCommand;
+import com.example.commands.inventory.InventoryListCommand;
 import com.example.commands.product.ProductCommand;
 import com.example.commands.Category.CategoryCommand;
 import com.example.commands.customer.CustomerCommand;
@@ -15,7 +17,8 @@ import picocli.CommandLine.Command;
         CustomerCommand.class,
         ImportCommand.class,
         ProductCommand.class,
-        ExitCommand.class
+        ExitCommand.class,
+        InventoryCommand.class
 })
 public class RootCommand {
 
