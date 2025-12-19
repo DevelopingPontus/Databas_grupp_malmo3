@@ -3,6 +3,7 @@ package com.example.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -44,13 +45,32 @@ public class Payment {
     private Orders orders;
 
     // Constructor
+    /**
+     * Don't use this constructor
+     */
     public Payment() {
     }
 
+    public Payment(Orders order, PaymentMethod method) {
+        this(order, method, PaymentStatus.PENDING, Timestamp.valueOf(LocalDateTime.now()));
+    }
+
+    public Payment(Orders order, PaymentMethod method, PaymentStatus status) {
+        this(order, method, status, Timestamp.valueOf(LocalDateTime.now()));
+    }
+
     public Payment(PaymentMethod method, PaymentStatus status, Timestamp timestamp) {
+        this(null, method, status, timestamp);
+    }
+
+    public Payment(Orders order, PaymentMethod method, PaymentStatus status, Timestamp timestamp) {
+        this.orders = order;
         this.method = method;
         this.status = status;
         this.timestamp = timestamp;
+        if (this.orders != null) {
+            this.orders.setPayment(this);
+        }
     }
 
     // Getters and setters
