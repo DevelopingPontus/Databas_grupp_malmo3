@@ -59,4 +59,8 @@ public class InventoryService {
         inventoryRepository.save(inventory);
     }
 
+    // list
+
+    // update
+
 }
