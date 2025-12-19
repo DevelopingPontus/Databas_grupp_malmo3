@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.respoitories.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,6 @@ import com.example.models.OrderItem;
 import com.example.models.Orders;
 import com.example.models.Payment;
 import com.example.models.Product;
-import com.example.respoitories.CategoryRepository;
-import com.example.respoitories.CustomerRepository;
-import com.example.respoitories.InventoryRepository;
-import com.example.respoitories.OrderItemRepository;
-import com.example.respoitories.OrdersRepository;
-import com.example.respoitories.PaymentRepository;
-import com.example.respoitories.ProductRepository;
 
 @Service
 public class JsonService {
@@ -31,19 +25,19 @@ public class JsonService {
     private final CustomerRepository customerRepository;
     private final InventoryRepository inventoryRepository;
     private final OrderItemRepository orderItemRepository;
-    private final OrdersRepository ordersRepository;
+    private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final ProductRepository productRepository;
 
     public JsonService(CategoryRepository categoryRepository, CustomerRepository customerRepository,
             InventoryRepository inventoryRepository, OrderItemRepository orderItemRepository,
-            OrdersRepository ordersRepository, PaymentRepository paymentRepository,
+            OrderRepository orderRepository, PaymentRepository paymentRepository,
             ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
         this.inventoryRepository = inventoryRepository;
         this.orderItemRepository = orderItemRepository;
-        this.ordersRepository = ordersRepository;
+        this.orderRepository = orderRepository;
         this.paymentRepository = paymentRepository;
         this.productRepository = productRepository;
     }
@@ -74,7 +68,7 @@ public class JsonService {
             order.setPayment(null);
 
             // This will cascade save to OrderItems automatically
-            ordersRepository.save(order);
+            orderRepository.save(order);
             System.out.println("Saved order " + orderIndex + " with ID: " + order.getId() +
                     " and " + order.getOrderItems().size() + " items");
 
