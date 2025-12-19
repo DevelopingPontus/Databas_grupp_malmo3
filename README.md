@@ -42,13 +42,14 @@ The program is a CLI application that allows users to manage products, customers
 
 1. Clone the repository
 2. Configure the database connection in `src/main/resources/application.properties`
-3. Build the project using Maven:
+3. Run the schema setup script located in `src/main/resources/schema.sql` to create the necessary tables in your PostgreSQL database.
+4. Build the project using Maven:
 
    ```bash
    mvn clean install
    ```
 
-4. Run the application:
+5. Run the application:
 
    ```bash
    mvn spring-boot:run
