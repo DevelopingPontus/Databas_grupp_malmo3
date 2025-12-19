@@ -47,6 +47,10 @@ public class Orders {
         customer.addOrder(this);
     }
 
+    public Orders(OrderStatus status, double total, Timestamp createdAt) {
+        this(status, BigDecimal.valueOf(total), createdAt);
+    }
+
     public Orders(OrderStatus status, BigDecimal total, Timestamp createdAt) {
         this.status = status;
         this.total = total;
@@ -79,6 +83,10 @@ public class Orders {
 
     public BigDecimal getTotal() {
         return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = BigDecimal.valueOf(total);
     }
 
     public void setTotal(BigDecimal total) {

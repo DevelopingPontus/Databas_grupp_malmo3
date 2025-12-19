@@ -5,8 +5,6 @@ import com.example.models.Payment;
 import com.example.respoitories.PaymentRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Random;
 
 @Service
@@ -20,18 +18,14 @@ public class PaymentService {
 
     public Payment process(Orders order, Payment.PaymentMethod method) {
 
-        Payment payment = new Payment();
-        payment.setOrders(order);
-        payment.setMethod(method);
-        payment.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
+        Payment payment = new Payment(order, method);
 
         boolean approved = random.nextInt(10) < 9;
 
         payment.setStatus(
                 approved
                         ? Payment.PaymentStatus.APPROVED
-                        : Payment.PaymentStatus.DECLINED
-        );
+                        : Payment.PaymentStatus.DECLINED);
 
         return paymentRepository.save(payment);
     }
