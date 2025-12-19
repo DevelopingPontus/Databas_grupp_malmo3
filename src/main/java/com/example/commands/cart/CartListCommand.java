@@ -12,8 +12,8 @@ public class CartListCommand implements Runnable {
 
     private final CartService cartService;
 
-    @Parameters(index = "0", description = "The customer id")
-    private int customerId;
+    @Parameters(index = "0", description = "The customer email")
+    private String customerEmail;
 
     public CartListCommand(CartService cartService) {
         this.cartService = cartService;
@@ -22,7 +22,7 @@ public class CartListCommand implements Runnable {
     @Override
     public void run() {
         try {
-            Orders cart = cartService.getCartItems(customerId);
+            Orders cart = cartService.getOrder(customerEmail);
 
             if (cart.getOrderItems().isEmpty()) {
                 System.out.println("Cart is empty");

@@ -10,14 +10,11 @@ import picocli.CommandLine.Command;
 public class CartRemoveItemCommand implements Runnable {
     private final CartService cartService;
 
-    @Parameters(index = "0", description = "The customer id")
-    private int customerId;
+    @Parameters(index = "0", description = "The customer email")
+    private String customerEmail;
 
-    @Parameters(index = "1", description = "The product id")
-    private int productId;
-
-    @Parameters(index = "2", description = "The quantity")
-    private int quantity;
+    @Parameters(index = "1", description = "The product SKU")
+    private String productSku;
 
     public CartRemoveItemCommand(CartService cartService) {
         this.cartService = cartService;
@@ -26,7 +23,7 @@ public class CartRemoveItemCommand implements Runnable {
     @Override
     public void run() {
         try {
-            cartService.removeFromCart(customerId, productId, quantity);
+            cartService.removeFromCart(customerEmail, productSku);
             System.out.println("Product removed from cart");
 
         } catch (Exception e) {

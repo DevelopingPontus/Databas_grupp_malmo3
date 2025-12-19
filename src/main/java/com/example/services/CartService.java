@@ -18,58 +18,60 @@ public class CartService {
     private final OrderItemRepository orderItemRepository;
     private final PaymentRepository paymentRepository;
     private final CustomerService customerService;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
     private final OrderService orderService;
     private final InventoryService inventoryService;
     private final PaymentService paymentService;
 
     public CartService(OrderRepository orderRepository,
-                       OrderItemRepository orderItemRepository,
-                       PaymentRepository paymentRepository,
-                       CustomerService customerService,
-                       ProductRepository productRepository,
-                       OrderService orderService,
-                       InventoryService inventoryService,
-                       PaymentService paymentService) {
+            OrderItemRepository orderItemRepository,
+            PaymentRepository paymentRepository,
+            CustomerService customerService,
+            ProductService productService,
+            OrderService orderService,
+            InventoryService inventoryService,
+            PaymentService paymentService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.paymentRepository = paymentRepository;
         this.customerService = customerService;
-        this.productRepository = productRepository;
+        this.productService = productService;
         this.orderService = orderService;
         this.inventoryService = inventoryService;
         this.paymentService = paymentService;
     }
 
     @Transactional
-    public void addToCart(int customerId, int productId, int quantity) {
+    public void addToCart(String customerEmail, String productSku, int quantity) {
 
-        Customer customer = customerService.getCustomerById(customerId).orElseThrow();
-        Product product = productRepository.findById(productId).orElseThrow();
+        Customer customer = customerService.getCustomerByEmail(customerEmail).orElseThrow();
+        Product product = productService.searchProductBySku(productSku).getFirst();
         Orders order = orderService.getOrCreateCart(customer);
+        // TODO: check stock in inventory service
         OrderItem orderItem = createOrUpdateOrderItem(order, product, quantity);
 
-        updateOrderTotal(order);
         saveOrder(order);
+        updateOrderTotal(order);
     }
 
     // --- Hjälpmetoder till addToCart
     public OrderItem createOrUpdateOrderItem(Orders order, Product product, int quantity) {
-        // Creating OrderItem id manually
-        // because OrderItem has a composite primary key
-        OrderItem.OrderItemId id = new OrderItem.OrderItemId(order.getId(), product.getId());
-
-        OrderItem item = orderItemRepository.findById(id).orElseGet(OrderItem::new);
-
-        item.setOrderAndProduct(order, product);
-        item.setQuantity(item.getQuantity() + quantity);
-        item.setUnitPrice(product.getPrice());
-        item.setLineTotal(item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
-
-        return orderItemRepository.save(item);
+        var orderItem = order.getOrderItems().stream().filter((oi) -> oi.getProduct().getId().equals(product.getId()))
+                .findFirst();
+        if (orderItem.isPresent()) {
+            OrderItem item = orderItem.get();
+            item.setQuantity(item.getQuantity() + quantity);
+            item.setLineTotal(item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
+            return orderItemRepository.save(item);
+        } else {
+            OrderItem item = new OrderItem(quantity, product.getPrice(), product, order);
+            order.addOrderItem(item);
+            item.setLineTotal(item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
+            return orderItemRepository.save(item);
+        }
     }
 
-    private void updateOrderTotal(Orders order){
+    private void updateOrderTotal(Orders order) {
         BigDecimal total = order.getOrderItems().stream()
                 .map(OrderItem::getLineTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -82,37 +84,25 @@ public class CartService {
     }
 
     @Transactional
-    public void removeFromCart(int customerId, int productId, int quantity) {
+    public void removeFromCart(String customerEmail, String productSku) {
 
-        Customer customer = customerService.getCustomerById(customerId)
+        Customer customer = customerService.getCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
-
+        Product product = productService.searchProductBySku(productSku).getFirst();
         Orders order = orderService.getOrCreateCart(customer);
 
-        OrderItem.OrderItemId id = new OrderItem.OrderItemId(customerId, productId);
+        var orderItems = order.getOrderItems();
+        orderItems.removeIf((item) -> item.getProduct().getId().equals(product.getId()));
 
-        orderItemRepository.findById(id).ifPresent(item -> {
-            int newQty = item.getQuantity() - quantity;
-
-            if (newQty <= 0) {
-                order.getOrderItems().remove(item);
-                orderItemRepository.delete(item);
-            } else {
-                item.setQuantity(newQty);
-                item.setLineTotal(
-                        item.getUnitPrice().multiply(BigDecimal.valueOf(newQty))
-                );
-            }
-        });
         orderService.updateTotal(order);
         orderService.save(order);
     }
 
     // get cart here, is looped and printed in list command!
     @Transactional(readOnly = true)
-    public Orders getCartItems(int customerId){
+    public Orders getOrder(String customerEmail) {
 
-        Customer customer = customerService.getCustomerById(customerId)
+        Customer customer = customerService.getCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
         Orders order = orderService.getOrCreateCart(customer);
 
@@ -124,17 +114,17 @@ public class CartService {
 
     // checkout(customerId, PaymentMethod method)
     // Checkout =
-//    ta kundens cart (Order NEW) →
-//    reservera lager →
-//    beräkna total →
-//    simulera betalning →
-//    uppdatera orderstatus →
-//    spara →
-//    töm cart
+    // ta kundens cart (Order NEW) →
+    // reservera lager →
+    // beräkna total →
+    // simulera betalning →
+    // uppdatera orderstatus →
+    // spara →
+    // töm cart
     @Transactional
-    public void checkout(int customerId, Payment.PaymentMethod paymentMethod){
+    public void checkout(String customerEmail, Payment.PaymentMethod paymentMethod) {
 
-        Customer customer = customerService.getCustomerById(customerId)
+        Customer customer = customerService.getCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
         Orders order = orderService.getOrCreateCart(customer);
@@ -155,6 +145,8 @@ public class CartService {
         if (payment.getStatus() == Payment.PaymentStatus.APPROVED) {
             order.setStatus(Orders.OrderStatus.PAID);
         } else {
+            // NOTE: This is inside transaction, so if exception is thrown, all changes will
+            // be rolled back
             order.setStatus(Orders.OrderStatus.CANCELLED);
             inventoryService.release(order);
             throw new IllegalArgumentException("Payment failed");
@@ -164,118 +156,114 @@ public class CartService {
         orderService.save(order);
     }
 
-
-
-
-
-
-
-
-    //public void removeFromCart(int customerId, int productId, int quantity) {
-      //Map<Integer, Integer> cart = userCarts.get(customerId);
-    //    if (cart != null) {
-  //          cart.computeIfPresent(productId, (k, v) -> v > quantity ? v - quantity : null);
-//       }
-//    }
-//
-//    public Map<Integer, Integer> viewCart(int customerId) {
-//        return new HashMap<>(userCarts.getOrDefault(customerId, Map.of()));
-//    }
-//
-//    @Transactional
-//    public void checkoutTest() {
-//        var order = createOrder(); (orderService)
-//
-//        try {
-//            reserveInventory(order);
-//        } catch (Exception e) {
-//            throw e;
-//        }
-//
-//        var orderTotal = calculateOrderTotal(order);
-//
-//        var paymentsStatus = processPayment(orderTotal);
-//
-//        if (paymentsStatus == Payment.PaymentStatus.APPROVED) {
-//            updateOrderStatus(order, Orders.OrderStatus.PAID);
-//            updateInventory(order);
-//        } else {
-//            updateOrderStatus(order, Orders.OrderStatus.CANCELLED);
-//            throw new Exception("Payment failed");
-//        }
-//    }
-//
-//
-//    @Transactional
-//    public Order checkout(int customerId, Payment.PaymentMethod paymentMethod) {
-//        Map<Integer, Integer> cart = userCarts.get(customerId);
-//        if (cart == null || cart.isEmpty()) {
-//            throw new IllegalStateException("Cart is empty");
-//        }
-//
-//        Customer customer = customerService.getCustomerById(customerId)
-//                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
-//
-//
-//        //TODO: använd orderservicen istället
-//        // Create order
-//        Orders order = new Orders(customer);
-//        orderRepository.save(order);
-//
-//
-//        // Add order items and calculate total
-//        BigDecimal total = BigDecimal.ZERO;
-//        for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
-//            Product product = productRepository.findById(entry.getKey())
-//                    .orElseThrow(() -> new IllegalArgumentException("Product not found: " + entry.getKey()));
-//
-//            OrderItem orderItem = new OrderItem();
-//            orderItem.setOrder(order);
-//            orderItem.setProduct(product);
-//            orderItem.setQuantity(entry.getValue());
-//            orderItem.setUnitPrice(product.getPrice());
-//            orderItem.setLineTotal(product.getPrice().multiply(BigDecimal.valueOf(entry.getValue())));
-//
-//            orderItemRepository.save(orderItem);
-//            total = total.add(orderItem.getLineTotal());
-//        }
-//
-//        // Create payment
-//        Payment payment = new Payment();
-//        payment.setOrders(order);
-//        payment.setAmount(total);
-//        payment.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-//        payment.setMethod(paymentMethod);
-//        payment.setStatus(Payment.PaymentStatus.PENDING);
-//        paymentRepository.save(payment);
-//
-//        // Update order total and status
-//        order.setTotal(total);
-//        order.setStatus(Orders.OrderStatus.PAID);
-//        order = orderRepository.save(order);
-//
-//        // Clear the cart
-//        userCarts.remove(customerId);
-//
-//        return order;
-//    }
-//
-//    public void clearCart(int customerId) {
-//        userCarts.remove(customerId);
-//    }
-//
-//    public BigDecimal getCartTotal(int customerId) {
-//        Map<Integer, Integer> cart = userCarts.get(customerId);
-//        if (cart == null || cart.isEmpty()) {
-//            return BigDecimal.ZERO;
-//        }
-//
-//        return cart.entrySet().stream()
-//                .map(entry -> {
-//                    Product product = productRepository.findById(entry.getKey())
-//                            .orElseThrow(() -> new IllegalArgumentException("Product not found: " + entry.getKey()));
-//                    return product.getPrice().multiply(BigDecimal.valueOf(entry.getValue()));
-//                })
-//                .reduce(BigDecimal.ZERO, BigDecimal::add);
-//    }
+    // public void removeFromCart(int customerId, int productId, int quantity) {
+    // Map<Integer, Integer> cart = userCarts.get(customerId);
+    // if (cart != null) {
+    // cart.computeIfPresent(productId, (k, v) -> v > quantity ? v - quantity :
+    // null);
+    // }
+    // }
+    //
+    // public Map<Integer, Integer> viewCart(int customerId) {
+    // return new HashMap<>(userCarts.getOrDefault(customerId, Map.of()));
+    // }
+    //
+    // @Transactional
+    // public void checkoutTest() {
+    // var order = createOrder(); (orderService)
+    //
+    // try {
+    // reserveInventory(order);
+    // } catch (Exception e) {
+    // throw e;
+    // }
+    //
+    // var orderTotal = calculateOrderTotal(order);
+    //
+    // var paymentsStatus = processPayment(orderTotal);
+    //
+    // if (paymentsStatus == Payment.PaymentStatus.APPROVED) {
+    // updateOrderStatus(order, Orders.OrderStatus.PAID);
+    // updateInventory(order);
+    // } else {
+    // updateOrderStatus(order, Orders.OrderStatus.CANCELLED);
+    // throw new Exception("Payment failed");
+    // }
+    // }
+    //
+    //
+    // @Transactional
+    // public Order checkout(int customerId, Payment.PaymentMethod paymentMethod) {
+    // Map<Integer, Integer> cart = userCarts.get(customerId);
+    // if (cart == null || cart.isEmpty()) {
+    // throw new IllegalStateException("Cart is empty");
+    // }
+    //
+    // Customer customer = customerService.getCustomerById(customerId)
+    // .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+    //
+    //
+    // //TODO: använd orderservicen istället
+    // // Create order
+    // Orders order = new Orders(customer);
+    // orderRepository.save(order);
+    //
+    //
+    // // Add order items and calculate total
+    // BigDecimal total = BigDecimal.ZERO;
+    // for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
+    // Product product = productRepository.findById(entry.getKey())
+    // .orElseThrow(() -> new IllegalArgumentException("Product not found: " +
+    // entry.getKey()));
+    //
+    // OrderItem orderItem = new OrderItem();
+    // orderItem.setOrder(order);
+    // orderItem.setProduct(product);
+    // orderItem.setQuantity(entry.getValue());
+    // orderItem.setUnitPrice(product.getPrice());
+    // orderItem.setLineTotal(product.getPrice().multiply(BigDecimal.valueOf(entry.getValue())));
+    //
+    // orderItemRepository.save(orderItem);
+    // total = total.add(orderItem.getLineTotal());
+    // }
+    //
+    // // Create payment
+    // Payment payment = new Payment();
+    // payment.setOrders(order);
+    // payment.setAmount(total);
+    // payment.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
+    // payment.setMethod(paymentMethod);
+    // payment.setStatus(Payment.PaymentStatus.PENDING);
+    // paymentRepository.save(payment);
+    //
+    // // Update order total and status
+    // order.setTotal(total);
+    // order.setStatus(Orders.OrderStatus.PAID);
+    // order = orderRepository.save(order);
+    //
+    // // Clear the cart
+    // userCarts.remove(customerId);
+    //
+    // return order;
+    // }
+    //
+    // public void clearCart(int customerId) {
+    // userCarts.remove(customerId);
+    // }
+    //
+    // public BigDecimal getCartTotal(int customerId) {
+    // Map<Integer, Integer> cart = userCarts.get(customerId);
+    // if (cart == null || cart.isEmpty()) {
+    // return BigDecimal.ZERO;
+    // }
+    //
+    // return cart.entrySet().stream()
+    // .map(entry -> {
+    // Product product = productRepository.findById(entry.getKey())
+    // .orElseThrow(() -> new IllegalArgumentException("Product not found: " +
+    // entry.getKey()));
+    // return product.getPrice().multiply(BigDecimal.valueOf(entry.getValue()));
+    // })
+    // .reduce(BigDecimal.ZERO, BigDecimal::add);
+    // }
 }

@@ -1,5 +1,6 @@
 package com.example.commands.cart;
 
+import com.example.exceptions.OutOfStockException;
 import com.example.services.CartService;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Parameters;
@@ -12,11 +13,11 @@ import java.util.NoSuchElementException;
 public class CartAddCommand implements Runnable {
     private final CartService cartService;
 
-    @Parameters(index = "0", description = "The customer id")
-    private int customerId;
+    @Parameters(index = "0", description = "The customer email")
+    private String customerEmail;
 
-    @Parameters(index = "1", description = "The product id")
-    private int productId;
+    @Parameters(index = "1", description = "The product SKU")
+    private String productSku;
 
     @Parameters(index = "2", description = "The quantity")
     private int quantity;
@@ -29,12 +30,14 @@ public class CartAddCommand implements Runnable {
     public void run() {
         try {
             validateInput();
-            cartService.addToCart(customerId, productId, quantity);
+            cartService.addToCart(customerEmail, productSku, quantity);
 
             System.out.printf(
-                    "Added product %d (qty %d) to cart for customer %d%n",
-                    productId, quantity, customerId);
+                    "Added product %s (qty %d) to cart for customer %s%n",
+                    productSku, quantity, customerEmail);
 
+        } catch (OutOfStockException e) {
+            System.out.println("Not enough stock for product: " + productSku);
         } catch (NoSuchElementException e) {
             System.out.println("Customer or product not found");
 

@@ -14,8 +14,8 @@ public class CartCheckoutCommand implements Runnable {
 
     private final CartService cartService;
 
-    @Parameters(index = "0", description = "Customer id")
-    private int customerId;
+    @Parameters(index = "0", description = "Customer email")
+    private String customerEmail;
 
     @Parameters(index = "1", description = "Payment method (CARD|INVOICE)")
     private Payment.PaymentMethod method;
@@ -27,7 +27,7 @@ public class CartCheckoutCommand implements Runnable {
     @Override
     public void run() {
         try {
-            cartService.checkout(customerId, method);
+            cartService.checkout(customerEmail, method);
             System.out.println("Order completed successfully");
 
         } catch (OutOfStockException e) {

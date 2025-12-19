@@ -46,7 +46,7 @@ public class OrderItem {
     }
 
     public OrderItem(int quantity, BigDecimal unitPrice, Product product, Orders order) {
-        this.id = new OrderItemId();
+        this.id = new OrderItemId(order.getId(), product.getId());
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.product = product;
