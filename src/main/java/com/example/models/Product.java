@@ -40,7 +40,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private Set<OrderItem> orderItem;
 
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Inventory inventory;
 
     // Constructor
@@ -63,6 +63,10 @@ public class Product {
     // Getters and Setters
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getSku() {

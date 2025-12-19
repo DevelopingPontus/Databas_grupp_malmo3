@@ -22,6 +22,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    @Transactional
     public boolean removeProductByID(int productId) {
         if (productRepository.existsById(productId)) {
             productRepository.deleteById(productId);
@@ -45,7 +46,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<Product> searchProductBySku(String sku) {
+    public Optional<Product> searchProductBySku(String sku) {
         return productRepository.findProductBySku(sku);
     }
 

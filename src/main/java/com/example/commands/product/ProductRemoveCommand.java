@@ -11,16 +11,15 @@ import picocli.CommandLine.Command;
 public class ProductRemoveCommand implements Runnable {
     private final ProductService productService;
 
-    @Parameters(index = "0", description = "To remove product enter ID: ", arity = "0..1")
-    private int productId;
-    @Option(names = "--sku", description = "To remove product enter SKU: ")
-    private String sku;
-
-
     public ProductRemoveCommand(ProductService productService) {
         this.productService = productService;
     }
+    //TODO sak endast tas bort via --sku
+    @Parameters(index = "0", description = "To remove product enter ID: ", arity = "0..1")
+    private Integer productId;
 
+    @Option(names = "--sku", description = "To remove product enter SKU: ")
+    private String sku;
 
     @Override
     public void run() {
@@ -32,12 +31,12 @@ public class ProductRemoveCommand implements Runnable {
             } else {
                 System.out.println("Product not found");
             }
-        } else {
+        } else if (productId != null){
             System.out.printf("Removing product with ID: %d\n", productId);
             boolean removed = productService.removeProductByID(productId);
             if (removed) {
                 System.out.println("Product removed successfully");
-            } else {
+        } else {
                 System.out.println("Product not found");
             }
         }

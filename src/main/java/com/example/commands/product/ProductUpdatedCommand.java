@@ -20,6 +20,7 @@ public class ProductUpdatedCommand implements Runnable {
         this.productService = productService;
     }
 
+    //TODO ska endast kunnas sökas på den specifika produkt via --sku inte id
     @Parameters(index = "0", description = "Enter ID of product to update")
     private int productId;
 
