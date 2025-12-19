@@ -36,14 +36,14 @@ public class InventoryService {
     }
 
     //--helper methods
-    private int getStock(int productId) {
+    public int getStock(int productId) {
         return inventoryRepository.findByProductId(productId)
                 .orElseThrow(() ->
                         new IllegalStateException("No inventory found for product " + productId))
                 .getQuantity();
     }
 
-    private void decreaseStock(int productId, int quantity) {
+    public void decreaseStock(int productId, int quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
                 .orElseThrow(() ->
                         new IllegalStateException("No inventory found for product " + productId));
@@ -51,7 +51,7 @@ public class InventoryService {
         inventoryRepository.save(inventory);
     }
 
-    private void increaseStock(int productId, int quantity) {
+    public void increaseStock(int productId, int quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
                 .orElseThrow(() ->
                         new IllegalStateException("No inventory found for product " + productId));

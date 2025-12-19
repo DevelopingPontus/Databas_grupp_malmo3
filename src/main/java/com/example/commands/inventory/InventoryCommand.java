@@ -5,7 +5,8 @@ import picocli.CommandLine.Command;
 
 @Component
 @Command(name = "inventory", mixinStandardHelpOptions = true, description = "Commands related to inventory", subcommands = {
-        InventoryListCommand.class
+        InventoryListCommand.class,
+        InventoryUpdateCommand.class
 })
 public class InventoryCommand {
 
