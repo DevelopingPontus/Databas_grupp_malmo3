@@ -5,9 +5,11 @@ import picocli.CommandLine.Command;
 
 @Component
 @Command(name = "product", mixinStandardHelpOptions = true, description = "Product commands", subcommands = {
-                ProductAddCommand.class,
-                ProductListCommand.class,
-                ProductRemoveCommand.class
+        ProductAddCommand.class,
+        ProductListCommand.class,
+        ProductFilterCommand.class,
+        ProductRemoveCommand.class,
+        ProductUpdatedCommand.class
 })
 public class ProductCommand {
 }
