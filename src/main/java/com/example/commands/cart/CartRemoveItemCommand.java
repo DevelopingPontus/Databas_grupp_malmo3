@@ -6,7 +6,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 
 @Component
-@Command(name = "remove", description = "Remove item from cart")
+@Command(name = "remove", mixinStandardHelpOptions = true, description = "Remove item from cart")
 public class CartRemoveItemCommand implements Runnable {
     private final CartService cartService;
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine;
 
 @Component
-@CommandLine.Command(name = "list", description = "List all categories")
+@CommandLine.Command(name = "list", mixinStandardHelpOptions = true, description = "List all categories")
 public class CategoryListCommand implements Runnable {
     private final CategoryService categoryService;
 

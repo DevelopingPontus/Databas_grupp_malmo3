@@ -9,7 +9,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 
 @Component
-@Command(name = "checkout", description = "Checkout cart")
+@Command(name = "checkout", mixinStandardHelpOptions = true, description = "Checkout cart")
 public class CartCheckoutCommand implements Runnable {
 
     private final CartService cartService;

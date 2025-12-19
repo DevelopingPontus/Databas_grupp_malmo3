@@ -7,7 +7,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 
 @Component
-@Command(name = "list", description = "List cart items")
+@Command(name = "list", mixinStandardHelpOptions = true, description = "List cart items")
 public class CartListCommand implements Runnable {
 
     private final CartService cartService;
@@ -18,7 +18,6 @@ public class CartListCommand implements Runnable {
     public CartListCommand(CartService cartService) {
         this.cartService = cartService;
     }
-
 
     @Override
     public void run() {
@@ -40,8 +39,7 @@ public class CartListCommand implements Runnable {
                         item.getProduct().getId(),
                         item.getQuantity(),
                         item.getUnitPrice(),
-                        item.getLineTotal()
-                );
+                        item.getLineTotal());
             });
 
             System.out.println("--------------------------------");

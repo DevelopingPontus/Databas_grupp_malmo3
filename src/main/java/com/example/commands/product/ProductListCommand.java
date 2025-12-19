@@ -9,7 +9,7 @@ import picocli.CommandLine.Command;
 import java.util.List;
 
 @Component
-@Command(name = "list", description = "List all products")
+@Command(name = "list", mixinStandardHelpOptions = true, description = "List all products")
 public class ProductListCommand implements Runnable {
     private final ProductService productService;
 
@@ -42,7 +42,8 @@ public class ProductListCommand implements Runnable {
 
         System.out.println("Listing all products... ");
         productService.getAllProducts()
-                .forEach((p) -> System.out.printf("- %s (SKU: %s, Price: %.2f)%n", p.getName(), p.getSku(), p.getPrice()));
+                .forEach((p) -> System.out.printf("- %s (SKU: %s, Price: %.2f)%n", p.getName(), p.getSku(),
+                        p.getPrice()));
 
     }
 }

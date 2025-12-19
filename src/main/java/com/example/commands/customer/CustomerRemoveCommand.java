@@ -8,7 +8,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
 @Component
-@Command(name = "remove", description = "Remove a customer by ID")
+@Command(name = "remove", mixinStandardHelpOptions = true, description = "Remove a customer by ID")
 public class CustomerRemoveCommand implements Runnable {
     private final CustomerService customerService;
 

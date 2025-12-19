@@ -9,7 +9,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Component
-@Command(name = "find", description = "Find a customer by email")
+@Command(name = "find", mixinStandardHelpOptions = true, description = "Find a customer by email")
 public class CustomerFindCommand implements Runnable {
     private final CustomerService customerService;
 

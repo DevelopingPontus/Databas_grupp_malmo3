@@ -8,7 +8,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
 @Component
-@Command(name = "add", description = "Add a new customer")
+@Command(name = "add", mixinStandardHelpOptions = true, description = "Add a new customer")
 public class CustomerAddCommand implements Runnable {
     private final CustomerService customerService;
 

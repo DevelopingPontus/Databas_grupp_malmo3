@@ -8,7 +8,7 @@ import picocli.CommandLine.Command;
 import java.util.NoSuchElementException;
 
 @Component
-@Command(name = "add", description = "Add a new cart")
+@Command(name = "add", mixinStandardHelpOptions = true, description = "Add a new cart")
 public class CartAddCommand implements Runnable {
     private final CartService cartService;
 
@@ -33,8 +33,7 @@ public class CartAddCommand implements Runnable {
 
             System.out.printf(
                     "Added product %d (qty %d) to cart for customer %d%n",
-                    productId, quantity, customerId
-            );
+                    productId, quantity, customerId);
 
         } catch (NoSuchElementException e) {
             System.out.println("Customer or product not found");
