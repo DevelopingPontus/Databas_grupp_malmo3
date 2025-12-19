@@ -5,6 +5,7 @@ import com.example.respoitories.ProductRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product addProducts(String sku, String name, String description, double price) {
+    public Product addProducts(String sku, String name, String description, BigDecimal price) {
         Product product = new Product(sku, name, description, price);
         return productRepository.save(product);
     }

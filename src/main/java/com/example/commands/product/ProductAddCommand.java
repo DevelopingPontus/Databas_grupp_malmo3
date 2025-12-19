@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
+import java.math.BigDecimal;
+
 
 @Component
 @Command(name = "add", description = "Add a new product")
@@ -19,7 +21,7 @@ public class ProductAddCommand implements Runnable {
     private String name;
 
     @Parameters(index = "2", description = "Product price")
-    private double price;
+    private BigDecimal price;
 
     @Parameters(index = "3", description = "Product description", arity = "0..1")
     private String description;
