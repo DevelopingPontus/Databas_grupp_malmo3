@@ -17,9 +17,6 @@ import picocli.CommandLine.Command;
         ProductCommand.class,
         ExitCommand.class
 })
-public class RootCommand implements Runnable {
-    @Override
-    public void run() {
-        System.out.println("Welcome to the E-Store application! Type a command or 'exit' to quit.");
-    }
+public class RootCommand {
+
 }
