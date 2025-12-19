@@ -55,6 +55,7 @@ public class CartServiceTest {
     //Add to cart tests
     @Test
     void shouldAddToCartAndUpdateOrder() {
+        cartService.addToCart(customer.getEmail(), product.getSku(), 2);
 
     }
 
