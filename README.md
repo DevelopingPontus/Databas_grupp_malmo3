@@ -30,6 +30,19 @@ The program is a CLI application that allows users to manage products, customers
 - `product list [--sku <product_sku>] [--name <product_name>]`: Lists products with optional filters
 - `product remove <product_id> | [--sku <product_sku>]`: Removes a product by ID or SKU
 
+#### Clear Commands
+
+These commands clear data from specific tables in the database.
+The options can be combined to clear multiple tables at once.
+
+- `clear --all`: Clears all data from the database
+- `clear --categories`: Clears all categories
+- `clear --customers`: Clears all customers
+- `clear --inventory`: Clears all inventory
+- `clear --products`: Clears all products
+- `clear --orders`: Clears all orders
+- `clear --payments`: Clears all payments
+
 ## Building
 
 ### Prerequisites

@@ -30,7 +30,7 @@ public class Orders {
     @Column(nullable = false)
     @CreationTimestamp
     private Timestamp createdAt;
-    @OneToOne(mappedBy = "orders")
+    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private Payment payment;
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)

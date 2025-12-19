@@ -15,6 +15,7 @@ import picocli.CommandLine.Command;
         CustomerCommand.class,
         ImportCommand.class,
         ProductCommand.class,
+        ClearCommand.class,
         ExitCommand.class
 })
 public class RootCommand {
