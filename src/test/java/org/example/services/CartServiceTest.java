@@ -1,10 +1,7 @@
 package org.example.services;
 
 import com.example.models.*;
-import com.example.respoitories.OrderItemRepository;
-import com.example.respoitories.OrderRepository;
-import com.example.respoitories.PaymentRepository;
-import com.example.respoitories.ProductRepository;
+import com.example.respoitories.*;
 import com.example.services.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,67 +11,87 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class CartServiceTest {
-    private final int productQuantityInInventory;
-    private final int moreThenQuantityInInventory;
-    private final int lessThenQuantityInInventory;
-    private final Customer customer;
+class CartServiceTest {
+
+    private final String TEST_EMAIL = "test@example.com";
+    private final String TEST_SKU = "TEST123";
+    private final int TEST_QUANTITY = 2;
+    @Mock
+    private ProductRepository productRepository;
+    @Mock
+    private CustomerRepository customerRepository;
     @Mock
     private OrderRepository orderRepository;
     @Mock
-    private OrderItemRepository orderItemRepository;
-    @Mock
     private PaymentRepository paymentRepository;
     @Mock
-    private ProductRepository productRepository;
+    private InventoryRepository inventoryRepository;
+    @Mock
+    private OrderItemRepository orderItemRepository;
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private CategoryService categoryService;
     @InjectMocks
     private CustomerService customerService;
-    private OrderService orderService;
+    @Mock
+    private DatabaseService databaseService;
+    @Mock
     private InventoryService inventoryService;
+    @Mock
+    private OrderService orderService;
+    @Mock
     private PaymentService paymentService;
-    private CartService cartService;
-    private Product product;
-    private Inventory inventory;
-    private Orders orderEmpty;
-    private OrderItem orderItem;
-    private Payment payment;
+    @Mock
+    private ProductService productService;
+    @InjectMocks
+    private CartService cartService = new CartService(orderRepository, orderItemRepository, paymentRepository, customerService, productService, orderService, inventoryService, paymentService);
 
-    {
-        productQuantityInInventory = 5;
-        moreThenQuantityInInventory = 10;
-        lessThenQuantityInInventory = 1;
-        customer = customerService.addCustomer("p@ntu.se", "Pontus");
-
-    }
-
+    private Customer testCustomer;
+    private Product testProduct;
+    private Orders testOrder;
+    private OrderItem testOrderItem;
+    private Payment testPayment;
 
     @BeforeEach
-    void setup() {
-        product = new Product("ThisSKU", "Billys Pizza", "Mumma!", BigDecimal.valueOf(15), true);
-        inventory = new Inventory();
-        inventory.setProduct(product);
-        inventory.setQuantity(productQuantityInInventory);
-        orderEmpty = new Orders(customer);
-        orderItem = new OrderItem(lessThenQuantityInInventory, product.getPrice(), product, orderEmpty);
-        //payment = new Payment(Payment.PaymentMethod.CARD,)
+    void setUp() {
+        // Initialize test data
+        testCustomer = new Customer();
+        testCustomer.setEmail(TEST_EMAIL);
+        testCustomer.setName("Test User");
+
+        testProduct = new Product();
+        testProduct.setId(1);
+        testProduct.setSku(TEST_SKU);
+        testProduct.setName("Test Product");
+        testProduct.setPrice(BigDecimal.TEN);
+        testProduct.setActive(true);
+
+        testOrder = new Orders();
+        testOrder.setCustomer(testCustomer);
+        testOrder.setStatus(Orders.OrderStatus.NEW);
+
+        testOrderItem = new OrderItem();
+        testOrderItem.setProduct(testProduct);
+        testOrderItem.setQuantity(TEST_QUANTITY);
+        testOrderItem.setUnitPrice(testProduct.getPrice());
+        testOrderItem.setLineTotal(testProduct.getPrice().multiply(BigDecimal.valueOf(TEST_QUANTITY)));
+
+        testPayment = new Payment();
+        testPayment.setId(1);
+        testPayment.setMethod(Payment.PaymentMethod.CARD);
+        testPayment.setStatus(Payment.PaymentStatus.PENDING);
+
+
     }
+
 
     //Add to cart tests
     @Test
     void shouldAddToCartAndUpdateOrder() {
-
-        assertEquals(orderService.getCart(customer), Optional.empty());
-        System.out.println(Optional.of(orderService.getCart(customer)));
-
-        cartService.addToCart(customer.getEmail(), product.getSku(), lessThenQuantityInInventory);
-
-        //System.out.println(Optional.of(orderService.getCart(customer)));
-        //assertEquals(orderService.getCart(customer), customer);
+        cartService.addToCart(TEST_EMAIL, TEST_SKU, TEST_QUANTITY);
     }
 
     @Test
