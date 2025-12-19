@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.exceptions.InvalidEmailException;
+import com.example.exceptions.InvalidNameException;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -28,19 +31,28 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private Set<Orders> orders = new HashSet<>();
 
-    // Constructor
-    public Customer() {
-    }
-
-    public Customer(String email, String name, Timestamp createdAt) {
-        this.email = email;
-        this.name = name;
-        this.createdAt = createdAt;
+    // Needed for JPA
+    private Customer() {
+        // Empty, just for JPA
     }
 
     public Customer(String name, String email) {
-        this.name = name;
+        this(email, name, null);
+    }
+
+    public Customer(String email, String name, Timestamp createdAt) {
+        if (name == null || name.isBlank()) {
+            throw new InvalidNameException("Name cannot be null or blank");
+        }
+        if (email == null || email.isBlank()) {
+            throw new InvalidEmailException("Email cannot be null or blank");
+        }
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new InvalidEmailException("Invalid email format");
+        }
         this.email = email;
+        this.name = name;
+        this.createdAt = createdAt;
     }
 
     // Getters and Setters
