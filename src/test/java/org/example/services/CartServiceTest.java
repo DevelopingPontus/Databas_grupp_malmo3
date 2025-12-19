@@ -40,7 +40,6 @@ public class CartServiceTest {
     private Customer customer;
     private Product product;
     private Orders orderEmpty;
-    private Orders orderWithItem;
     private OrderItem orderItem;
     private Payment payment;
 
@@ -49,8 +48,8 @@ public class CartServiceTest {
         customer = new Customer("p@ntu.se", "Pontus");
         product = new Product("ThisSKU", "Billys Pizza", "Mumma!", BigDecimal.valueOf(15), true);
         orderEmpty = new Orders(customer);
-        orderWithItem = new Orders(customer);
-        orderWithItem.setTotal(BigDecimal.valueOf(30));
+        orderItem = new OrderItem(3, product.getPrice(), product, orderEmpty);
+        //payment = new Payment(Payment.PaymentMethod.CARD,)
     }
 
     //Add to cart tests
