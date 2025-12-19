@@ -3,6 +3,7 @@ package com.example.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class Product {
     @Column(nullable = true)
     private String description = "Description missing";
     @Column(columnDefinition = "numeric(10,2) default 0.0", nullable = false)
-    private double price;
+    private BigDecimal price;
     @Column(nullable = false)
     private boolean active;
     @Column(nullable = false)
@@ -38,7 +39,7 @@ public class Product {
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
-    private Set<OrderItem> orderItem;
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Inventory inventory;
@@ -51,7 +52,15 @@ public class Product {
         this(sku, name, description, price, true);
     }
 
+    public Product(String sku, String name, String description, BigDecimal price) {
+        this(sku, name, description, price, true);
+    }
+
     public Product(String sku, String name, String description, double price, boolean active) {
+        this(sku, name, description, new BigDecimal(price), active);
+    }
+
+    public Product(String sku, String name, String description, BigDecimal price, boolean active) {
         this.sku = sku;
         this.name = name;
         if (description != null)
@@ -93,11 +102,11 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

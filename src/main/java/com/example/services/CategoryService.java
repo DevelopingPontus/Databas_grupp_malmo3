@@ -2,7 +2,7 @@ package com.example.services;
 
 import com.example.models.Category;
 import com.example.respoitories.CategoryRepository;
-import org.antlr.v4.runtime.misc.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category addCategory(@NotNull String name) {
+    public Category addCategory(@NonNull String name) {
         if (categoryRepository.findByNameIgnoreCase(name) != null) {
             throw new IllegalArgumentException("Category already exists");
         }

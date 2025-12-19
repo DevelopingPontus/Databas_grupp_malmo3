@@ -6,6 +6,7 @@ import com.example.respoitories.ProductRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,15 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+  
     public Product addProducts(String sku, String name, String description, double price) {
+        return addProducts(sku, name, description, new BigDecimal(price));
+    }
+  
+    public Product addProducts(String sku, String name, String description, BigDecimal price) {
         Product product = new Product(sku, name, description, price);
         return productRepository.save(product);
     }

@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@Command(name = "list", description = "List products")
 @Transactional
+@Command(name = "list", mixinStandardHelpOptions = true, description = "List all products")
 public class ProductListCommand implements Runnable {
     private final ProductService productService;
 

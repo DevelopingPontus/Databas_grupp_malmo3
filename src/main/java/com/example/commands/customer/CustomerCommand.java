@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
 @Component
-@Command(name = "customer", description = "Commands related to customer operations", subcommands = {
-        CustomerListCommand.class,
-        CustomerAddCommand.class,
-        CustomerFindCommand.class,
-        CustomerRemoveCommand.class
+@Command(name = "customer", mixinStandardHelpOptions = true, description = "Commands related to customer operations", subcommands = {
+                CustomerListCommand.class,
+                CustomerAddCommand.class,
+                CustomerFindCommand.class,
+                CustomerRemoveCommand.class
 })
 public class CustomerCommand {
 

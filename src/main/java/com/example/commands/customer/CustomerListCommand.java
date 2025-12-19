@@ -7,7 +7,7 @@ import com.example.services.CustomerService;
 import picocli.CommandLine.Command;
 
 @Component
-@Command(name = "list", description = "List all customers")
+@Command(name = "list", mixinStandardHelpOptions = true, description = "List all customers")
 public class CustomerListCommand implements Runnable {
     private final CustomerService customerService;
 
