@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.respoitories.CategoryRepository;
 import com.example.respoitories.CustomerRepository;
 import com.example.respoitories.InventoryRepository;
-import com.example.respoitories.OrdersRepository;
+import com.example.respoitories.OrderRepository;
 import com.example.respoitories.PaymentRepository;
 import com.example.respoitories.ProductRepository;
 
@@ -16,24 +16,24 @@ public class DatabaseService {
     private final CategoryRepository categoryRepository;
     private final CustomerRepository customerRepository;
     private final InventoryRepository inventoryRepository;
-    private final OrdersRepository ordersRepository;
+    private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final ProductRepository productRepository;
 
     public DatabaseService(CategoryRepository categoryRepository, CustomerRepository customerRepository,
-            InventoryRepository inventoryRepository, OrdersRepository ordersRepository,
+            InventoryRepository inventoryRepository, OrderRepository orderRepository,
             PaymentRepository paymentRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
         this.inventoryRepository = inventoryRepository;
-        this.ordersRepository = ordersRepository;
+        this.orderRepository = orderRepository;
         this.paymentRepository = paymentRepository;
         this.productRepository = productRepository;
     }
 
     @Transactional
     public void clearAll() {
-        ordersRepository.deleteAll();
+        orderRepository.deleteAll();
         productRepository.deleteAll();
         customerRepository.deleteAll();
         categoryRepository.deleteAll();
@@ -52,7 +52,7 @@ public class DatabaseService {
     }
 
     public void clearOrders() {
-        ordersRepository.deleteAll();
+        orderRepository.deleteAll();
     }
 
     public void clearPayments() {
