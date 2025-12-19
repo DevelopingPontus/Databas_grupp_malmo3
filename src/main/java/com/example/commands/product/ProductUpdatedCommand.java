@@ -9,6 +9,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
@@ -68,7 +69,7 @@ public class ProductUpdatedCommand implements Runnable {
             updated = true;
         }
         if (newPrice != null) {
-            product.setPrice(newPrice);
+            product.setPrice(new BigDecimal(newPrice));
             updated = true;
         }
         if (active != null) {

@@ -17,10 +17,6 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
   
     public Product addProducts(String sku, String name, String description, double price) {
         return addProducts(sku, name, description, new BigDecimal(price));
