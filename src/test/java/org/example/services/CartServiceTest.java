@@ -14,10 +14,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class CartServiceTest {
-    private final int productQuantity = 5;
+    private final int productQuantityInInventory;
+    private final int moreThenQuantityInInventory;
+    private final int lessThenQuantityInInventory;
     @Mock
     private OrderRepository orderRepository;
     @Mock
@@ -43,23 +48,32 @@ public class CartServiceTest {
     private OrderItem orderItem;
     private Payment payment;
 
+    {
+        productQuantityInInventory = 5;
+        moreThenQuantityInInventory = 10;
+        lessThenQuantityInInventory = 1;
+    }
+
     @BeforeEach
     void setup() {
         customer = new Customer("p@ntu.se", "Pontus");
         product = new Product("ThisSKU", "Billys Pizza", "Mumma!", BigDecimal.valueOf(15), true);
         inventory = new Inventory();
         inventory.setProduct(product);
-        inventory.setQuantity(productQuantity);
+        inventory.setQuantity(productQuantityInInventory);
         orderEmpty = new Orders(customer);
-        orderItem = new OrderItem(3, product.getPrice(), product, orderEmpty);
+        orderItem = new OrderItem(lessThenQuantityInInventory, product.getPrice(), product, orderEmpty);
         //payment = new Payment(Payment.PaymentMethod.CARD,)
     }
 
     //Add to cart tests
     @Test
     void shouldAddToCartAndUpdateOrder() {
-        cartService.addToCart(customer.getEmail(), product.getSku(), 2);
+        assertEquals(orderService.getCart(customer), Optional.empty());
 
+        cartService.addToCart(customer.getEmail(), product.getSku(), lessThenQuantityInInventory);
+
+        assertEquals(orderService.getCart(customer), customer);
     }
 
     @Test
