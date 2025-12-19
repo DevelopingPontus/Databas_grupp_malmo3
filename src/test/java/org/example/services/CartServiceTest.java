@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 
 @ExtendWith(MockitoExtension.class)
 public class CartServiceTest {
+    private final int productQuantity = 5;
     @Mock
     private OrderRepository orderRepository;
     @Mock
@@ -33,12 +34,11 @@ public class CartServiceTest {
     private InventoryService inventoryService;
     @Mock
     private PaymentService paymentService;
-
     @InjectMocks
     private CartService cartService;
-
     private Customer customer;
     private Product product;
+    private Inventory inventory;
     private Orders orderEmpty;
     private OrderItem orderItem;
     private Payment payment;
@@ -47,6 +47,9 @@ public class CartServiceTest {
     void setup() {
         customer = new Customer("p@ntu.se", "Pontus");
         product = new Product("ThisSKU", "Billys Pizza", "Mumma!", BigDecimal.valueOf(15), true);
+        inventory = new Inventory();
+        inventory.setProduct(product);
+        inventory.setQuantity(productQuantity);
         orderEmpty = new Orders(customer);
         orderItem = new OrderItem(3, product.getPrice(), product, orderEmpty);
         //payment = new Payment(Payment.PaymentMethod.CARD,)
