@@ -23,12 +23,18 @@ public class OrderService {
     }
 
     @Transactional
-    public Orders getOrCreateCart(Customer customer){
+    public Optional<Orders> getCart(Customer customer) {
+        return orderRepository.findFirstByCustomerIdAndStatusOrderByCreatedAtDesc(
+                customer.getId(),
+                Orders.OrderStatus.NEW);
+    }
+
+    @Transactional
+    public Orders getOrCreateCart(Customer customer) {
         return orderRepository
                 .findFirstByCustomerIdAndStatusOrderByCreatedAtDesc(
                         customer.getId(),
-                        Orders.OrderStatus.NEW
-                )
+                        Orders.OrderStatus.NEW)
                 .orElseGet(() -> {
                     Orders order = new Orders(customer);
                     order.setCreatedNow();
@@ -48,7 +54,6 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-
     public Optional<OrderItem> findByOrderAndProduct(Orders order, Product product) {
         return orderItemRepository.findByOrderAndProduct(order, product);
     }
@@ -63,13 +68,10 @@ public class OrderService {
 
     }
 
-
-
-
     // Hämta pågående order (NEW) för kund
-    //Skapa ny order om ingen finns
-    //Uppdatera total
-    //Spara order
+    // Skapa ny order om ingen finns
+    // Uppdatera total
+    // Spara order
 
     // orderItemService -NEJ
 }

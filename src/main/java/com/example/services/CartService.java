@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -100,13 +101,12 @@ public class CartService {
 
     // get cart here, is looped and printed in list command!
     @Transactional(readOnly = true)
-    public Orders getOrder(String customerEmail) {
+    public Optional<Orders> getOrder(String customerEmail) {
 
         Customer customer = customerService.getCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
-        Orders order = orderService.getOrCreateCart(customer);
+        var order = orderService.getCart(customer);
 
-        order.getOrderItems().size();
         return order;
     }
 
