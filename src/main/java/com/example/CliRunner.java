@@ -3,6 +3,7 @@ package com.example;
 import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.ParsedLine;
 import org.jline.reader.UserInterruptException;
 import org.jline.reader.impl.DefaultParser;
 import org.jline.terminal.Terminal;
@@ -42,11 +43,16 @@ public class CliRunner implements CommandLineRunner {
 
         PicocliJLineCompleter picoliJLineCompleter = new PicocliJLineCompleter(cmd.getCommandSpec());
 
+        // Custom parser to handle quoted strings
+        DefaultParser parser = new DefaultParser();
+        parser.setQuoteChars(new char[] { '"', '\'' });
+        parser.setEofOnUnclosedQuote(true);
+
         // Custom line reader to allow tab completion
         LineReader lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
                 .completer(picoliJLineCompleter)
-                .parser(new DefaultParser())
+                .parser(parser)
                 .build();
 
         System.out.println("Type 'exit' to terminate the application.");
@@ -62,7 +68,9 @@ public class CliRunner implements CommandLineRunner {
             if (line.trim().isEmpty())
                 continue;
 
-            String[] tokens = line.split("\\s+");
+            // Use JLine's parser to properly handle quoted strings
+            ParsedLine parsedLine = lineReader.getParser().parse(line, 0);
+            String[] tokens = parsedLine.words().toArray(new String[0]);
             cmd.execute(tokens);
 
             if (ExitCommand.exitRequested) {
