@@ -17,10 +17,6 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
-
     public Product addProducts(String sku, String name, String description, double price) {
         Product product = new Product(sku, name, description, price);
         return productRepository.save(product);
@@ -43,6 +39,11 @@ public class ProductService {
         return false;
     }
 
+    @Transactional
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
     @Transactional(readOnly = true)
     public List<Product> searchProductBySku(String sku) {
         return productRepository.findProductBySku(sku);
@@ -53,9 +54,9 @@ public class ProductService {
         return productRepository.findProductByName(name);
     }
 
-    @Transactional(readOnly = true)
-    public List<Product> searchProductByCategory(Category categories) {
-        return productRepository.findProductByCategory(categories.getId());
+    @Transactional
+    public List<Product> searchProductByCategory(String categoryName) {
+        return productRepository.findProductByCategory(categoryName);
     }
 
     @Transactional(readOnly = true)
