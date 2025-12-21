@@ -1,15 +1,13 @@
 package com.example.models;
 
+import com.example.exceptions.InvalidEmailException;
+import com.example.exceptions.InvalidNameException;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.hibernate.annotations.CreationTimestamp;
-
-import com.example.exceptions.InvalidEmailException;
-import com.example.exceptions.InvalidNameException;
 
 @Entity
 @Table(name = "customer")
@@ -32,7 +30,7 @@ public class Customer {
     private Set<Orders> orders = new HashSet<>();
 
     // Needed for JPA
-    private Customer() {
+    public Customer() {
         // Empty, just for JPA
     }
 

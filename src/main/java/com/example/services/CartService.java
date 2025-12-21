@@ -43,7 +43,7 @@ public class CartService {
     public void addToCart(String customerEmail, String productSku, int quantity) {
 
         Customer customer = customerService.getCustomerByEmail(customerEmail).orElseThrow();
-        Product product = productService.searchProductBySku(productSku).get();
+        Product product = productService.searchProductBySku(productSku).orElseThrow(); //Was .get now .orElseThrow
         Orders order = orderService.getOrCreateCart(customer);
 
         if (inventoryService.getStock(product.getId()) < quantity) {
@@ -56,7 +56,7 @@ public class CartService {
     }
 
     // --- Hjälpmetoder till addToCart
-    private OrderItem createOrUpdateOrderItem(Orders order, Product product, int quantity) {
+    public OrderItem createOrUpdateOrderItem(Orders order, Product product, int quantity) {
         var orderItem = order.getOrderItems().stream().filter((oi) -> oi.getProduct().getId().equals(product.getId()))
                 .findFirst();
         if (orderItem.isPresent()) {

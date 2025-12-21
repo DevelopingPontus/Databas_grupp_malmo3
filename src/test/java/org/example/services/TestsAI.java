@@ -89,7 +89,7 @@ public class TestsAI {
     void addToCart_ShouldAddNewItemToCart() {
         // Arrange
         when(customerService.getCustomerByEmail(TEST_EMAIL)).thenReturn(Optional.of(testCustomer));
-        when(productService.searchProductBySku(TEST_SKU)).thenReturn(java.util.List.of(testProduct));
+        // when(productService.searchProductBySku(TEST_SKU)).thenReturn(java.util.List.of(testProduct));
         when(orderService.getOrCreateCart(testCustomer)).thenReturn(testOrder);
         when(inventoryService.getStock(testProduct.getId())).thenReturn(10);
         when(orderItemRepository.save(any(OrderItem.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -106,7 +106,7 @@ public class TestsAI {
     void addToCart_ShouldThrowWhenNotEnoughStock() {
         // Arrange
         when(customerService.getCustomerByEmail(TEST_EMAIL)).thenReturn(Optional.of(testCustomer));
-        when(productService.searchProductBySku(TEST_SKU)).thenReturn(java.util.List.of(testProduct));
+        //  when(productService.searchProductBySku(TEST_SKU)).thenReturn(java.util.List.of(testProduct));
         when(orderService.getOrCreateCart(testCustomer)).thenReturn(testOrder);
         when(inventoryService.getStock(testProduct.getId())).thenReturn(1);
 
@@ -119,8 +119,8 @@ public class TestsAI {
     void removeFromCart_ShouldRemoveItem() {
         // Arrange
         testOrder.getOrderItems().add(testOrderItem);
-        when(customerService.getCustomerByEmail(TEST_EMAIL)).thenReturn(Optional.of(testCustomer));
-        when(productService.searchProductBySku(TEST_SKU)).thenReturn(java.util.List.of(testProduct));
+        // when(customerService.getCustomerByEmail(TEST_EMAIL)).thenReturn(Optional.of(testCustomer));
+        // when(productService.searchProductBySku(TEST_SKU)).thenReturn(java.util.List.of(testProduct));
         when(orderService.getOrCreateCart(testCustomer)).thenReturn(testOrder);
 
         // Act
