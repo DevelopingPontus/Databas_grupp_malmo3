@@ -43,7 +43,7 @@ public class CartService {
     public void addToCart(String customerEmail, String productSku, int quantity) {
 
         Customer customer = customerService.getCustomerByEmail(customerEmail).orElseThrow();
-        Product product = productService.searchProductBySku(productSku).getFirst();
+        Product product = productService.searchProductBySku(productSku).get();
         Orders order = orderService.getOrCreateCart(customer);
 
         if (inventoryService.getStock(product.getId()) < quantity) {
@@ -89,7 +89,7 @@ public class CartService {
 
         Customer customer = customerService.getCustomerByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
-        Product product = productService.searchProductBySku(productSku).getFirst();
+        Product product = productService.searchProductBySku(productSku).get();
         Orders order = orderService.getOrCreateCart(customer);
 
         var orderItems = order.getOrderItems();

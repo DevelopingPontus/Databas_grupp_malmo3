@@ -1,10 +1,11 @@
 package com.example.commands;
 
+import com.example.commands.Category.CategoryCommand;
 import com.example.commands.cart.CartCommand;
 import com.example.commands.product.ProductCommand;
-import com.example.commands.Category.CategoryCommand;
-import com.example.commands.customer.CustomerCommand;
+import org.springframework.stereotype.Component;
 
+import com.example.commands.customer.CustomerCommand;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
@@ -13,8 +14,8 @@ import picocli.CommandLine.Command;
         CategoryCommand.class,
         CartCommand.class,
         CustomerCommand.class,
-        ImportCommand.class,
         ProductCommand.class,
+        ImportCommand.class,
         ClearCommand.class,
         ExitCommand.class
 })

@@ -12,8 +12,6 @@ import java.util.Set;
 @Entity
 @Table(name = "product")
 public class Product {
-    @OneToMany(mappedBy = "product")
-    private final Set<OrderItem> orderItems = new HashSet<>();
     // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +30,17 @@ public class Product {
     @Column(nullable = false)
     @CreationTimestamp
     private Timestamp createdAt;
+
     // Relations
     @ManyToMany
-    @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "product")
+    private Set<OrderItem> orderItems = new HashSet<>();
+
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Inventory inventory;
 
@@ -69,8 +74,8 @@ public class Product {
         return id;
     }
 
-    public void setId(Integer i) {
-        id = i;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getSku() {

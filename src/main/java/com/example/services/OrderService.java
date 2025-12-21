@@ -9,6 +9,7 @@ import com.example.respoitories.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,10 +69,41 @@ public class OrderService {
 
     }
 
-    // Hämta pågående order (NEW) för kund
-    // Skapa ny order om ingen finns
-    // Uppdatera total
-    // Spara order
+    @Transactional
+    public Optional<Orders> findById(int id) {
+        Orders order = orderRepository.findById(id).orElse(null);
+        if (order != null) {
+            order.getOrderItems().size(); // init lazy
+        }
+        return Optional.ofNullable(order);
+    }
 
-    // orderItemService -NEJ
+    //    order list // visa all
+    @Transactional
+    public List<Orders> listAll() {
+        return orderRepository.findAllByOrderByCreatedAtDesc();
+    }
+
+    //    order list --email john.doe@example.com // lista kundens
+    @Transactional
+    public List<Orders> listByCustomerEmail(String email) {
+        return orderRepository.findByCustomerEmailOrderByCreatedAtDesc(email);
+    }
+
+    //    order list --status NEW // filtrera för status
+    @Transactional
+    public List<Orders> listByStatus(Orders.OrderStatus status) {
+        return orderRepository.findByStatusOrderByCreatedAtDesc(status);
+    }
+
+    //      order list efter customer (mail) och status
+    @Transactional
+    public List<Orders> listByCustomerAndStatus(String email, Orders.OrderStatus status) {
+        return orderRepository.findByCustomerEmailAndStatusOrderByCreatedAtDesc(email, status);
+    }
+
+
+
+
+
 }

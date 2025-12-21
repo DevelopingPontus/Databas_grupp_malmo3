@@ -3,12 +3,14 @@ package com.example.commands.product;
 import com.example.models.Product;
 import com.example.services.ProductService;
 import org.springframework.stereotype.Component;
-import picocli.CommandLine.Option;
 import picocli.CommandLine.Command;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
+@Transactional
 @Command(name = "list", mixinStandardHelpOptions = true, description = "List all products")
 public class ProductListCommand implements Runnable {
     private final ProductService productService;
@@ -17,33 +19,24 @@ public class ProductListCommand implements Runnable {
         this.productService = productService;
     }
 
-    @Option(names = "--sku", description = "List products by SKU")
-    private String sku;
-
-    @Option(names = "--name", description = "List products by name")
-    private String name;
-
     @Override
     public void run() {
+        //TODO if no product is found, return "No products found"
         List<Product> products;
-        if (sku != null) {
-            products = productService.searchProductBySku(sku);
-        } else if (name != null) {
-            products = productService.searchProductByName(name);
-        } else {
-            products = productService.getAllProducts();
-        }
+        products = productService.getAllProducts();
 
-        // Display results
-        if (products.isEmpty()) {
-            System.out.println("No products found");
-            return;
-        }
-
-        System.out.println("Listing all products... ");
-        productService.getAllProducts()
-                .forEach((p) -> System.out.printf("- %s (SKU: %s, Price: %.2f)%n", p.getName(), p.getSku(),
-                        p.getPrice()));
-
+        System.out.println("Listing products...");
+        System.out.println("----------------------------------");
+        products.forEach(p -> System.out.printf(
+                "ID:%-4d | %-25s | SKU:%-8s | Price:%-8.2f | Category:%-18s | Active:%b%n",
+                p.getId(),
+                p.getName(),
+                p.getSku().toLowerCase(),
+                p.getPrice(),
+                p.getCategories().isEmpty() ? "None" : p.getCategories().stream()
+                        .map(c -> c.getName())
+                        .collect(Collectors.joining(", ")),
+                p.isActive()
+        ));
     }
 }
