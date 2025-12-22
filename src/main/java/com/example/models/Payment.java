@@ -15,11 +15,11 @@ public class Payment {
     @Column(name = "PAYMENT_ID")
     private Integer id;
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "PAYMENT_METHOD")
+    @Column(nullable = false, columnDefinition = "payment_method")
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private PaymentMethod method;
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "PAYMENT_STATUS")
+    @Column(nullable = false, columnDefinition = "payment_status")
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private PaymentStatus status;
     @Column
@@ -28,6 +28,7 @@ public class Payment {
     @OneToOne
     @JoinColumn(name = "order_id")
     private Orders orders;
+
     /**
      * Don't use this constructor
      */

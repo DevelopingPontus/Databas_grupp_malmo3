@@ -4,8 +4,9 @@ import com.example.models.Customer;
 import com.example.models.OrderItem;
 import com.example.models.Orders;
 import com.example.models.Product;
-import com.example.respoitories.OrderItemRepository;
-import com.example.respoitories.OrderRepository;
+import com.example.repositories.OrderItemRepository;
+import com.example.repositories.OrderRepository;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -78,32 +79,28 @@ public class OrderService {
         return Optional.ofNullable(order);
     }
 
-    //    order list // visa all
+    // order list // visa all
     @Transactional
     public List<Orders> listAll() {
         return orderRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    //    order list --email john.doe@example.com // lista kundens
+    // order list --email john.doe@example.com // lista kundens
     @Transactional
     public List<Orders> listByCustomerEmail(String email) {
         return orderRepository.findByCustomerEmailOrderByCreatedAtDesc(email);
     }
 
-    //    order list --status NEW // filtrera för status
+    // order list --status NEW // filtrera för status
     @Transactional
     public List<Orders> listByStatus(Orders.OrderStatus status) {
         return orderRepository.findByStatusOrderByCreatedAtDesc(status);
     }
 
-    //      order list efter customer (mail) och status
+    // order list efter customer (mail) och status
     @Transactional
     public List<Orders> listByCustomerAndStatus(String email, Orders.OrderStatus status) {
         return orderRepository.findByCustomerEmailAndStatusOrderByCreatedAtDesc(email, status);
     }
-
-
-
-
 
 }

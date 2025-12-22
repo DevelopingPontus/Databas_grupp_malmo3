@@ -1,7 +1,8 @@
 package com.example.services;
 
 import com.example.models.Customer;
-import com.example.respoitories.CustomerRepository;
+import com.example.repositories.CustomerRepository;
+
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 

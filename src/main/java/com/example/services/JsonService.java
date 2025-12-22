@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.example.respoitories.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import com.example.models.OrderItem;
 import com.example.models.Orders;
 import com.example.models.Payment;
 import com.example.models.Product;
+import com.example.repositories.*;
 
 @Service
 public class JsonService {

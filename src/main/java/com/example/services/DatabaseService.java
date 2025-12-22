@@ -2,12 +2,12 @@ package com.example.services;
 
 import org.springframework.stereotype.Service;
 
-import com.example.respoitories.CategoryRepository;
-import com.example.respoitories.CustomerRepository;
-import com.example.respoitories.InventoryRepository;
-import com.example.respoitories.OrderRepository;
-import com.example.respoitories.PaymentRepository;
-import com.example.respoitories.ProductRepository;
+import com.example.repositories.CategoryRepository;
+import com.example.repositories.CustomerRepository;
+import com.example.repositories.InventoryRepository;
+import com.example.repositories.OrderRepository;
+import com.example.repositories.PaymentRepository;
+import com.example.repositories.ProductRepository;
 
 import jakarta.transaction.Transactional;
 

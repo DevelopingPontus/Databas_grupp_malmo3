@@ -13,10 +13,14 @@ import java.util.Properties;
 public class DBHealthCheck {
     public static void testConnection() {
         Properties props = new Properties();
-        try (var input = ClassLoader.getSystemResourceAsStream("application.properties")) {
+        try (var input = DBHealthCheck.class.getClassLoader().getResourceAsStream("application.properties")) {
+            if (input == null) {
+                throw new RuntimeException("application.properties not found in classpath");
+            }
             props.load(input);
         } catch (Exception e) {
             System.err.println("Failed to load database configuration!");
+            System.err.println("Error: " + e.getMessage());
             System.exit(1);
         }
 
