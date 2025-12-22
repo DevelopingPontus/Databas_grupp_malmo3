@@ -33,13 +33,18 @@ The program is a CLI application that allows users to manage products, customers
 
 #### Product Commands
 
-- `product add <product_sku> <product_name> <price> [<product_description>]`: Adds a new product with optional description
-- `product list [--sku <product_sku>] [--name <product_name>]`: Lists products with optional filters
-- `product remove <product_id> | [--sku <product_sku>]`: Removes a product by ID or SKU
-- `product update <sku> [options]`: Updates a product by SKU
-- `product filter --sku <sku>`: Lists products matching the given SKU.
-- `product filter --name <name>`: Lists products matching the given name.
-- `product filter --category <category>`: Lists products belonging to the given category.
+- `product add <product_sku> <product_name> <price> [<product_description>]`: Adds a new product with optional description and default true activation 
+- `product remove <product_sku>`: Removes a product by SKU
+- `product list`: Lists all products
+- `product filter -s/--sku <sku>`: Lists products matching the given SKU.
+- `product filter -n/--name <name>`: Lists products matching the given name.
+- `product filter -c/--category <category>`: Lists products belonging to the given category.
+- `product update <sku> [-n/--name <newName>]`: Updates product name matching given SKU
+- `product update <sku> [-s/--sku <newSKu>]`: Updates product SKU matching given SKU
+- `product update <sku> [-d/--description <newDescription>]`: Updates product description matching given SKU
+- `product update <sku> [-p/--price <newPrice>]`: Updates product price matching given SKU
+- `product update <sku> [-a/--active=<true/false>]`: Updates if product is active or not with matching given SKU
+
 
 #### Order Commands
 
