@@ -75,7 +75,7 @@ class CartServiceJPATest {
     void shouldAddItemToCart() {
         // When
         cartService.addToCart(TEST_EMAIL, TEST_SKU, TEST_QUANTITY);
-
+        System.out.println(1);
         // Then
         Orders cart = orderRepository.findFirstByCustomerIdAndStatusOrderByCreatedAtDesc(
                 testCustomer.getId(),
