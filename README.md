@@ -19,6 +19,8 @@ The program is a CLI application that allows users to manage products, customers
 
 - `cart add <customer_email> <product_sku> <quantity>`: Adds a product to a customer's cart
 - `cart checkout <customer_email> <payment_method>`: Checks out the customer's cart using the specified payment method
+- `cart list <customer_email>`: Lists all products in a customer's cart
+- `cart remove <customer_email> <product_sku>`: Removes a product from a customer's cart
 
 #### Customer Commands
 
@@ -34,6 +36,24 @@ The program is a CLI application that allows users to manage products, customers
 - `product add <product_sku> <product_name> <price> [<product_description>]`: Adds a new product with optional description
 - `product list [--sku <product_sku>] [--name <product_name>]`: Lists products with optional filters
 - `product remove <product_id> | [--sku <product_sku>]`: Removes a product by ID or SKU
+- `product update <sku> [options]`: Updates a product by SKU
+- `product filter --sku <sku>`: Lists products matching the given SKU.
+- `product filter --name <name>`: Lists products matching the given name.
+- `product filter --category <category>`: Lists products belonging to the given category.
+
+#### Order Commands
+
+- `order list`: Lists all orders
+- `order list --email <customer_email>`: Lists orders for a specific customer
+- `order list --status NEW|PAID|CANCELLED`: Lists orders filtered by status
+- `order show <order_id>`: Shows detailed information about a specific order
+
+#### Report Commands
+
+- `report daily revenue [--days <n>]`: Shows daily revenue for the last n days (default: 7)
+- `report top sellers [--limit <n>]`: Shows top 10 best selling products
+- `report low stock [--threshold <n>]`: Shows products with low stock
+
 
 #### Clear Commands
 
