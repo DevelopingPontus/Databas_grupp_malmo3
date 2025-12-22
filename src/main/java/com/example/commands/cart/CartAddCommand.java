@@ -28,13 +28,16 @@ public class CartAddCommand implements Runnable {
 
     @Override
     public void run() {
+        long startTime = System.currentTimeMillis();
         try {
             validateInput();
             cartService.addToCart(customerEmail, productSku, quantity);
+            long endTime = System.currentTimeMillis();
 
             System.out.printf(
                     "Added product %s (qty %d) to cart for customer %s%n",
                     productSku, quantity, customerEmail);
+            System.out.println("Add to cart time: " + (endTime - startTime) + "ms");
 
         } catch (OutOfStockException e) {
             System.out.println("Not enough stock for product: " + productSku);

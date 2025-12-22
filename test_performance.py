@@ -46,11 +46,27 @@ def run_command_args(jar_file, *args):
 
 
 def measure_time_args(jar_file, *args):
-    """Measure command execution time in milliseconds (non-interactive mode)"""
+    """Measure command execution time and extract internal timing from output"""
     start = time.perf_counter()
-    run_command_args(jar_file, *args)
+    stdout, stderr = run_command_args(jar_file, *args)
     end = time.perf_counter()
-    return int((end - start) * 1000)
+    
+    total_time = int((end - start) * 1000)
+    
+    # Parse internal timing from output
+    # Look for patterns like "Add to cart time: 45ms" or "Checkout time: 45ms"
+    internal_time = None
+    for line in stdout.split('\n'):
+        if 'time:' in line.lower() and 'ms' in line:
+            try:
+                # Extract number before "ms"
+                time_str = line.split('time:')[1].strip().split('ms')[0].strip()
+                internal_time = int(time_str)
+                break
+            except (IndexError, ValueError):
+                pass
+    
+    return total_time, internal_time
 
 
 def load_test_data(data_file):
@@ -106,8 +122,10 @@ def main():
         print()
 
         # Arrays to store timing results
-        add_times = []
-        checkout_times = []
+        add_times_total = []
+        add_times_internal = []
+        checkout_times_total = []
+        checkout_times_internal = []
 
         # Run iterations
         for i in range(1, ITERATIONS + 1):
@@ -120,42 +138,54 @@ def main():
             run_command_args(JAR_FILE, "import", data_file)
 
             # Measure: cart add (non-interactive mode)
-            add_time = measure_time_args(JAR_FILE, "cart", "add", email, sku, "10")
-            add_times.append(add_time)
+            add_time_total, add_time_internal = measure_time_args(JAR_FILE, "cart", "add", email, sku, "10")
+            add_times_total.append(add_time_total)
+            if add_time_internal:
+                add_times_internal.append(add_time_internal)
+            
             all_results.append({
                 'dataset': size,
                 'operation': 'cart_add',
                 'iteration': i,
-                'time_ms': add_time
+                'total_time_ms': add_time_total,
+                'internal_time_ms': add_time_internal or 0
             })
 
             # Measure: cart checkout (non-interactive mode)
-            checkout_time = measure_time_args(JAR_FILE, "cart", "checkout", email, "CARD")
-            checkout_times.append(checkout_time)
+            checkout_time_total, checkout_time_internal = measure_time_args(JAR_FILE, "cart", "checkout", email, "CARD")
+            checkout_times_total.append(checkout_time_total)
+            if checkout_time_internal:
+                checkout_times_internal.append(checkout_time_internal)
+            
             all_results.append({
                 'dataset': size,
                 'operation': 'cart_checkout',
                 'iteration': i,
-                'time_ms': checkout_time
+                'total_time_ms': checkout_time_total,
+                'internal_time_ms': checkout_time_internal or 0
             })
 
-            print(colored("✓", GREEN) + f" add: {add_time}ms, checkout: {checkout_time}ms")
+            internal_add_str = f"{add_time_internal}ms" if add_time_internal else "N/A"
+            internal_checkout_str = f"{checkout_time_internal}ms" if checkout_time_internal else "N/A"
+            print(colored("✓", GREEN) + f" add: {add_time_total}ms ({internal_add_str}), checkout: {checkout_time_total}ms ({internal_checkout_str})")
 
         # Calculate medians
-        median_add = statistics.median(add_times)
-        median_checkout = statistics.median(checkout_times)
+        median_add_total = statistics.median(add_times_total)
+        median_checkout_total = statistics.median(checkout_times_total)
+        median_add_internal = statistics.median(add_times_internal) if add_times_internal else None
+        median_checkout_internal = statistics.median(checkout_times_internal) if checkout_times_internal else None
 
         print()
         print(colored(f"Results for {size} dataset:", YELLOW))
-        print(f"  Cart Add - Median: {median_add}ms")
-        print(f"  Checkout - Median: {median_checkout}ms")
+        print(f"  Cart Add - Total: {median_add_total}ms, Internal: {median_add_internal}ms" if median_add_internal else f"  Cart Add - Total: {median_add_total}ms")
+        print(f"  Checkout - Total: {median_checkout_total}ms, Internal: {median_checkout_internal}ms" if median_checkout_internal else f"  Checkout - Total: {median_checkout_total}ms")
         print()
         print("-" * 50)
         print()
 
     # Save results to CSV
     with open(RESULTS_FILE, 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['dataset', 'operation', 'iteration', 'time_ms'])
+        writer = csv.DictWriter(f, fieldnames=['dataset', 'operation', 'iteration', 'total_time_ms', 'internal_time_ms'])
         writer.writeheader()
         writer.writerows(all_results)
 
@@ -167,21 +197,28 @@ def main():
     print()
 
     # Print summary table
-    print("Summary:")
+    print("Summary (Total / Internal):")
     print()
-    print("Dataset    | Cart Add (median) | Checkout (median)")
-    print("-----------|-------------------|------------------")
+    print("Dataset    | Cart Add (median)      | Checkout (median)")
+    print("-----------|------------------------|------------------------")
 
     for size in TEST_SIZES:
         size_results = [r for r in all_results if r['dataset'] == size]
         if size_results:
-            add_times = [r['time_ms'] for r in size_results if r['operation'] == 'cart_add']
-            checkout_times = [r['time_ms'] for r in size_results if r['operation'] == 'cart_checkout']
+            add_total = [r['total_time_ms'] for r in size_results if r['operation'] == 'cart_add']
+            add_internal = [r['internal_time_ms'] for r in size_results if r['operation'] == 'cart_add' and r['internal_time_ms'] > 0]
+            checkout_total = [r['total_time_ms'] for r in size_results if r['operation'] == 'cart_checkout']
+            checkout_internal = [r['internal_time_ms'] for r in size_results if r['operation'] == 'cart_checkout' and r['internal_time_ms'] > 0]
 
-            if add_times and checkout_times:
-                median_add = statistics.median(add_times)
-                median_checkout = statistics.median(checkout_times)
-                print(f"{size:<11}| {median_add:>15}ms | {median_checkout:>14}ms")
+            if add_total and checkout_total:
+                median_add_total = statistics.median(add_total)
+                median_add_internal = statistics.median(add_internal) if add_internal else 0
+                median_checkout_total = statistics.median(checkout_total)
+                median_checkout_internal = statistics.median(checkout_internal) if checkout_internal else 0
+                
+                add_str = f"{median_add_total}ms / {median_add_internal}ms" if median_add_internal else f"{median_add_total}ms / N/A"
+                checkout_str = f"{median_checkout_total}ms / {median_checkout_internal}ms" if median_checkout_internal else f"{median_checkout_total}ms / N/A"
+                print(f"{size:<11}| {add_str:>22} | {checkout_str:>22}")
 
     print()
     print(f"Detailed results available in: {RESULTS_FILE}")

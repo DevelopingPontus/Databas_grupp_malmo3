@@ -26,9 +26,12 @@ public class CartCheckoutCommand implements Runnable {
 
     @Override
     public void run() {
+        long startTime = System.currentTimeMillis();
         try {
             cartService.checkout(customerEmail, method);
+            long endTime = System.currentTimeMillis();
             System.out.println("Order completed successfully");
+            System.out.println("Checkout time: " + (endTime - startTime) + "ms");
 
         } catch (OutOfStockException e) {
             System.out.println("Out of stock: " + e.getMessage());
