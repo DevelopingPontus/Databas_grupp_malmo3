@@ -5,10 +5,7 @@ import com.example.repositories.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -17,10 +14,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DataJpaTest
-@ActiveProfiles("test")
-@Import({CartService.class, CustomerService.class, ProductService.class,
-        OrderService.class, InventoryService.class, PaymentService.class})
+
 class CartServiceJPATest {
 
     @Autowired
@@ -70,6 +64,7 @@ class CartServiceJPATest {
         testProduct = productRepository.findProductBySku("ELEC001").get();
         TEST_SKU = testProduct.getSku();
         TEST_QUANTITY = 2;
+        System.out.println(testCustomer.getName());
     }
 
 //    void setUp() {
@@ -95,7 +90,7 @@ class CartServiceJPATest {
     private void loadTestData() {
         try {
             String jsonData = new String(Files.readAllBytes(
-                    Paths.get("test_data_small.json"))); // or use the full path
+                    Paths.get("/Users/pontus/IdeaProjects/Databas_grupp_malmo3/test_data_small.json"))); // or use the full path
             jsonService.importData(jsonData);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load test data", e);
