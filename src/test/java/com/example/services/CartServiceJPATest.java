@@ -44,6 +44,9 @@ class CartServiceJPATest {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     private Customer testCustomer;
     private Product testProduct;
     private final String TEST_EMAIL = "test@example.com";
@@ -75,7 +78,7 @@ class CartServiceJPATest {
     void shouldAddItemToCart() {
         // When
         cartService.addToCart(TEST_EMAIL, TEST_SKU, TEST_QUANTITY);
-
+        System.out.println(1);
         // Then
         Orders cart = orderRepository.findFirstByCustomerIdAndStatusOrderByCreatedAtDesc(
                 testCustomer.getId(),
