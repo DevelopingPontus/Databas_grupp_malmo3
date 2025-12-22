@@ -1,11 +1,17 @@
 package com.example.services;
 
-import com.example.models.*;
+import com.example.models.Customer;
+import com.example.models.OrderItem;
+import com.example.models.Orders;
+import com.example.models.Product;
 import com.example.repositories.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -14,17 +20,12 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
 class CartServiceJPATest {
 
     @Autowired
-    private JsonService jsonService;
-
-    @Autowired
     private TestEntityManager entityManager;
-
-    @Autowired
-    private CartService cartService;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -47,9 +48,12 @@ class CartServiceJPATest {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    private Orders order;
-    private OrderItem orderItem;
-    private Payment payment;
+    @Autowired
+    private JsonService jsonService;
+
+    @Autowired
+    private CartService cartService;
+
     private Customer testCustomer;
     private Product testProduct;
     private String TEST_EMAIL;
@@ -59,39 +63,22 @@ class CartServiceJPATest {
     @BeforeEach
     void setUp() {
         loadTestData();
-        testCustomer = customerRepository.findById(1).get();
+        testCustomer = customerRepository.findByEmail("john.doe@example.com")
+                .orElseThrow(() -> new RuntimeException("Test customer not found"));
         TEST_EMAIL = testCustomer.getEmail();
-        testProduct = productRepository.findProductBySku("ELEC001").get();
+        testProduct = productRepository.findProductBySku("ELEC001")
+                .orElseThrow(() -> new RuntimeException("Test product not found"));
         TEST_SKU = testProduct.getSku();
         TEST_QUANTITY = 2;
-        System.out.println(testCustomer.getName());
     }
-
-//    void setUp() {
-//        // Clear existing data
-//        orderItemRepository.deleteAll();
-//        paymentRepository.deleteAll();
-//        orderRepository.deleteAll();
-//        inventoryRepository.deleteAll();
-//        productRepository.deleteAll();
-//        customerRepository.deleteAll();
-//
-//        // Create test data
-//        testCustomer = new Customer("Test User", TEST_EMAIL);
-//        testCustomer = customerRepository.save(testCustomer);
-//
-//        testProduct = new Product(TEST_SKU, "Test Product", "Test Description", BigDecimal.TEN);
-//        testProduct = productRepository.save(testProduct);
-//
-//        Inventory testInventory = new Inventory(testProduct, 10); // 10 items in stock
-//        inventoryRepository.save(testInventory);
-//    }
 
     private void loadTestData() {
         try {
             String jsonData = new String(Files.readAllBytes(
-                    Paths.get("/Users/pontus/IdeaProjects/Databas_grupp_malmo3/test_data_small.json"))); // or use the full path
+                    Paths.get("test_data_small.json")));
             jsonService.importData(jsonData);
+            entityManager.flush();
+            entityManager.clear();
         } catch (IOException e) {
             throw new RuntimeException("Failed to load test data", e);
         }
@@ -101,7 +88,7 @@ class CartServiceJPATest {
     void shouldAddItemToCart() {
         // When
         cartService.addToCart(TEST_EMAIL, TEST_SKU, TEST_QUANTITY);
-        System.out.println(1);
+
         // Then
         Orders cart = orderRepository.findFirstByCustomerIdAndStatusOrderByCreatedAtDesc(
                 testCustomer.getId(),
@@ -114,6 +101,4 @@ class CartServiceJPATest {
         assertEquals(testProduct, item.getProduct());
         assertEquals(testProduct.getPrice().multiply(BigDecimal.valueOf(TEST_QUANTITY)), item.getLineTotal());
     }
-
-    // ... rest of the test methods
 }
