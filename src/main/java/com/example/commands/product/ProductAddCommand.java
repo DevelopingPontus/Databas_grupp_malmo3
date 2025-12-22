@@ -25,13 +25,21 @@ public class ProductAddCommand implements Runnable {
     @Parameters(index = "3", description = "Product description", arity = "0..1")
     private String description;
 
+    @Parameters(index = "4", description = "Product category", arity = "0..1")
+    private String category;
+
     public ProductAddCommand(ProductService productService) {
         this.productService = productService;
     }
 
     public void run() {
         var product = productService.addProducts(sku, name, description, price);
-        System.out.println("SKU:" + product.getSku() + " Name:" + product.getName() +
-                " Description:" + product.getDescription() + " Price:" + product.getPrice());
+        System.out.printf(" SKU:%s | Name:%s | Description:%s | Price:%.2f | Active:%b%n",
+                product.getSku().toLowerCase(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                product.isActive()
+        );
     }
 }
