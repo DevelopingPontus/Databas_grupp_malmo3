@@ -15,6 +15,11 @@ The program is a CLI application that allows users to manage products, customers
 - `category add <category_name>`: Adds a new category
 - `category list`: Lists all categories
 
+#### Cart Commands
+
+- `cart add <customer_email> <product_sku> <quantity>`: Adds a product to a customer's cart
+- `cart checkout <customer_email> <payment_method>`: Checks out the customer's cart using the specified payment method
+
 #### Customer Commands
 
 - `customer add <customer_name> <customer_email>`: Adds a new customer
@@ -71,3 +76,33 @@ The options can be combined to clear multiple tables at once.
 ## Database Schema
 
 ![ER Diagram](res/er_diagram.svg)
+
+## Performance Testing
+
+The performance tests uses a Python script to measure the execution time of cart operations (adding items to the cart and checking out) on datasets of varying sizes.
+
+To run performance tests for the cart operations, first build the project without running tests:
+
+```bash
+mvn clean package -DskipTests
+```
+
+then execute the performance test using the following command:
+
+```bash
+./test_performance.py
+```
+
+The performance test script will run a series of add-to-cart and checkout operations on datasets of varying sizes (small, medium, large) and report the median execution times for each operation. Both the total time and the database interaction time are measured and displayed.
+
+```text
+Summary (Total / Internal):
+
+Dataset    | Cart Add (median)      | Checkout (median)
+-----------|------------------------|------------------------
+small      |      1834.5ms / 89.0ms |        1817.5ms / 83ms
+medium     |      1822.0ms / 89.0ms |      1826.0ms / 83.0ms
+large      |      1869.5ms / 92.0ms |        1817.5ms / 88ms
+
+Detailed results available in: performance_results.csv
+```

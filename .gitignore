@@ -4,6 +4,8 @@ target/
 !**/src/test/**/target/
 logs/
 
+performance_results.csv
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
