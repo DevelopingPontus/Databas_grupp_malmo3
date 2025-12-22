@@ -1,0 +1,2 @@
+#!/bin/bash
+exec java --enable-native-access=ALL-UNNAMED -jar "$(dirname "$0")/target/storeapp-1.0-SNAPSHOT.jar" "$@"
