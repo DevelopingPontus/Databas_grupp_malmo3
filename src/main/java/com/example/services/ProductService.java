@@ -1,6 +1,5 @@
 package com.example.services;
 
-import com.example.models.Category;
 import com.example.models.Product;
 import com.example.repositories.ProductRepository;
 
@@ -17,10 +16,6 @@ public class ProductService {
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-    }
-
-    public Product addProducts(String sku, String name, String description, double price) {
-        return addProducts(sku, name, description, new BigDecimal(price));
     }
 
     public Product addProducts(String sku, String name, String description, BigDecimal price) {
@@ -64,11 +59,6 @@ public class ProductService {
     @Transactional
     public List<Product> searchProductByCategory(String categoryName) {
         return productRepository.findProductByCategory(categoryName);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Product> findById(int productId) {
-        return productRepository.findById(productId);
     }
 
     @Transactional

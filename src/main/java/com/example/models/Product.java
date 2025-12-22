@@ -150,4 +150,10 @@ public class Product {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+//
+//    @PrePersist
+//    @PreUpdate
+//    private void normalizeSku() {
+//        this.sku = this.sku.toLowerCase();
+//    }
 }

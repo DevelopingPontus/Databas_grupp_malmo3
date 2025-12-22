@@ -21,34 +21,34 @@ public class ProductUpdatedCommand implements Runnable {
         this.productService = productService;
     }
 
-    // TODO ska endast kunnas sökas på den specifika produkt via --sku inte id
-    @Parameters(index = "0", description = "Enter ID of product to update")
-    private int productId;
+    // TODO Case insensitive
+    @Parameters(index = "0", description = "Enter SKU of product to update")
+    private String sku;
 
-    @Option(names = "--name", description = "New product name")
+    @Option(names = { "-n", "--name" }, description = "New product name")
     private String newName;
 
-    @Option(names = "--sku", description = "New SKU (must be unique)")
+    @Option(names = {"-s", "--sku"}, description = "New SKU (must be unique)")
     private String newSku;
 
-    @Option(names = "--description", description = "New description")
+    @Option(names = {"-d", "--description"}, description = "New description")
     private String newDescription;
 
-    @Option(names = "--price", description = "New price")
+    @Option(names = {"-p", "--price"}, description = "New price")
     private Double newPrice;
 
-    @Option(names = "--active", description = "Set product active status (true/false)")
+    @Option(names = {"-a", "--active"}, description = "Set product active status (true/false)")
     private Boolean active;
 
     @Override
     public void run() {
-        System.out.printf("Updating product with ID: %d\n", productId);
+        System.out.printf("Updating product with SKU: %s\n", sku);
 
         // First, get the existing product
-        Optional<Product> existingProduct = productService.findById(productId);
+        Optional<Product> existingProduct = productService.searchProductBySku(sku);
 
         if (existingProduct.isEmpty()) {
-            System.out.println("Error: Product not found with ID: " + productId);
+            System.out.println("Error: Product not found with SKU: " + sku);
             return;
         }
 
