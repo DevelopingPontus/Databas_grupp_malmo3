@@ -22,7 +22,7 @@ public class Orders {
     @Column(name = "ORDER_ID")
     private Integer id;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "order_status")
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private OrderStatus status;
     @Column(columnDefinition = "numeric(10,2) default 0.0")
