@@ -10,7 +10,10 @@ import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,6 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Import({CartService.class, CustomerService.class, ProductService.class,
         OrderService.class, InventoryService.class, PaymentService.class})
 class CartServiceJPATest {
+
+    @Autowired
+    private JsonService jsonService;
 
     @Autowired
     private TestEntityManager entityManager;
@@ -47,31 +53,53 @@ class CartServiceJPATest {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    private Orders order;
+    private OrderItem orderItem;
+    private Payment payment;
     private Customer testCustomer;
     private Product testProduct;
-    private final String TEST_EMAIL = "test@example.com";
-    private final String TEST_SKU = "TEST123";
-    private final int TEST_QUANTITY = 2;
+    private String TEST_EMAIL;
+    private String TEST_SKU;
+    private int TEST_QUANTITY;
 
     @BeforeEach
     void setUp() {
-        // Clear existing data
-        orderItemRepository.deleteAll();
-        paymentRepository.deleteAll();
-        orderRepository.deleteAll();
-        inventoryRepository.deleteAll();
-        productRepository.deleteAll();
-        customerRepository.deleteAll();
+        loadTestData();
+        testCustomer = customerRepository.findById(1).get();
+        TEST_EMAIL = testCustomer.getEmail();
+        testProduct = productRepository.findProductBySku("ELEC001").get();
+        TEST_SKU = testProduct.getSku();
+        TEST_QUANTITY = 2;
+    }
 
-        // Create test data
-        testCustomer = new Customer("Test User", TEST_EMAIL);
-        testCustomer = customerRepository.save(testCustomer);
+//    void setUp() {
+//        // Clear existing data
+//        orderItemRepository.deleteAll();
+//        paymentRepository.deleteAll();
+//        orderRepository.deleteAll();
+//        inventoryRepository.deleteAll();
+//        productRepository.deleteAll();
+//        customerRepository.deleteAll();
+//
+//        // Create test data
+//        testCustomer = new Customer("Test User", TEST_EMAIL);
+//        testCustomer = customerRepository.save(testCustomer);
+//
+//        testProduct = new Product(TEST_SKU, "Test Product", "Test Description", BigDecimal.TEN);
+//        testProduct = productRepository.save(testProduct);
+//
+//        Inventory testInventory = new Inventory(testProduct, 10); // 10 items in stock
+//        inventoryRepository.save(testInventory);
+//    }
 
-        testProduct = new Product(TEST_SKU, "Test Product", "Test Description", BigDecimal.TEN);
-        testProduct = productRepository.save(testProduct);
-
-        Inventory testInventory = new Inventory(testProduct, 10); // 10 items in stock
-        inventoryRepository.save(testInventory);
+    private void loadTestData() {
+        try {
+            String jsonData = new String(Files.readAllBytes(
+                    Paths.get("test_data_small.json"))); // or use the full path
+            jsonService.importData(jsonData);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load test data", e);
+        }
     }
 
     @Test
