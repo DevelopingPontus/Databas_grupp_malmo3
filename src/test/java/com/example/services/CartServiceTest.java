@@ -1,8 +1,7 @@
-package org.example.services;
+package com.example.services;
 
 import com.example.models.*;
-import com.example.respoitories.*;
-import com.example.services.*;
+import com.example.repositories.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
