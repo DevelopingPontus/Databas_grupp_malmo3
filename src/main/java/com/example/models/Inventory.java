@@ -14,7 +14,7 @@ public class Inventory {
     private Integer product_Id;
     @Column
     private int quantity; // KRAV(MVP) säger att vi ska ha endast inStock dock vår sql schema har quantity
-                          // men inte inStock .
+    // men inte inStock .
 
     // Relations
     @OneToOne
@@ -22,7 +22,7 @@ public class Inventory {
     private Product product;
 
     // Constructor
-    public Inventory() {
+    private Inventory() {
     }
 
     public Inventory(int quantity) {

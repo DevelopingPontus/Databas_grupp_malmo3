@@ -37,7 +37,7 @@ public class Orders {
     private Customer customer;
 
     // Constructor
-    public Orders() {
+    private Orders() {
     }
 
     public Orders(Customer customer) {

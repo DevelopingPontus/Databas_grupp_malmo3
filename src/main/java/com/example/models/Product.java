@@ -39,13 +39,13 @@ public class Product {
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private final Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Inventory inventory;
 
     // Constructor
-    public Product() {
+    private Product() {
     }
 
     public Product(String sku, String name, String description, double price) {

@@ -68,37 +68,13 @@ class CartServiceTest {
     @BeforeEach
     void setUp() {
         // Initialize test data
-        testCustomer = new Customer();
-        testCustomer.setEmail(TEST_EMAIL);
-        testCustomer.setName("Test User");
+        testCustomer = new Customer("Test User", TEST_EMAIL);
 
-        testProduct = new Product();
-        testProduct.setId(1);
-        testProduct.setSku(TEST_SKU);
-        testProduct.setName("Test Product");
-        testProduct.setPrice(BigDecimal.TEN);
-        testProduct.setActive(true);
+        testProduct = new Product(TEST_SKU, "Test Product", "Nom", BigDecimal.TEN);
 
-        testOrder = new Orders();
-        testOrder.setCustomer(testCustomer);
-        testOrder.setStatus(Orders.OrderStatus.NEW);
+        testOrder = new Orders(testCustomer);
 
-        testOrderItem = new OrderItem();
-        testOrderItem.setProduct(testProduct);
-        testOrderItem.setQuantity(TEST_QUANTITY);
-        testOrderItem.setUnitPrice(testProduct.getPrice());
-        testOrderItem.setLineTotal(testProduct.getPrice().multiply(BigDecimal.valueOf(TEST_QUANTITY)));
-
-        testPayment = new Payment();
-        testPayment.setId(1);
-        testPayment.setMethod(Payment.PaymentMethod.CARD);
-        testPayment.setStatus(Payment.PaymentStatus.PENDING);
-
-        testInventory = new Inventory();
-        testInventory.setId(1);
-        testInventory.setProduct(testProduct);
-        testInventory.setProduct_Id(testProduct.getId());
-        testInventory.setQuantity(TEST_QUANTITY + 1);
+        testInventory = new Inventory(testProduct, TEST_QUANTITY);
     }
 
 
@@ -148,36 +124,4 @@ class CartServiceTest {
 //        //verify(orderService).save(testOrder);
 //    }
 
-    @Test
-    void shouldNotMakeNewOrderItem() {
-
-    }
-
-    @Test
-    void shouldFindCurrentOrderItemUpdateItAndSaveIt() {
-
-    }
-
-    //Update order total tests
-    @Test
-    void shouldUpdateOrderTotal() {
-
-    }
-
-    //Remove from cart tests
-    @Test
-    void shouldUpdateOrderQuantity() {
-
-    }
-
-    @Test
-    void shouldThrowWhenRemovingMoreQuantityOfItemThenThereIsInCart() {
-
-    }
-
-    //Get cart Items tests
-    @Test
-    void shouldReturnEverythingInACart() {
-
-    }
 }
