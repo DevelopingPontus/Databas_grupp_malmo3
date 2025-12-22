@@ -73,6 +73,20 @@ The options can be combined to clear multiple tables at once.
    mvn spring-boot:run
    ```
 
+   or using the provided executable script:
+
+   Linux /macOS:
+
+   ```bash
+   ./storeapp
+   ```
+
+   Windows:
+
+   ```cmd
+   storeapp.bat
+   ```
+
 ## Database Schema
 
 ![ER Diagram](res/er_diagram.svg)

@@ -55,6 +55,8 @@ public class CliRunner implements CommandLineRunner {
                 .parser(parser)
                 .build();
 
+        System.out.println("Welcome to the Store CLI!");
+        System.out.println("Type '--help' to see available commands.");
         System.out.println("Type 'exit' to terminate the application.");
         while (true) {
             String line;
