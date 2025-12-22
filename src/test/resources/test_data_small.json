@@ -1,0 +1,275 @@
+{
+    "categories": [
+        {
+            "name": "Electronics"
+        },
+        {
+            "name": "Clothing"
+        },
+        {
+            "name": "Books"
+        },
+        {
+            "name": "Sports"
+        },
+        {
+            "name": "Home & Garden"
+        }
+    ],
+    "products": [
+        {
+            "sku": "ELEC001",
+            "name": "Wireless Mouse",
+            "description": "Ergonomic wireless mouse with USB receiver",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "ELEC002",
+            "name": "Mechanical Keyboard",
+            "description": "RGB backlit mechanical gaming keyboard",
+            "price": 89.99,
+            "active": true,
+            "categoryNames": [
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "CLOTH001",
+            "name": "Cotton T-Shirt",
+            "description": "Comfortable 100% cotton t-shirt in various colors",
+            "price": 19.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "CLOTH002",
+            "name": "Denim Jeans",
+            "description": "Classic fit denim jeans",
+            "price": 49.99,
+            "active": true,
+            "categoryNames": [
+                "Clothing"
+            ]
+        },
+        {
+            "sku": "BOOK001",
+            "name": "Java Programming Guide",
+            "description": "Comprehensive guide to modern Java development",
+            "price": 39.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "BOOK002",
+            "name": "Database Design Fundamentals",
+            "description": "Learn database design principles and SQL",
+            "price": 44.99,
+            "active": true,
+            "categoryNames": [
+                "Books"
+            ]
+        },
+        {
+            "sku": "SPORT001",
+            "name": "Running Shoes",
+            "description": "Lightweight running shoes with cushioned sole",
+            "price": 79.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "SPORT002",
+            "name": "Yoga Mat",
+            "description": "Non-slip yoga mat with carrying strap",
+            "price": 24.99,
+            "active": true,
+            "categoryNames": [
+                "Sports"
+            ]
+        },
+        {
+            "sku": "HOME001",
+            "name": "LED Desk Lamp",
+            "description": "Adjustable LED desk lamp with touch control",
+            "price": 34.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden",
+                "Electronics"
+            ]
+        },
+        {
+            "sku": "HOME002",
+            "name": "Plant Pot Set",
+            "description": "Set of 3 ceramic plant pots with drainage",
+            "price": 29.99,
+            "active": true,
+            "categoryNames": [
+                "Home & Garden"
+            ]
+        }
+    ],
+    "customers": [
+        {
+            "email": "john.doe@example.com",
+            "name": "John Doe"
+        },
+        {
+            "email": "jane.smith@example.com",
+            "name": "Jane Smith"
+        },
+        {
+            "email": "bob.wilson@example.com",
+            "name": "Bob Wilson"
+        },
+        {
+            "email": "alice.johnson@example.com",
+            "name": "Alice Johnson"
+        },
+        {
+            "email": "charlie.brown@example.com",
+            "name": "Charlie Brown"
+        }
+    ],
+    "inventory": [
+        {
+            "productSku": "ELEC001",
+            "quantity": 150
+        },
+        {
+            "productSku": "ELEC002",
+            "quantity": 75
+        },
+        {
+            "productSku": "CLOTH001",
+            "quantity": 200
+        },
+        {
+            "productSku": "CLOTH002",
+            "quantity": 120
+        },
+        {
+            "productSku": "BOOK001",
+            "quantity": 50
+        },
+        {
+            "productSku": "BOOK002",
+            "quantity": 45
+        },
+        {
+            "productSku": "SPORT001",
+            "quantity": 80
+        },
+        {
+            "productSku": "SPORT002",
+            "quantity": 100
+        },
+        {
+            "productSku": "HOME001",
+            "quantity": 60
+        },
+        {
+            "productSku": "HOME002",
+            "quantity": 90
+        }
+    ],
+    "orders": [
+        {
+            "customerEmail": "john.doe@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "ELEC001",
+                    "quantity": 2,
+                    "unitPrice": 29.99
+                },
+                {
+                    "productSku": "ELEC002",
+                    "quantity": 1,
+                    "unitPrice": 89.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "jane.smith@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "CLOTH001",
+                    "quantity": 3,
+                    "unitPrice": 19.99
+                },
+                {
+                    "productSku": "CLOTH002",
+                    "quantity": 1,
+                    "unitPrice": 49.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "bob.wilson@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "BOOK001",
+                    "quantity": 1,
+                    "unitPrice": 39.99
+                },
+                {
+                    "productSku": "BOOK002",
+                    "quantity": 1,
+                    "unitPrice": 44.99
+                }
+            ]
+        },
+        {
+            "customerEmail": "alice.johnson@example.com",
+            "status": "PAID",
+            "items": [
+                {
+                    "productSku": "SPORT001",
+                    "quantity": 1,
+                    "unitPrice": 79.99
+                },
+                {
+                    "productSku": "SPORT002",
+                    "quantity": 2,
+                    "unitPrice": 24.99
+                }
+            ],
+            "payment": {
+                "method": "CARD",
+                "status": "APPROVED"
+            }
+        },
+        {
+            "customerEmail": "charlie.brown@example.com",
+            "status": "NEW",
+            "items": [
+                {
+                    "productSku": "HOME001",
+                    "quantity": 2,
+                    "unitPrice": 34.99
+                }
+            ]
+        }
+    ]
+}
