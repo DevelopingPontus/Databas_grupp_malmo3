@@ -1,29 +1,15 @@
 package com.example.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.JdbcType;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
 @Entity
 @Table(name = "payment")
 public class Payment {
-    // Attribut
-    public enum PaymentMethod {
-        CARD,
-        INVOICE
-    }
-
-    public enum PaymentStatus {
-        PENDING,
-        APPROVED,
-        DECLINED
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PAYMENT_ID")
@@ -38,22 +24,21 @@ public class Payment {
     private PaymentStatus status;
     @Column
     private Timestamp timestamp;
-
     // Relations
     @OneToOne
     @JoinColumn(name = "order_id")
     private Orders orders;
-
-    // Constructor
     /**
      * Don't use this constructor
      */
-    public Payment() {
+    private Payment() {
     }
 
     public Payment(Orders order, PaymentMethod method) {
         this(order, method, PaymentStatus.PENDING, Timestamp.valueOf(LocalDateTime.now()));
     }
+
+    // Constructor
 
     public Payment(Orders order, PaymentMethod method, PaymentStatus status) {
         this(order, method, status, Timestamp.valueOf(LocalDateTime.now()));
@@ -112,5 +97,17 @@ public class Payment {
 
     public void setOrders(Orders orders) {
         this.orders = orders;
+    }
+
+    // Attribut
+    public enum PaymentMethod {
+        CARD,
+        INVOICE
+    }
+
+    public enum PaymentStatus {
+        PENDING,
+        APPROVED,
+        DECLINED
     }
 }

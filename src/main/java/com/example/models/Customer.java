@@ -30,7 +30,7 @@ public class Customer {
     private Set<Orders> orders = new HashSet<>();
 
     // Needed for JPA
-    public Customer() {
+    private Customer() {
         // Empty, just for JPA
     }
 

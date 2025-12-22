@@ -1,13 +1,10 @@
 package com.example.models;
 
-import java.math.BigDecimal;
-import java.util.Objects;
-
+import jakarta.persistence.*;
 import org.hibernate.annotations.Generated;
 
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "order_item")
@@ -37,7 +34,7 @@ public class OrderItem {
     private Product product;
 
     // Constructor
-    public OrderItem() {
+    private OrderItem() {
     }
 
     public OrderItem(int quantity, BigDecimal unitPrice) {
@@ -144,9 +141,8 @@ public class OrderItem {
         public boolean equals(Object o) {
             if (this == o)
                 return true;
-            if (!(o instanceof OrderItemId))
+            if (!(o instanceof OrderItemId that))
                 return false;
-            OrderItemId that = (OrderItemId) o;
             return Objects.equals(order_id, that.order_id) &&
                     Objects.equals(product_id, that.product_id);
         }
