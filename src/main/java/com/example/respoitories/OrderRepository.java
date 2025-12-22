@@ -2,7 +2,6 @@ package com.example.respoitories;
 
 import com.example.models.Customer;
 import com.example.models.Orders;
-import jakarta.persistence.criteria.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +26,7 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
             String email,
             Orders.OrderStatus status
     );
+
+
 
 }
