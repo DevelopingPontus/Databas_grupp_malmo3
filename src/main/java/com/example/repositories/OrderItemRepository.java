@@ -1,4 +1,4 @@
-package com.example.respoitories;
+package com.example.repositories;
 
 import com.example.models.OrderItem;
 import com.example.models.Orders;
@@ -12,5 +12,3 @@ import java.util.Optional;
 public interface OrderItemRepository extends JpaRepository<OrderItem, OrderItem.OrderItemId> {
     Optional<OrderItem> findByOrderAndProduct(Orders order, Product product);
 }
-
-

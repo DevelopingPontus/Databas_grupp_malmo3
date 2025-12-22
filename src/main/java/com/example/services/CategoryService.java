@@ -1,7 +1,8 @@
 package com.example.services;
 
 import com.example.models.Category;
-import com.example.respoitories.CategoryRepository;
+import com.example.repositories.CategoryRepository;
+
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 

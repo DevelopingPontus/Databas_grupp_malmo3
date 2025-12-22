@@ -1,4 +1,4 @@
-package com.example.respoitories;
+package com.example.repositories;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +10,9 @@ import com.example.models.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     public Optional<Customer> findByEmail(String email);
+
     public Optional<Customer> findById(Integer id);
+
     public List<Customer> findByName(String name);
 
 }

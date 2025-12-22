@@ -4,7 +4,8 @@ import com.example.exceptions.OutOfStockException;
 import com.example.models.Inventory;
 import com.example.models.OrderItem;
 import com.example.models.Orders;
-import com.example.respoitories.InventoryRepository;
+import com.example.repositories.InventoryRepository;
+
 import org.springframework.stereotype.Service;
 
 @Service

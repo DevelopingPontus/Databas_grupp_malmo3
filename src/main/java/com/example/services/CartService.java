@@ -1,9 +1,10 @@
 package com.example.services;
 
 import com.example.models.*;
-import com.example.respoitories.OrderItemRepository;
-import com.example.respoitories.OrderRepository;
-import com.example.respoitories.PaymentRepository;
+import com.example.repositories.OrderItemRepository;
+import com.example.repositories.OrderRepository;
+import com.example.repositories.PaymentRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,13 +23,13 @@ public class CartService {
     private final PaymentService paymentService;
 
     public CartService(OrderRepository orderRepository,
-                       OrderItemRepository orderItemRepository,
-                       PaymentRepository paymentRepository,
-                       CustomerService customerService,
-                       ProductService productService,
-                       OrderService orderService,
-                       InventoryService inventoryService,
-                       PaymentService paymentService) {
+            OrderItemRepository orderItemRepository,
+            PaymentRepository paymentRepository,
+            CustomerService customerService,
+            ProductService productService,
+            OrderService orderService,
+            InventoryService inventoryService,
+            PaymentService paymentService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.paymentRepository = paymentRepository;
@@ -43,7 +44,7 @@ public class CartService {
     public void addToCart(String customerEmail, String productSku, int quantity) {
 
         Customer customer = customerService.getCustomerByEmail(customerEmail).orElseThrow();
-        Product product = productService.searchProductBySku(productSku).orElseThrow(); //Was .get now .orElseThrow
+        Product product = productService.searchProductBySku(productSku).orElseThrow(); // Was .get now .orElseThrow
         Orders order = orderService.getOrCreateCart(customer);
 
         if (inventoryService.getStock(product.getId()) < quantity) {

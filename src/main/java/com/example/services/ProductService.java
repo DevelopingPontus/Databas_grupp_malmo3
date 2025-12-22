@@ -2,7 +2,8 @@ package com.example.services;
 
 import com.example.models.Category;
 import com.example.models.Product;
-import com.example.respoitories.ProductRepository;
+import com.example.repositories.ProductRepository;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,11 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-  
+
     public Product addProducts(String sku, String name, String description, double price) {
         return addProducts(sku, name, description, new BigDecimal(price));
     }
-  
+
     public Product addProducts(String sku, String name, String description, BigDecimal price) {
         Product product = new Product(sku, name, description, price);
         return productRepository.save(product);

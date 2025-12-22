@@ -1,7 +1,7 @@
 package com.example.commands.product;
 
 import com.example.models.Product;
-import com.example.respoitories.ProductRepository;
+import com.example.repositories.ProductRepository;
 import com.example.services.ProductService;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class ProductUpdatedCommand implements Runnable {
         this.productService = productService;
     }
 
-    //TODO ska endast kunnas sökas på den specifika produkt via --sku inte id
+    // TODO ska endast kunnas sökas på den specifika produkt via --sku inte id
     @Parameters(index = "0", description = "Enter ID of product to update")
     private int productId;
 

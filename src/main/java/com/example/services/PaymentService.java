@@ -2,7 +2,8 @@ package com.example.services;
 
 import com.example.models.Orders;
 import com.example.models.Payment;
-import com.example.respoitories.PaymentRepository;
+import com.example.repositories.PaymentRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
