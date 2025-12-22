@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Command(name = "filter", description = "Filter products")
-public class ProductFilterCommand implements Runnable{
+public class ProductFilterCommand implements Runnable {
     private final ProductService productService;
 
     public ProductFilterCommand(ProductService productService) {
@@ -56,7 +56,7 @@ public class ProductFilterCommand implements Runnable{
         System.out.println("Found " + products.size() + " product(s):");
         System.out.println("----------------------------------");
         products.forEach(p -> System.out.printf(
-                "ID:%-4d | %-28s | SKU:%-8s | Price:%-8.2f | Category:%-20s | Active:%b%n",
+                "ID:%-4d | %-28s | SKU:%-9s | Price:%-8.2f | Category:%-28s | Active:%b%n",
                 p.getId(),
                 p.getName(),
                 p.getSku().toLowerCase(),

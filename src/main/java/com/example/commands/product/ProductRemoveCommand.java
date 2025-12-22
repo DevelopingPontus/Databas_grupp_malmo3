@@ -2,7 +2,6 @@ package com.example.commands.product;
 
 import com.example.services.ProductService;
 import org.springframework.stereotype.Component;
-import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 
@@ -14,7 +13,7 @@ public class ProductRemoveCommand implements Runnable {
     public ProductRemoveCommand(ProductService productService) {
         this.productService = productService;
     }
-    //TODO cane insensitive
+
     @Parameters(index = "0", description = "To remove product enter SKU: ", arity = "0..1")
     private String sku;
 

@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-//Produkter: lista/sök (på namn, kategori), lägg till/ändra/inaktivera.
 @Entity
 @Table(name = "product")
 public class Product {
@@ -150,10 +149,4 @@ public class Product {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
-//
-//    @PrePersist
-//    @PreUpdate
-//    private void normalizeSku() {
-//        this.sku = this.sku.toLowerCase();
-//    }
 }
