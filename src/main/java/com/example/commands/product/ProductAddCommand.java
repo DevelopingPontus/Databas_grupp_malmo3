@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 public class ProductAddCommand implements Runnable {
     private final ProductService productService;
 
-    // String sku, String name, String description, double price
     @Parameters(index = "0", description = "Product SKU")
     private String sku;
 
@@ -31,7 +30,12 @@ public class ProductAddCommand implements Runnable {
 
     public void run() {
         var product = productService.addProducts(sku, name, description, price);
-        System.out.println("SKU:" + product.getSku() + " Name:" + product.getName() +
-                " Description:" + product.getDescription() + " Price:" + product.getPrice());
+        System.out.printf(" SKU:%s | Name:%s | Price:%.2f | Description:%s | Active:%b%n",
+                product.getSku().toLowerCase(),
+                product.getName(),
+                product.getPrice(),
+                product.getDescription(),
+                product.isActive()
+        );
     }
 }

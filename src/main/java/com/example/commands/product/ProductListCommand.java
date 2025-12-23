@@ -21,14 +21,17 @@ public class ProductListCommand implements Runnable {
 
     @Override
     public void run() {
-        //TODO if no product is found, return "No products found"
-        List<Product> products;
-        products = productService.getAllProducts();
+        List<Product> products = productService.getAllProducts();
+
+        if (products == null || products.isEmpty()) {
+            System.out.println("No products found");
+            return;
+        }
 
         System.out.println("Listing products...");
         System.out.println("----------------------------------");
         products.forEach(p -> System.out.printf(
-                "ID:%-4d | %-25s | SKU:%-8s | Price:%-8.2f | Category:%-18s | Active:%b%n",
+                "ID:%-4d | %-28s | SKU:%-9s | Price:%-8.2f | Category:%-28s | Active:%b%n",
                 p.getId(),
                 p.getName(),
                 p.getSku().toLowerCase(),

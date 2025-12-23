@@ -1,6 +1,5 @@
 package com.example.services;
 
-import com.example.models.Category;
 import com.example.models.Product;
 import com.example.repositories.ProductRepository;
 
@@ -19,31 +18,19 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product addProducts(String sku, String name, String description, double price) {
-        return addProducts(sku, name, description, new BigDecimal(price));
-    }
-
     public Product addProducts(String sku, String name, String description, BigDecimal price) {
+        if (sku != null) {
+            sku = sku.toUpperCase();
+        }
         Product product = new Product(sku, name, description, price);
         return productRepository.save(product);
     }
 
     @Transactional
-    public boolean removeProductByID(int productId) {
-        if (productRepository.existsById(productId)) {
-            productRepository.deleteById(productId);
-            return true;
-        }
-        return false;
-    }
-
-    @Transactional
     public boolean removeProductBySku(String sku) {
-        if (productRepository.existsBySku(sku)) {
-            productRepository.deleteBySku(sku);
-            return true;
-        }
-        return false;
+        if (sku == null) return false;
+        int deleted = productRepository.deleteBySku(sku);
+        return deleted > 0;
     }
 
     @Transactional
@@ -53,6 +40,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Optional<Product> searchProductBySku(String sku) {
+        if (sku == null) return Optional.empty();
         return productRepository.findProductBySku(sku);
     }
 
@@ -64,11 +52,6 @@ public class ProductService {
     @Transactional
     public List<Product> searchProductByCategory(String categoryName) {
         return productRepository.findProductByCategory(categoryName);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Product> findById(int productId) {
-        return productRepository.findById(productId);
     }
 
     @Transactional
