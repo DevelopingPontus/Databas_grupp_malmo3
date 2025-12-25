@@ -15,8 +15,15 @@ public class CategoryListCommand implements Runnable {
 
     @Override
     public void run() {
+        if (categoryService.listAllCategories().isEmpty()) {
+            System.out.println("No categories found");
+            return;
+        }
+
         System.out.println("Listing all categories...");
-        categoryService.listAllCategories()
-                .forEach((c) -> System.out.printf("%s %s \n", c.getId(), c.getName()));
+        categoryService.listAllCategories().forEach((c) -> System.out.printf(
+                "ID:%-4d | Name:%s%n",
+                c.getId(),
+                c.getName()));
     }
 }

@@ -12,10 +12,10 @@ import java.util.List;
 @Command(name = "list", mixinStandardHelpOptions = true, description = "List orders")
 public class OrderListCommand implements Runnable {
 
-    @Option(names = "email", description = "Filter by customer email")
+    @Option(names = "--email", description = "Filter by customer email")
     private String email;
 
-    @Option(names = "status", description = "Filter by order status")
+    @Option(names = "--status", description = "Filter by order status")
     private Orders.OrderStatus status;
 
     private final OrderService orderService;
@@ -45,7 +45,7 @@ public class OrderListCommand implements Runnable {
 
         orders.forEach(order ->
                 System.out.printf(
-                        "Order #%d  |  %s  |  %s  |  %.2f%n",
+                        "Order #%d | %-33s | %-9s | %.2f%n",
                         order.getId(),
                         order.getCustomer().getEmail(),
                         order.getStatus(),
