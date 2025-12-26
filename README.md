@@ -154,4 +154,4 @@ Detailed results available in: performance_results.csv
 
 https://github.com/user-attachments/assets/4b52f0c7-cf43-447c-89d2-808e9a1f0d04
 
-![Demonstration video](res/Demo.mp4)
+![Demonstration video](res/Demo.gif)
