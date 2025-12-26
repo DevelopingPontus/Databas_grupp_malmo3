@@ -145,3 +145,7 @@ large      |      1869.5ms / 92.0ms |        1817.5ms / 88ms
 
 Detailed results available in: performance_results.csv
 ```
+
+## Demo video
+
+https://github.com/user-attachments/assets/4b52f0c7-cf43-447c-89d2-808e9a1f0d04
