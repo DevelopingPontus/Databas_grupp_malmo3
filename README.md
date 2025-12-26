@@ -2,7 +2,8 @@
 
 ## Usage
 
-The program is a CLI application that allows users to manage products, customers, orders, and payments in a PostgreSQL database.
+The program is a CLI application that allows users to manage products, customers, orders, and payments in a PostgreSQL
+database.
 
 ### Commands
 
@@ -33,7 +34,8 @@ The program is a CLI application that allows users to manage products, customers
 
 #### Product Commands
 
-- `product add <product_sku> <product_name> <price> [<product_description>]`: Adds a new product with optional description and default true activation 
+- `product add <product_sku> <product_name> <price> [<product_description>]`: Adds a new product with optional
+  description and default true activation
 - `product remove <product_sku>`: Removes a product by SKU
 - `product list`: Lists all products
 - `product filter -s/--sku <sku>`: Lists products matching the given SKU.
@@ -44,7 +46,6 @@ The program is a CLI application that allows users to manage products, customers
 - `product update <sku> [-d/--description <newDescription>]`: Updates product description matching given SKU
 - `product update <sku> [-p/--price <newPrice>]`: Updates product price matching given SKU
 - `product update <sku> [-a/--active=<true/false>]`: Updates if product is active or not with matching given SKU
-
 
 #### Order Commands
 
@@ -58,7 +59,6 @@ The program is a CLI application that allows users to manage products, customers
 - `report daily revenue [--days <n>]`: Shows daily revenue for the last n days (default: 7)
 - `report top sellers [--limit <n>]`: Shows top 10 best selling products
 - `report low stock [--threshold <n>]`: Shows products with low stock
-
 
 #### Clear Commands
 
@@ -85,7 +85,8 @@ The options can be combined to clear multiple tables at once.
 
 1. Clone the repository
 2. Configure the database connection in `src/main/resources/application.properties`
-3. Run the schema setup script located in `src/main/resources/schema.sql` to create the necessary tables in your PostgreSQL database.
+3. Run the schema setup script located in `src/main/resources/schema.sql` to create the necessary tables in your
+   PostgreSQL database.
 4. Build the project using Maven:
 
    ```bash
@@ -118,7 +119,8 @@ The options can be combined to clear multiple tables at once.
 
 ## Performance Testing
 
-The performance tests uses a Python script to measure the execution time of cart operations (adding items to the cart and checking out) on datasets of varying sizes.
+The performance tests uses a Python script to measure the execution time of cart operations (adding items to the cart
+and checking out) on datasets of varying sizes.
 
 To run performance tests for the cart operations, first build the project without running tests:
 
@@ -132,7 +134,9 @@ then execute the performance test using the following command:
 ./test_performance.py
 ```
 
-The performance test script will run a series of add-to-cart and checkout operations on datasets of varying sizes (small, medium, large) and report the median execution times for each operation. Both the total time and the database interaction time are measured and displayed.
+The performance test script will run a series of add-to-cart and checkout operations on datasets of varying sizes (
+small, medium, large) and report the median execution times for each operation. Both the total time and the database
+interaction time are measured and displayed.
 
 ```text
 Summary (Total / Internal):
@@ -149,3 +153,5 @@ Detailed results available in: performance_results.csv
 ## Demo video
 
 https://github.com/user-attachments/assets/4b52f0c7-cf43-447c-89d2-808e9a1f0d04
+
+![Demonstration video](res/Demo.mp4)
